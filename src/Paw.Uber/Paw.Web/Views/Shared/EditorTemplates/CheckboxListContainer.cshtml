@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+    ModelMetadata property = this.ViewData.ModelMetadata;
+}
+<div  id="@(property.PropertyName)-container" class="form-group">
+    <label class="control-label" for="@property.PropertyName">
+
+        @if (property.IsRequired)
+        {
+            <strong>@property.GetDisplayName() </strong>
+        }
+        else
+        {
+            @property.GetDisplayName()
+        }
+
+        @if (!string.IsNullOrWhiteSpace(property.Description))
+        {
+            Context.Items["EnableToolTip"] = true;
+            <a href="#" data-toggle="popover" class="pop" data-placement="top" data-title="@property.GetDisplayName() " data-content="@property.Description"><i class="icon-question-sign"></i></a>
+        }
+    </label>
+</div>
+<div class="form-group">
+    @RenderBody()
+</div>

@@ -1,0 +1,443 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<div class="modal fade" id="resDialog" tabindex="-1" role="dialog" aria-labelledby="resDialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div id="resDialogContent1" class="modal-content">
+            <!-- Content will be loaded here -->
+            <!-- header -->
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">{{this.formTitle}}</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div slot="page1" v-if="CurrentPage == 1">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="Name-container" class="form-group ">
+                                    <div>
+                                        <label class="control-label" for="">
+                                            <strong>Pet Name</strong>
+                                        </label>
+                                    </div>
+                                    <select v-model="Pet" class="form-control">
+                                        <option v-for="pet in PetList" v-bind:value="pet">
+                                            {{pet.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page2" v-else-if="CurrentPage == 2">
+
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <div>
+                                            <label class="control-label" for="">
+
+                                                <strong>Service</strong>
+
+                                            </label>
+                                        </div>
+                                        <select v-model="Sku" class="form-control">
+                                            <option v-for="sku in PrimarySkuList" v-bind:value="sku">
+                                                {{sku.Name}} (${{sku.Amount}})
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page3" v-else-if="CurrentPage == 3">
+
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <label v-for="relatedSku in RelatedSkuList" class="col-6 ">
+                                    <input type="checkbox" v-model="RelatedSkuIdList" v-bind:value="relatedSku.Id"> {{relatedSku.Name}} (${{relatedSku.Amount}})
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page4" v-else-if="CurrentPage == 4">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label" for="">
+
+                                        <strong>Choose Provider</strong>
+
+                                    </label>
+                                    <select v-model="Employee" class="form-control">
+                                        <option v-for="employee in EmployeeList" v-bind:value="employee">
+                                            {{employee.FullName}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <div>
+                                        <label class="control-label" for="">
+                                            <strong>Start Date</strong>
+                                        </label>
+                                    </div>
+                                    <input type="date" v-model="StartDate" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label" for="">
+
+                                        <strong>Start Time</strong>
+
+                                    </label>
+                                    <select v-model="ScheduleRule" class="form-control">
+                                        <option v-for="startTime in StartTimeList" v-bind:value="startTime">
+                                            {{startTime.Time | toJSDate | timeOnly }}
+                                        </option>
+                                    </select>
+                                    <br />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page5" v-else-if="CurrentPage == 5">
+
+                        <div><span class='font-weight-bold'>Service:</span> {{Sku.Name}}  (${{Sku.Amount}})</div>
+                        <div>
+                            <span class='font-weight-bold'>Extras:</span>
+                            <template v-for="(extra, index) in CurrentExtraList">
+                                <span>{{extra.Name}} (${{extra.Amount}})</span>
+                                <span v-if="index+1 < CurrentExtraList.length">, </span>
+                            </template>
+                        </div>
+                        <div><span class='font-weight-bold'>Provider:</span> {{Employee.FullName}}</div>
+                        <div><span class='font-weight-bold'>Owner:</span> {{Owner.FullName}}</div>
+                        <div><span class='font-weight-bold'>Pet:</span> {{Pet.Name}}</div>
+                        <div><span class='font-weight-bold'>Date:</span> {{StartDate}} </div>
+                        <div><span class='font-weight-bold'>Time:</span> {{ScheduleRule.Time | toJSDate | timeOnly }} </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="modal-footer">
+
+                <template v-if="CurrentPage != 1">
+                    <button class="btn" v-on:click="movePrevious()">Back</button>
+                </template>
+                <template v-if="CurrentPage < 5">
+                    <button class="btn btn-primary" v-on:click="moveNext()">Next</button>
+                </template>
+                <template v-if="CurrentPage == 5">
+                    <button class="btn" v-on:click="save()">Save</button>
+                </template>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/vue"></script>
+<script src="@Url.Content("~/Scripts/axios.min.js")"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+<script>
+
+    $(function () {
+        //v.$data.ownerId = '331b1bb1-8729-4625-bcad-b15d970e35df';
+        //v.init('331b1bb1-8729-4625-bcad-b15d970e35df', 'cc698546-9ebf-434c-82f6-a988000ae32b')
+
+        $('.res-link').on("click", function () {
+            v.init($(this).data("ownerid"), $(this).data("skucategoryid"), $(this).data("petid"), $(this).data("page"));
+        });
+
+    });
+
+
+    var v = new Vue({
+        el: '#resDialog',
+        data: {
+            OwnerId: '',
+            SkuCategoryId: '',
+            Sku: '',
+            CurrentPage: 1,
+            Pet: '',
+            Employee: '',
+            StartDate: '',
+            ScheduleRule: '',
+            RelatedSkuIdList: [
+
+            ],
+
+            InitialPetId: '',
+
+            PetList: [
+
+            ],
+
+            PrimarySkuList: [
+
+            ],
+
+            RelatedSkuList: [
+
+            ],
+
+            EmployeeList: [
+
+            ],
+
+            StartTimeList: [
+
+            ],
+
+            Owner: {},
+
+        },
+        mounted: function () {
+            this.getPetList();
+            this.getPrimarySkuList(this.SkuCategoryId);
+            this.getOwner();
+        },
+        methods: {
+            moveNext: function () {
+                return this.CurrentPage = this.CurrentPage + 1;
+            },
+            movePrevious: function () {
+                return this.CurrentPage = this.CurrentPage - 1;
+            },
+            // Lookups
+            getPetList: function () {
+                if (this.OwnerId) {
+                    axios.get('/reservations/lookup/getPetList?OwnerId=' + this.OwnerId)
+                        .then(response => {
+                            this.PetList = response.data.result;
+                            if (this.InitialPetId) {
+                                this.Pet = this.search(this.InitialPetId, this.PetList);
+                                this.InitialPetId = null;
+                            }
+                        });
+                }
+            },
+            getPrimarySkuList: function (skuCategoryId) {
+                if (skuCategoryId) {
+                    axios.get('/reservations/lookup/getPrimarySkuList?skuCategoryId=' + skuCategoryId)
+                        .then(response => this.PrimarySkuList = response.data.result);
+                }
+            },
+            getRelatedSkuList: function () {
+                if (this.Sku) {
+                    axios.get('/reservations/lookup/getRelatedSkuList?skuId=' + this.Sku.Id)
+                        .then(response => this.RelatedSkuList = response.data.result);
+                }
+            },
+            getEmployeeList: function () {
+                if (this.Sku) {
+                    axios.get('/reservations/lookup/getEmployeeList')
+                        .then(response => this.EmployeeList = response.data.result);
+                }
+            },
+            getStartTimeList: function (date, employeeId) {
+                if (date && employeeId) {
+                    axios.get('/reservations/lookup/getStartTimeList?date=' + date + '&employeeIdFilterList=' + employeeId)
+                        .then(response => {
+                            this.StartTimeList = response.data.result;
+                        });
+                }
+            },
+            getOwner: function () {
+                if (this.OwnerId) {
+                    axios.get('/reservations/lookup/getOwnerInfo?Id=' + this.OwnerId)
+                        .then(response => this.Owner = response.data.result);
+                }
+            },
+            // Search
+            search: function (id, array) {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i].Id.toUpperCase() === id.toUpperCase()) {
+                        return array[i];
+                    }
+                }
+
+                return null;
+            },
+            save: function () {
+                
+                var addReservation = {
+                    OwnerId: this.OwnerId,
+                    SkuCategoryId: this.SkuCategoryId,
+                    SkuId: this.Sku.Id,
+                    CurrentPage: 1,
+                    PetId: this.Pet.Id,
+                    StartDate: this.StartDate,
+                    ScheduleRuleId: this.ScheduleRule.Id,
+                    RelatedSkuIdList: this.RelatedSkuIdList
+
+                };
+
+                axios.post('/reservations/block/addreservation', addReservation).then(response => { this.refresh(1000); });
+                
+            },
+            refresh: function (millisecondsToWait) 
+            {
+                setTimeout(function () {
+                    location.reload(true);
+                }, millisecondsToWait);
+            },
+            init: function (ownerId, skuCategoryId, petId, pg) {
+
+                this.SkuCategoryId = skuCategoryId;
+                this.OwnerId = ownerId;
+
+                this.InitialPetId = petId;
+
+                this.CurrentPage = pg;
+
+                this.relatedSkuIdList = [];
+                this.startTimeList = [];
+                this.scheduleRuleId = '';
+                this.startDate = '';
+                this.employeeId = '';
+            },
+            getJSDate: function (value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                return new Date(parseFloat(results[1]));
+            }
+        },
+        filters: {
+            timeOnly: function (date) {
+                return moment(date).format("h:mm a");
+            },
+            toJSDate: function (value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                return new Date(parseFloat(results[1]));
+            }
+        },
+        computed:
+        {
+            SubTotal: function () {
+
+                var acc = 0;
+                for (var i = 0; i < this.reservation.SkuLineList.length; i++) {
+
+                    var item = this.reservation.SkuLineList[i];
+
+                    acc = acc + (item.Amount || 0);
+
+                    for (j = 0; j < item.SkuLineList.length; j++) {
+                        acc = acc + (item.SkuLineList[j].Amount || 0);
+                    }
+                }
+
+                return acc;
+            },
+            FormTitle: function () {
+                if (this.CurrentPage === 1) {
+                    return "Step 1. Choose Pet";
+                }
+                else if (this.CurrentPage === 2) {
+                    return "Step 2. Choose Service";
+                }
+                else if (this.CurrentPage === 3) {
+                    return "Step 3. Choose Extras";
+                }
+                else if (this.CurrentPage === 4) {
+                    return "Step 4. Choose Provider and Date";
+                }
+                else if (this.CurrentPage === 5) {
+                    return "Step 5. Review";
+                }
+                else if (this.CurrentPage === 6) {
+                    return "Step 6. Choose Pet";
+                }
+            },
+            CurrentExtraList: function () {
+                return this.RelatedSkuList.filter(item => { return this.RelatedSkuIdList.indexOf(item.Id) > -1 });
+            },
+        },
+        watch: {
+            Sku: function (val) {
+                if (val) {
+                    this.getRelatedSkuList();
+                    this.getEmployeeList();
+                }
+            },
+            StartDate: function (val) {
+                this.getStartTimeList(val, this.Employee.Id);
+            },
+            OwnerId: function (val) {
+                if (val) {
+                    this.getOwner();
+                    this.getPetList();
+                }
+            },
+            SkuCategoryId: function (val) {
+                this.getPrimarySkuList(val);
+            }
+        }
+    });
+
+    function guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    function round(value, precision) {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
+    function isEmpty(value) {
+        if (!!value && value instanceof Array) {
+            return value.length < 1
+        }
+
+        if (!!value && typeof value === 'object') {
+            for (var key in value) {
+                if (hasOwnProperty.call(value, key)) {
+                    return false
+                }
+            }
+        }
+
+        return !value // Fallback for strings, etc.
+    }
+
+</script>

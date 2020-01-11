@@ -1,0 +1,11 @@
+﻿ExternalId|Name|Description|IsDeleted
+grooming			|Grooming			||0
+dayCare				|Day Care			||0
+boarding			|Boarding			||0
+training			|Training			||0
+tour				|Tour				||0
+petSitting			|Pet Sitting		||1
+privateTraining		|Private Training	||1
+proGroom			|Pro Groom			||1
+extras				|Extras				||1
+fees				|Fees				||1

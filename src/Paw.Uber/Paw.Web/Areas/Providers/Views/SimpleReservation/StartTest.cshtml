@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+
+<div class="bump row">
+    <div class="col-3">
+
+        <h3>Grooming</h3>
+        <div><a href="http://localhost:49328/providers/simplereservation/test?SkuCategoryId=CC698546-9EBF-434C-82F6-A988000AE32B&EmployeeId=f73af731-6979-45c0-8a9b-12939110cf41">Create Appointment (Jenessa Wenger) </a></div>
+    </div>
+    <div class="col-3">B
+        <form id="myform">
+            <h3>Grooming 2</h3>
+            <button class="btn btn-primary add-sku" data-id="21b20c5d-3526-4b98-b560-a988002834a8" data-targetid="#PrimarySkuId">Complete Groom-XS ($55.00)</button>
+            <div class="row">
+                <div class="col-12">
+
+                    <div id="PrimarySkuId-Label"></div>
+                    <input id="PrimarySkuId" type="hidden" />
+
+                    <div id="primary-service-container"></div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">C</div>
+    <div class="col-3">D</div>
+</div>
+
+@section scripts{
+<script>
+    $(function () {
+
+        $(document).on("addPet", function (e) {
+            console.log(e);
+
+            $.ajax({
+                url: "/providers/simpleReservation/addService",
+                type: "get",
+                data: {
+                    PetId: e.dataItem.Id,
+                    SkuId: "3CC9A451-336B-4559-9B53-A988002834F4"
+                }
+            }).done(function (data) {
+                $(data).insertBefore('#card2');
+            });
+
+            //var source = document.getElementById('pet-service-template').innerHTML;
+            //var template = Handlebars.compile(source);
+            //var html = template(e.dataItem);
+            //$(html).insertBefore('#card2');
+        });
+        // Id={C74935F9-F2FC-4021-80AD-5B470BDB0126}&PetId=caf0da2f-8e29-48fc-b921-1cd93c6835bb&SkuId=3CC9A451-336B-4559-9B53-A988002834F4
+    });
+
+    $(function () {
+
+        $("#myform").on("click", ".add-sku", function (event) {
+            event.preventDefault();
+
+            var button = $(event.target);
+            console.log(button.data('targetid'));
+
+            var input = $(button.data('targetid'));
+            console.log(input);
+            
+
+            input.val(button.data('id'));
+            console.log(input.val());
+
+        });
+
+    });
+</script>
+
+<script id="pet-service-template" type="text/x-handlebars-template">
+    <div class="card">
+        <div class="card-header" id="pet-service-heading_{{Id}}">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#pet-service-body_{{Id}}" aria-expanded="false" aria-controls="pet-service-body_{{Id}}">
+                    {{Pet}} - Add-Ons
+                </button>
+            </h5>
+        </div>
+        <div id="pet-service-body_{{Id}}" class="collapse" aria-labelledby="pet-service-heading_{{Id}}" data-parent="#accordion">
+            <div class="card-body">
+
+                {{Pet}}
+
+            </div>
+        </div>
+    </div>
+</script>
+
+}
+

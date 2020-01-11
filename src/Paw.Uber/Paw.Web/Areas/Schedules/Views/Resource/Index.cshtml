@@ -1,0 +1,30 @@
+﻿@model DHTMLX.Scheduler.DHXScheduler
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/scheduler_initialization.js"></script>
+<script>
+    var dataActionUrl = "@ViewBag.DataAction";
+
+    var roomTypesCollection = @Html.Raw(ViewBag.RoomTypes);
+    var roomStatusesCollection = @Html.Raw(ViewBag.RoomStatuses);
+    var bookingStatusesCollection = @Html.Raw(ViewBag.BookingStatuses);
+</script>
+
+<div class="col-lg-12" style="">
+    <p>
+        Show rooms:
+        <select id="room-filter">
+            <option value="all">All</option>
+            <option value="1">Room Type 1</option>
+        </select>
+    </p>
+
+    </div>
+<div class="row">
+    <div class='col-lg-6'>
+        @Html.Raw(this.Model.Render())
+    </div>
+
+</div>

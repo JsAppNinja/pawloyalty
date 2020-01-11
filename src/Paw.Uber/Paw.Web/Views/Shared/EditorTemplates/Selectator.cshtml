@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Guid>
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    attributes.Add("class", "form-control selectator");
+    attributes.Add("data-selectator-keep-open", "true");
+    attributes.Add("data-selectator-show-all-options-on-focus", "true");
+    attributes.Add("data-selectator-search-fields", "value text subtitle right");
+    attributes.Add("multiple", "");
+
+    // Empyt Text
+    string emptyText = "";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    IEnumerable<SelectListItem> selectList = Html.ExecuteValue() as IEnumerable<SelectListItem>;
+
+    // Value
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (item.Value == this.Model.ToString())
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+
+            }
+        }
+    }
+
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+    
+}
+
+<text>
+    @Html.DropDownListFor(x => x, selectList, emptyText, attributes)
+</text>

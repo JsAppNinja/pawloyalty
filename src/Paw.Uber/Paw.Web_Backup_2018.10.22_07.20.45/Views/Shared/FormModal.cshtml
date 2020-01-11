@@ -1,0 +1,50 @@
+﻿@{
+    this.Layout = null;
+    
+    var ajaxFormModel = this.ViewData["AjaxFormModel"] as Paw.Services.UI.AjaxFormModel;
+
+    // Form Title
+    string formTitle = ajaxFormModel.FormTitle;
+
+    if (string.IsNullOrEmpty(formTitle))
+    {
+        formTitle = this.ViewData.ModelMetadata.DisplayName;
+    }
+}
+
+<div id="@(ajaxFormModel.Id)Container">
+    @using (Ajax.BeginForm(null, null, new AjaxOptions() { HttpMethod = ajaxFormModel.HttpMethod, InsertionMode = InsertionMode.Replace, UpdateTargetId = ajaxFormModel.Id + "Container", Url = ajaxFormModel.Action, OnSuccess = ajaxFormModel.OnSuccess }, new { @class = "form-vertical" }))
+    {
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">@formTitle</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="container-fluid">
+
+                @Html.Partial("FormLayout")
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+
+            <input type="submit" value="@ajaxFormModel.SubmitLabel" class="btn btn-primary" />
+        </div>
+    }
+    <script>
+
+            $(function () {
+                var form = $("@ajaxFormModel.Id")
+                        .removeData("validator") /* added by the raw jquery.validate plugin */
+                        .removeData("unobtrusiveValidation");  /* added by the jquery unobtrusive plugin */
+
+                $.validator.unobtrusive.parse(form);
+            });
+
+    </script>
+</div>

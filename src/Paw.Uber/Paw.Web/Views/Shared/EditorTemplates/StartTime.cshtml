@@ -1,0 +1,25 @@
+﻿@using Paw.Services.Attributes.ClientData
+@model Guid?
+@using Paw.Services.Util
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    attributes.Add("class", "form-control");
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    List<SelectListItem> selectList = new List<SelectListItem>();
+
+
+}
+
+@Html.DropDownListFor(x => x, selectList, emptyText, attributes)

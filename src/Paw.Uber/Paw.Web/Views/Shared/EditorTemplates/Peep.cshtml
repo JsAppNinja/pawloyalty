@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "InputContainer.cshtml";
+
+}
+
+@{
+    Func<ModelMetadata, bool> shouldShow = metadata =>
+    {
+        return metadata.ShowForEdit
+            // && metadata.ModelType != typeof(System.Data.EntityState)
+            // && !metadata.IsComplexType
+            && !ViewData.TemplateInfo.Visited(metadata);
+    };
+}
+
+@foreach (var prop in this.ViewData.ModelMetadata.Properties.Where(shouldShow))
+{
+    // Skip empty complex type
+    //if (prop.IsComplexType && prop.Model == null)
+    //{
+    //    continue;
+    //}
+
+    <div>Depth: @this.ViewData.TemplateInfo.TemplateDepth</div>
+    <div>Prefix: @this.ViewData.TemplateInfo.HtmlFieldPrefix</div>
+
+    // Add Section Title if necessary (section only renders for start of row items)
+    if (prop.AdditionalValues.ContainsKey("ButtonList"))
+    {
+        foreach (ButtonAttribute buttonAttribute in prop.AdditionalValues["ButtonList"] as List<ButtonAttribute>)
+        {
+            <button type="submit" name="@(buttonAttribute.Name)" value="@buttonAttribute.GetValue(prop)">@buttonAttribute.Text</button> 
+        }
+    }
+
+    if (prop.HideSurroundingHtml)
+    {
+        @Html.Editor(prop.PropertyName)
+    }
+    else
+    {
+        var labelHtml = Html.Label(prop.PropertyName);
+        if (!string.IsNullOrEmpty(labelHtml.ToHtmlString()))
+        {
+            <div class="editor-label">
+                @labelHtml
+
+
+            </div>
+        }
+        <div class="editor-field">
+            @Html.Editor(prop.PropertyName) @Html.ValidationMessage(prop.PropertyName, "*")
+        </div>
+    }
+}
+
+

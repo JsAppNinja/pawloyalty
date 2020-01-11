@@ -1,0 +1,41 @@
+﻿@model Paw.Services.Messages.Web.PetReservations.ReservationGroup
+@{
+    // Responsability: form layout including rows and columns
+
+    this.Layout = null;
+
+    Pet pet = this.ViewData["__Pet"] as Pet;
+
+    List<Pet> siblingList = pet.Owner.PetCollection.ToList().FindAll(x => !this.Model.PetReservationList.Any(y => y.PetId == x.Id));
+
+    Guid skuCategoryId = new Guid(this.Request["SkuCategoryId"]); //Fix this
+}
+<div>
+    <h2>Grooming Appointment Header</h2>
+
+    @if (siblingList.Count > 0)
+    {
+    <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add Pet
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach (Pet item in siblingList)
+            {
+                <a class="dropdown-item add-pet" href="#" data-id="@item.Id" data-skucategoryid="@skuCategoryId">@item.NameBreedAge</a>
+            }
+
+        </div>
+    </div>
+    }
+</div>
+<div>
+    @foreach (var property in ViewData.ModelMetadata.Properties.Where(x => x.ShowForEdit && !ViewData.TemplateInfo.Visited(x)))
+    {
+        @Html.Editor(property.PropertyName, new { Parent = this.Model });
+    }
+</div>
+<div>
+    <h4>Grooming Appointment Footer</h4>
+</div>
+

@@ -1,0 +1,106 @@
+﻿@model Pet
+@{
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+    ViewBag.PageTitle = null;
+    ViewBag.PageSubTitle = null;
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <h1>@this.Model.Name <small style="font-size: .40em; color: lightgrey;" class="uppercase">Pet Profile</small></h1>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img src="~/Content/Images/default-avatar-100.jpg" class="img-rounded" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div>
+                                    <h4>Details</h4>
+                                    Breed: Unknown
+                                </div>
+                                <div>
+                                    DOB: @Pet.GetDOB(this.Model.DOB)
+                                </div>
+                                <div>
+                                    Weight: @Pet.GetWeight(this.Model.Weight)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- OWNER INFO -->
+                                @if (this.Model.Owner != null)
+                            {
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4>Owner</h4>
+                                            @this.Model.Owner.FullName
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            @AppHelpers.Address(this.Model.Owner.StreetAddress, this.Model.Owner.City, this.Model.Owner.State, this.Model.Owner.PostalCode, this.Model.Owner.PhoneNumber, this.Model.Owner.Email)
+                                        </div>
+                                    </div>
+                            }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h5>Siblings</h5>
+                                    </div>
+                                </div>
+                                @if (this.Model.Owner.PetCollection.ToList().Count > 1)
+                                {
+
+                                    foreach (Pet pet in this.Model.Owner.PetCollection.ToList())
+                                    {
+                                        if (pet.Id == this.Model.Id)
+                                        {
+                                            continue;
+                                        }
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <a href="/Providers/@providerId/Profile/@pet.Id ">@pet.Name</a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <small style="color: lightgray">None Listed</small>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

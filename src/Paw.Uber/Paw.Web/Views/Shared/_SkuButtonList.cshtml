@@ -1,0 +1,50 @@
+﻿@model List<Guid>
+
+@{
+    Layout = null;
+
+    List<Sku> skuList = this.ViewData["SkuList"] as List<Sku>;
+
+    int columns = 2;
+    int rows = 10;
+    int recordCount = skuList.Count;
+
+    int colWidth = 12 / columns;
+    
+    string nameForModel = this.ViewData["NameForModel"] as string;
+    string idForModel = this.ViewData["IdForModel"] as string;
+    
+}
+
+<div id="@(idForModel)-container" class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            @for (int i = 0; (i < columns) && (rows * i < recordCount); i++)
+            {
+                <div class="row">
+                    @for (int y = 0; y < rows && (rows * i + y < recordCount); y++)
+                    {
+                        int index = rows * i + y;
+                        Sku sku = skuList[index];
+
+                        <div class="col-@(colWidth) sm-bump">
+                            <div class="btn-group-toggle" >
+                                <label for="@(idForModel)-@index" class="btn btn-outline-secondary @(this.Model.Any(x => x == sku.Id) ? "active" : "")">
+                                    <input id="@(idForModel)-@index"
+                                           name="@(nameForModel)"
+                                           value="@sku.Id"
+                                           class="multi-sku-button @(idForModel)-multi-sku-button"
+                                           data-inputclass="@(idForModel)"
+                                           data-description="@sku.NameAndPrice"
+                                           type="checkbox"
+                                           autocomplete="off" @(this.Model.Any(x => x == sku.Id) ? "checked" : "")> @sku.NameAndPrice
+                                    </label>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

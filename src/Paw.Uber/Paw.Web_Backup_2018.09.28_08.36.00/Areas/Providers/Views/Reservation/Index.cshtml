@@ -1,0 +1,42 @@
+﻿@model List<Reservation>
+@{
+    ViewBag.Title = "Reservation List";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+}
+
+<p>
+    <a href="/Providers/Reservation/_AddReservation">Add Reservation</a> | 
+    <a href="/Providers/Reservation/_AddReservation">Add Training</a>
+    
+    
+    </p>
+                    @(Html.Kendo()
+                    .Grid<Reservation>(this.Model)
+                    .Name("MainGrid")
+                    .HtmlAttributes(new { @class = "bump table" })
+                        .Pageable()
+                    .DataSource(d => d.Server().PageSize(50))
+                    .Columns(columns =>
+                    {
+                        columns.Bound(u => u.Provider.Name).Title("Provider");
+
+                        //columns.Bound(u => u.Pet.Owner.FullName).Title("Owner");
+
+                        columns.Bound(u => u.Created).Title("Create");
+
+                        columns.Bound(u => u.Id).Title("Action").Width(120).Template(@<text>
+
+                            <a href="/Providers/Reservation/View/@item.Id">view</a> |
+                            <a class="action"
+                               data-ajax="true"
+                               data-ajax-confirm="Are you sure?"
+                               data-ajax-method="POST"
+                               data-ajax-success="paw.onRefresh"
+                               data-ajax-url="/Providers/Reservation/_DeleteReservation/@item.Id">remove</a>
+
+                        </text>);
+                            })
+                                        .Sortable()
+                                        .Deferred()
+)

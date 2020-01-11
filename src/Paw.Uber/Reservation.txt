@@ -1,0 +1,17 @@
+
+Structure
+------------------------------------
+ReservationGroup
+- PetReservation
+-- PrimarySku
+--- SecondarySkuList
+
+ScheduleRule
+
+Open Issues
+--------------------------
+1. Schedule changes and cancel history
+2. Sku changes and pricing
+3. 
+
+1

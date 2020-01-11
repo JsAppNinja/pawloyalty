@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "InputContainer.cshtml";
+}
+
+@{
+    RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+    this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control");
+    this.ViewData.ModelMetadata.AdditionalValues.Add("placeholder", this.ViewData.ModelMetadata.Watermark);
+}
+
+@Html.TextBox(string.Empty, ViewContext.ViewData.TemplateInfo.FormattedModelValue, this.ViewData.ModelMetadata.AdditionalValues)

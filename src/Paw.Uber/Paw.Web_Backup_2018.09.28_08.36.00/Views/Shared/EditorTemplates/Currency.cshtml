@@ -1,0 +1,20 @@
+﻿@model decimal?
+@{
+    Layout = "InputContainer.cshtml";
+}
+
+@{
+    this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control");
+    this.ViewData.ModelMetadata.AdditionalValues.Add("placeholder", this.ViewData.ModelMetadata.Watermark);
+
+    if (this.ViewData.ModelMetadata.AdditionalValues.ContainsKey("Restricted") &&
+        !this.ViewData.ModelMetadata.AdditionalValues["Restricted"].ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList().Any(x => User.IsInRole(x)))
+    {
+        this.ViewData.ModelMetadata.AdditionalValues.Add("disabled", true);
+    }
+}
+
+<div class="input-group">
+    <span class="input-group-addon">$</span>
+    @Html.TextBox(string.Empty, ViewContext.ViewData.TemplateInfo.FormattedModelValue, this.ViewData.ModelMetadata.AdditionalValues)
+</div>

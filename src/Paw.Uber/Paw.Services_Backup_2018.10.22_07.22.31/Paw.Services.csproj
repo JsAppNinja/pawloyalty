@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD25786A-C767-413D-9A93-2F3350B57935}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Paw.Services</RootNamespace>
+    <AssemblyName>Paw.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\packages\Telerik.UI.for.AspNet.Mvc5.2018.1.117\lib\net45\Kendo.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.8.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.TraceListener.2.7.2\lib\net45\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.1.3.0, Culture=neutral, PublicKeyToken=55aa52d3c3c0d2b2, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.1.3\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridMail, Version=5.0.0.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.5.0.0\lib\SendGridMail.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\AddSelectListAttribute.cs" />
+    <Compile Include="Attributes\AtLeastOneAttribute.cs" />
+    <Compile Include="Attributes\AttributeHelper.cs" />
+    <Compile Include="Attributes\ButtonAttribute.cs" />
+    <Compile Include="Attributes\ClientData\AddAttributeAttribute.cs" />
+    <Compile Include="Attributes\ClientData\AddDataAttributeAttribute.cs" />
+    <Compile Include="Attributes\CustomDataAnnotationsModelMetadataProvider.cs" />
+    <Compile Include="Attributes\FileNameAttribute.cs" />
+    <Compile Include="Attributes\FirstOrFifteenthAttribute.cs" />
+    <Compile Include="Attributes\FormAttribute.cs" />
+    <Compile Include="Attributes\GetModelPropertyAttribute.cs" />
+    <Compile Include="Attributes\GetRouteValueAsGuidAttribute.cs" />
+    <Compile Include="Attributes\GetViewDataValueAttribute.cs" />
+    <Compile Include="Attributes\IAddViewData.cs" />
+    <Compile Include="Attributes\IBindControllerValue.cs" />
+    <Compile Include="Attributes\IPropertyInfoInit.cs" />
+    <Compile Include="Attributes\IShow.cs" />
+    <Compile Include="Attributes\ViewMetadataHelper.cs" />
+    <Compile Include="Attributes\RestrictedAttribute.cs" />
+    <Compile Include="Attributes\SectionAttribute.cs" />
+    <Compile Include="Attributes\SetForeignKeyAttribute.cs" />
+    <Compile Include="Attributes\ShowAttribute.cs" />
+    <Compile Include="Attributes\SingleValueAttribute.cs" />
+    <Compile Include="Attributes\StartRowAttribute.cs" />
+    <Compile Include="Attributes\TitleAttribute.cs" />
+    <Compile Include="Attributes\WidthAttribute.cs" />
+    <Compile Include="Common\Breed.cs" />
+    <Compile Include="Common\Chit.cs" />
+    <Compile Include="Common\DataContext.cs" />
+    <Compile Include="Common\Dimension.cs" />
+    <Compile Include="Common\Employee.cs" />
+    <Compile Include="Common\Gender.cs" />
+    <Compile Include="Common\IAudit.cs" />
+    <Compile Include="Common\IChild.cs" />
+    <Compile Include="Common\IParentId.cs" />
+    <Compile Include="Common\IId.cs" />
+    <Compile Include="Common\IKey.cs" />
+    <Compile Include="Common\INode.cs" />
+    <Compile Include="Common\Invoice.cs" />
+    <Compile Include="Common\InvoiceItem.cs" />
+    <Compile Include="Common\IProviderId.cs" />
+    <Compile Include="Common\IProviderGroupId.cs" />
+    <Compile Include="Common\ISaved.cs" />
+    <Compile Include="Common\ISchedule.cs" />
+    <Compile Include="Common\IVersion.cs" />
+    <Compile Include="Common\Peek.cs" />
+    <Compile Include="Common\Peep.cs" />
+    <Compile Include="Common\Pet.cs" />
+    <Compile Include="Common\Owner.cs" />
+    <Compile Include="Common\PetClass.cs" />
+    <Compile Include="Common\PetReservation.cs" />
+    <Compile Include="Common\PrividerExtensions.cs" />
+    <Compile Include="Common\Provider.cs" />
+    <Compile Include="Common\ProviderGroup.cs" />
+    <Compile Include="Common\Reservation.cs" />
+    <Compile Include="Common\Resource.cs" />
+    <Compile Include="Common\ResourceType.cs" />
+    <Compile Include="Common\Role.cs" />
+    <Compile Include="Common\ScheduleRule.cs" />
+    <Compile Include="Common\ScheduleBlock.cs" />
+    <Compile Include="Common\SchedulerEvent.cs" />
+    <Compile Include="Common\SchedulerEventPet.cs" />
+    <Compile Include="Common\SchedulerEventType.cs" />
+    <Compile Include="Common\SchedulerType.cs" />
+    <Compile Include="Common\Service.cs" />
+    <Compile Include="Common\Sku.cs" />
+    <Compile Include="Common\SkuCategory.cs" />
+    <Compile Include="Common\SkuDimension.cs" />
+    <Compile Include="Common\SkuVersion.cs" />
+    <Compile Include="Common\Timezone.cs" />
+    <Compile Include="Common\User.cs" />
+    <Compile Include="Common\UserClaim.cs" />
+    <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Common\UserRole.cs" />
+    <Compile Include="Common\Vaccine.cs" />
+    <Compile Include="Common\VaccinationRecord.cs" />
+    <Compile Include="Identity\EmailService.cs" />
+    <Compile Include="Identity\LegacyPasswordHelper.cs" />
+    <Compile Include="Identity\PawSignInManager.cs" />
+    <Compile Include="Identity\PawUserManager.cs" />
+    <Compile Include="Identity\PawUserStore.cs" />
+    <Compile Include="Identity\IdentityHelper.cs" />
+    <Compile Include="Identity\SMSService.cs" />
+    <Compile Include="Messages\CacheHelper.cs" />
+    <Compile Include="Messages\ExceptionHelper.cs" />
+    <Compile Include="Messages\ForeignKeyConstraintException.cs" />
+    <Compile Include="Messages\IAdd.cs" />
+    <Compile Include="Messages\IDeleteProviderGroup.cs" />
+    <Compile Include="Messages\IDeleteProvider.cs" />
+    <Compile Include="Messages\IDelete.cs" />
+    <Compile Include="Messages\IGetProviderGroup.cs" />
+    <Compile Include="Messages\IGetProvider.cs" />
+    <Compile Include="Messages\IGet.cs" />
+    <Compile Include="Messages\IUpdateProviderGroup.cs" />
+    <Compile Include="Messages\IUpdateProvider.cs" />
+    <Compile Include="Messages\IUpdate.cs" />
+    <Compile Include="Messages\MessageExtensions.cs" />
+    <Compile Include="Messages\Util\Providers\UpsertProviderGroup.cs" />
+    <Compile Include="Messages\Util\Providers\UpsertProvider.cs" />
+    <Compile Include="Messages\Util\Users\BootstrapUser.cs" />
+    <Compile Include="Messages\Util\Users\ImportLogin.cs" />
+    <Compile Include="Messages\Util\Users\LegacyUser.cs" />
+    <Compile Include="Messages\Web\Breeds\GetBreedList.cs" />
+    <Compile Include="Messages\Web\Employees\EmployeeInfo.cs" />
+    <Compile Include="Messages\Web\Employees\GetEmployeeList.cs" />
+    <Compile Include="Messages\Web\Genders\GetGenderList.cs" />
+    <Compile Include="Messages\Web\InvoiceItems\AddInvoiceItem.cs" />
+    <Compile Include="Messages\Web\InvoiceItems\AddServiceSkuInvoiceItem.cs" />
+    <Compile Include="Messages\Web\InvoiceItems\DeleteInvoiceItem.cs" />
+    <Compile Include="Messages\Web\Invoices\UpdateInvoice.cs" />
+    <Compile Include="Messages\Web\Invoices\AddInvoice.cs" />
+    <Compile Include="Messages\Web\Invoices\DeleteInvoice.cs" />
+    <Compile Include="Messages\Web\Invoices\GetInvoice.cs" />
+    <Compile Include="Messages\Web\Invoices\GetInvoiceListByProviderId.cs" />
+    <Compile Include="Messages\Web\Invoices\GetUpdateInvoice.cs" />
+    <Compile Include="Messages\Web\Owners\AddOwner.cs" />
+    <Compile Include="Messages\Web\Owners\GetOwner.cs" />
+    <Compile Include="Messages\Web\Owners\GetOwnerListByProviderId.cs" />
+    <Compile Include="Messages\Web\Owners\GetUpdateOwner.cs" />
+    <Compile Include="Messages\Web\Owners\UpdateOwner.cs" />
+    <Compile Include="Messages\Web\Pets\AddPet.cs" />
+    <Compile Include="Messages\Web\Pets\GetPetListByOwnerId.cs" />
+    <Compile Include="Messages\Web\Pets\GetPet.cs" />
+    <Compile Include="Messages\Web\Pets\GetPetLinkList.cs" />
+    <Compile Include="Messages\Web\Pets\GetUpdatePet.cs" />
+    <Compile Include="Messages\Web\Pets\PetLink.cs" />
+    <Compile Include="Messages\Web\Pets\PetSearchService.cs" />
+    <Compile Include="Messages\Web\Pets\PetSearch.cs" />
+    <Compile Include="Messages\Web\Pets\UpdatePet.cs" />
+    <Compile Include="Messages\Web\ProviderGroups\GetProviderGroup.cs" />
+    <Compile Include="Messages\Web\Providers\GetProvider.cs" />
+    <Compile Include="Messages\Web\Providers\GetProviderByDomain.cs" />
+    <Compile Include="Messages\Web\Providers\GetProviderList.cs" />
+    <Compile Include="Messages\Web\Providers\GetUserProviderGroupList.cs" />
+    <Compile Include="Messages\Web\Providers\ProviderCacheService.cs" />
+    <Compile Include="Messages\Web\Reservations\AddReservation.cs" />
+    <Compile Include="Messages\Web\Reservations\ChoosePrimaryService.cs" />
+    <Compile Include="Messages\Web\Reservations\GetReservation.cs" />
+    <Compile Include="Messages\Web\Reservations\GetReservationListByProviderId.cs" />
+    <Compile Include="Messages\Web\Reservations\GetUpdateReservation.cs" />
+    <Compile Include="Messages\Web\Reservations\ReservationService.cs" />
+    <Compile Include="Messages\Web\DynamicControls\PrimarySkuIdDynamicControl.cs" />
+    <Compile Include="Messages\Web\Reservations\UpdateReservation.cs" />
+    <Compile Include="Messages\Web\Resouces\GetResourceList.cs" />
+    <Compile Include="Messages\Web\ScheduleBlocks\GetVirtualScheduleBlock.cs" />
+    <Compile Include="Messages\Web\ScheduleBlocks\GetScheduleBlock.cs" />
+    <Compile Include="Messages\Web\ScheduleBlocks\UpdateScheduleBlock.cs" />
+    <Compile Include="Messages\Web\ScheduleBlocks\AddScheduleBlock.cs" />
+    <Compile Include="Messages\Web\ScheduleBlocks\ScheduleBlockManager.cs" />
+    <Compile Include="Messages\Web\ScheduleRules\AddScheduleRule.cs" />
+    <Compile Include="Messages\Web\ScheduleRules\GetScheduleRule.cs" />
+    <Compile Include="Messages\Web\Schedules\Appointments\AddAppointmentReservation.cs" />
+    <Compile Include="Messages\Web\Schedules\Appointments\PetAppointmentReservation.cs" />
+    <Compile Include="Messages\Web\Schedules\Appointments\PetService.cs" />
+    <Compile Include="Messages\Web\Schedules\Blocks\GetBlockEventList.cs" />
+    <Compile Include="Messages\Web\Schedules\DeleteSchedulerEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\GetUpdateSchedulerEventModal.cs" />
+    <Compile Include="Messages\Web\Schedules\GetUpdateSchedulerEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\Resources\AddResourceEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\Resources\UpdateResourceEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\UpdateSchedulerEventModal.cs" />
+    <Compile Include="Messages\Web\Schedules\UpdateSchedulerEventStartEnd.cs" />
+    <Compile Include="Messages\Web\Schedules\UpdateSchedulerEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\AddSchedulerEventModal.cs" />
+    <Compile Include="Messages\Web\Schedules\AddSchedulerEvent.cs" />
+    <Compile Include="Messages\Web\Schedules\AddSchedulerEventType1.cs" />
+    <Compile Include="Messages\Web\Schedules\Appointment.cs" />
+    <Compile Include="Messages\Web\Schedules\ChoosePet.cs" />
+    <Compile Include="Messages\Web\Schedules\GetSchedulerEventList.cs" />
+    <Compile Include="Messages\Web\Schedules\ScheduleFilter.cs" />
+    <Compile Include="Messages\Web\Schedules\SchedulerInfo.cs" />
+    <Compile Include="Messages\Web\Searches\GetPetLinkSearch.cs" />
+    <Compile Include="Messages\Web\Pets\GetPetName.cs" />
+    <Compile Include="Messages\Web\Owners\GetOwnerName.cs" />
+    <Compile Include="Messages\Web\Searches\GetPetOwnerLink.cs" />
+    <Compile Include="Messages\Web\Searches\GetPetOwnerList.cs" />
+    <Compile Include="Messages\Web\Searches\PetOwnerLink.cs" />
+    <Compile Include="Messages\Web\Searches\OwnerLink.cs" />
+    <Compile Include="Messages\Web\Searches\OwnerProjection.cs" />
+    <Compile Include="Messages\Web\Searches\PetOwnerList.cs" />
+    <Compile Include="Messages\Web\Searches\PetProjection.cs" />
+    <Compile Include="Messages\Web\Searches\SearchService.cs" />
+    <Compile Include="Messages\Web\SimpleReservations\AddPetService.cs" />
+    <Compile Include="Messages\Web\SimpleReservations\AddSimpleReservation.cs" />
+    <Compile Include="Messages\Web\Skus\AddSku.cs" />
+    <Compile Include="Messages\Web\Skus\GetAddOnSkuList.cs" />
+    <Compile Include="Messages\Web\Skus\GetPrimaryServiceListByProviderId.cs" />
+    <Compile Include="Messages\Web\Skus\GetPrimarySkuList.cs" />
+    <Compile Include="Messages\Web\Skus\GetRootSku.cs" />
+    <Compile Include="Messages\Web\Skus\GetSku.cs" />
+    <Compile Include="Messages\Web\Skus\GetSkuCategoryNavList.cs" />
+    <Compile Include="Messages\Web\Skus\GetSkuCatetoryList.cs" />
+    <Compile Include="Messages\Web\Skus\GetSkuList.cs" />
+    <Compile Include="Messages\Web\Skus\GetUpdateSku.cs" />
+    <Compile Include="Messages\Web\Skus\RemoveSku.cs" />
+    <Compile Include="Messages\Web\Skus\UpdateSku.cs" />
+    <Compile Include="Messages\Web\Users\GetUser.cs" />
+    <Compile Include="Messages\Web\Providers\GetUserProviderList.cs" />
+    <Compile Include="Migrations\201712241210439_Init.cs" />
+    <Compile Include="Migrations\201712241210439_Init.Designer.cs">
+      <DependentUpon>201712241210439_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712271135407_Invoice2.cs" />
+    <Compile Include="Migrations\201712271135407_Invoice2.Designer.cs">
+      <DependentUpon>201712271135407_Invoice2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300432578_IProviderId.cs" />
+    <Compile Include="Migrations\201712300432578_IProviderId.Designer.cs">
+      <DependentUpon>201712300432578_IProviderId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801030258196_Reservation.cs" />
+    <Compile Include="Migrations\201801030258196_Reservation.Designer.cs">
+      <DependentUpon>201801030258196_Reservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060715289_Service.cs" />
+    <Compile Include="Migrations\201801060715289_Service.Designer.cs">
+      <DependentUpon>201801060715289_Service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801250953442_Reservation1.cs" />
+    <Compile Include="Migrations\201801250953442_Reservation1.Designer.cs">
+      <DependentUpon>201801250953442_Reservation1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801270907280_ReservationOwnerId.cs" />
+    <Compile Include="Migrations\201801270907280_ReservationOwnerId.Designer.cs">
+      <DependentUpon>201801270907280_ReservationOwnerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802050711351_EventScheduler.cs" />
+    <Compile Include="Migrations\201802050711351_EventScheduler.Designer.cs">
+      <DependentUpon>201802050711351_EventScheduler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190546098_SchedulerType.cs" />
+    <Compile Include="Migrations\201802190546098_SchedulerType.Designer.cs">
+      <DependentUpon>201802190546098_SchedulerType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190602265_SchdulerTypeIcon.cs" />
+    <Compile Include="Migrations\201802190602265_SchdulerTypeIcon.Designer.cs">
+      <DependentUpon>201802190602265_SchdulerTypeIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190611292_SkuNavIcon.cs" />
+    <Compile Include="Migrations\201802190611292_SkuNavIcon.Designer.cs">
+      <DependentUpon>201802190611292_SkuNavIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802200735422_SchedulerEventSkuCategory.cs" />
+    <Compile Include="Migrations\201802200735422_SchedulerEventSkuCategory.Designer.cs">
+      <DependentUpon>201802200735422_SchedulerEventSkuCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802200900224_Timezone1.cs" />
+    <Compile Include="Migrations\201802200900224_Timezone1.Designer.cs">
+      <DependentUpon>201802200900224_Timezone1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802200922523_Initials.cs" />
+    <Compile Include="Migrations\201802200922523_Initials.Designer.cs">
+      <DependentUpon>201802200922523_Initials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802210440190_SchedulerEventOwnerAndPet.cs" />
+    <Compile Include="Migrations\201802210440190_SchedulerEventOwnerAndPet.Designer.cs">
+      <DependentUpon>201802210440190_SchedulerEventOwnerAndPet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802250901065_Domain.cs" />
+    <Compile Include="Migrations\201802250901065_Domain.Designer.cs">
+      <DependentUpon>201802250901065_Domain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803060530091_Search2.cs" />
+    <Compile Include="Migrations\201803060530091_Search2.Designer.cs">
+      <DependentUpon>201803060530091_Search2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131909026_Gender.cs" />
+    <Compile Include="Migrations\201803131909026_Gender.Designer.cs">
+      <DependentUpon>201803131909026_Gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803152213400_PetCollection.cs" />
+    <Compile Include="Migrations\201803152213400_PetCollection.Designer.cs">
+      <DependentUpon>201803152213400_PetCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803201902169_Resource.cs" />
+    <Compile Include="Migrations\201803201902169_Resource.Designer.cs">
+      <DependentUpon>201803201902169_Resource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803201905155_Resource2.cs" />
+    <Compile Include="Migrations\201803201905155_Resource2.Designer.cs">
+      <DependentUpon>201803201905155_Resource2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803210007396_Resource3.cs" />
+    <Compile Include="Migrations\201803210007396_Resource3.Designer.cs">
+      <DependentUpon>201803210007396_Resource3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803222056332_BlockResource.cs" />
+    <Compile Include="Migrations\201803222056332_BlockResource.Designer.cs">
+      <DependentUpon>201803222056332_BlockResource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810142326178_Schedule.cs" />
+    <Compile Include="Migrations\201810142326178_Schedule.Designer.cs">
+      <DependentUpon>201810142326178_Schedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810200511524_ScheduleBlock.cs" />
+    <Compile Include="Migrations\201810200511524_ScheduleBlock.Designer.cs">
+      <DependentUpon>201810200511524_ScheduleBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810211957237_Employee.cs" />
+    <Compile Include="Migrations\201810211957237_Employee.Designer.cs">
+      <DependentUpon>201810211957237_Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs" />
+    <Compile Include="UI\AjaxFormModel.cs" />
+    <Compile Include="Util\CommonValueInjection.cs" />
+    <Compile Include="Util\ConnectionHelper.cs" />
+    <Compile Include="Util\CryptoHelper.cs" />
+    <Compile Include="Util\EmailHelper.cs" />
+    <Compile Include="Util\ExcludeReadOnly.cs" />
+    <Compile Include="Util\InputHelper.cs" />
+    <Compile Include="Util\Logger.cs" />
+    <Compile Include="Util\Muid.cs" />
+    <Compile Include="Util\NodeExtensions.cs" />
+    <Compile Include="Util\TextExtensions.cs" />
+    <Compile Include="Util\VersionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messages\Util\Skus\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migrations\_Performance.txt" />
+    <Content Include="Migrations\_ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712241210439_Init.resx">
+      <DependentUpon>201712241210439_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712271135407_Invoice2.resx">
+      <DependentUpon>201712271135407_Invoice2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300432578_IProviderId.resx">
+      <DependentUpon>201712300432578_IProviderId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801030258196_Reservation.resx">
+      <DependentUpon>201801030258196_Reservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060715289_Service.resx">
+      <DependentUpon>201801060715289_Service.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801250953442_Reservation1.resx">
+      <DependentUpon>201801250953442_Reservation1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801270907280_ReservationOwnerId.resx">
+      <DependentUpon>201801270907280_ReservationOwnerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802050711351_EventScheduler.resx">
+      <DependentUpon>201802050711351_EventScheduler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190546098_SchedulerType.resx">
+      <DependentUpon>201802190546098_SchedulerType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190602265_SchdulerTypeIcon.resx">
+      <DependentUpon>201802190602265_SchdulerTypeIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190611292_SkuNavIcon.resx">
+      <DependentUpon>201802190611292_SkuNavIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200735422_SchedulerEventSkuCategory.resx">
+      <DependentUpon>201802200735422_SchedulerEventSkuCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200900224_Timezone1.resx">
+      <DependentUpon>201802200900224_Timezone1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200922523_Initials.resx">
+      <DependentUpon>201802200922523_Initials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802210440190_SchedulerEventOwnerAndPet.resx">
+      <DependentUpon>201802210440190_SchedulerEventOwnerAndPet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802250901065_Domain.resx">
+      <DependentUpon>201802250901065_Domain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803060530091_Search2.resx">
+      <DependentUpon>201803060530091_Search2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131909026_Gender.resx">
+      <DependentUpon>201803131909026_Gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803152213400_PetCollection.resx">
+      <DependentUpon>201803152213400_PetCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803201902169_Resource.resx">
+      <DependentUpon>201803201902169_Resource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803201905155_Resource2.resx">
+      <DependentUpon>201803201905155_Resource2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803210007396_Resource3.resx">
+      <DependentUpon>201803210007396_Resource3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803222056332_BlockResource.resx">
+      <DependentUpon>201803222056332_BlockResource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810142326178_Schedule.resx">
+      <DependentUpon>201810142326178_Schedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810200511524_ScheduleBlock.resx">
+      <DependentUpon>201810200511524_ScheduleBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810211957237_Employee.resx">
+      <DependentUpon>201810211957237_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

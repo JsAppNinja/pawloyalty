@@ -1,0 +1,24 @@
+﻿@model object
+@using Paw.Services.Util
+@using Paw.Services.Messages.Web.Pets
+@{
+    Layout = "InputContainer.cshtml";
+    
+}
+
+@{
+    string key = this.ViewData.ModelMetadata.PropertyName + "_Item";
+    object value = this.ViewData[key];
+
+    // initial value
+    string valueAsString = null;
+    if (value != null)
+    {
+        valueAsString = value.ToString();
+    }
+
+}
+
+<div>@valueAsString</div>
+
+@Html.HiddenFor(x => x)

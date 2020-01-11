@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+}
+
+<h1>Hello</h1>
+
+@(Html.Kendo().AutoComplete()
+        .Name("search2")
+        .AutoWidth(true)
+        .DataTextField("Pet")
+        .Template(string.Format("<strong>#: data.Pet #</strong> #: data.Owner #", providerId))
+        .MinLength(3)
+        .HtmlAttributes(new { @class = "form-control input-lg mr-sm-2", placeholder = "Search...", style = "width: 350px;" })
+        .Events(client => client.Select("onSearchSelect"))
+        .DataSource(source =>
+        {
+            source.Custom()
+                .ServerFiltering(true)
+                .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                .Transport(transport =>
+                {
+                    transport.Read(config => config.Url(string.Format("/ProviderGroups/{0}/Search/PetOwner", providerGroupId)));
+
+                })
+                .Schema(schema =>
+                {
+                    schema
+                    .Data("Data")
+                    .Model(model =>
+                    {
+                        model.Id("Id");
+                        model.Field("Pet", typeof(string));
+                        model.Field("OwnerId", typeof(Guid));
+                        model.Field("Owner", typeof(string));
+                        model.Field("Breed", typeof(string));
+                        model.Field("PetAndOwner", typeof(string));
+                        model.Field("ProviderId", typeof(Guid));
+                    });
+                });
+        })
+        .Deferred()
+)
+<div id="selected-pet-container">
+
+
+</div>
+<script id="selected-pet-template" type="text/x-handlebars-template">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{Pet}}</strong> {{Owner}}
+        <input type="hidden" class="search-item" id="Search2Item" name="Search2PetList[1]" value="{{Id}}" />
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</script>
+
+<script>
+
+
+    function onSearchSelect(e) {
+        console.log($(this.element).attr('id'));
+
+        var source = document.getElementById("selected-pet-template").innerHTML;
+        var template = Handlebars.compile(source);
+        //console.log("event :: select (" + e.dataItem.PetAndOwner + ")");
+        var html = template(e.dataItem);
+        //console.log(html);
+        $('#selected-pet-container').append(html);
+        $("#search2").data("kendoAutoComplete").value("");
+        e.preventDefault();
+
+
+        
+    }
+
+</script>
+
+

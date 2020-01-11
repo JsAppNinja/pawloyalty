@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Guid>
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    attributes.Add("class", "form-control chosen-select");
+    attributes.Add("multiple", "");
+
+    // Empyt Text
+    string emptyText = "";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    IEnumerable<SelectListItem> selectList = Html.ExecuteValue() as IEnumerable<SelectListItem>;
+
+
+    // Get Default selected
+    bool defaultSelected = false;
+    if (this.Model.Count() == 0 && attributes.ContainsKey("DefaultSelected") && "true".Equals(attributes["DefaultSelected"].ToString(), StringComparison.CurrentCultureIgnoreCase))
+    {
+        defaultSelected = true;
+    }
+    // Value
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (item.Value == this.Model.ToString())
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+
+            }
+            else if (defaultSelected)
+            {
+                item.Selected = true;
+            }
+        }
+    }
+
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+}
+
+<text>
+    @Html.DropDownListFor(x => x, selectList, emptyText, attributes)
+</text>

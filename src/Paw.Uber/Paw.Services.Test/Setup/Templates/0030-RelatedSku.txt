@@ -1,0 +1,1 @@
+﻿ExternalId|SourceSku.ExternalId|TargetSkuExternalId|RelationshipType

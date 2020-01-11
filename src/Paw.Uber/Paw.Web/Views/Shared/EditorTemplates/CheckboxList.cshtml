@@ -1,0 +1,60 @@
+﻿@model List<Guid>
+@using Paw.Services.Util
+@{
+    Layout = "CheckboxListContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control");
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    List<SelectListItem> selectList = Html.ExecuteValue() as List<SelectListItem> ?? new List<SelectListItem>();
+
+    // Value
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+    bool isOnlyOne = selectList.Count() == 0; // Does this belong here?
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (this.Model.Any(x => x == new Guid(item.Value)))
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+
+            }
+
+            if (isOnlyOne)
+            {
+                item.Selected = true;
+            }
+        }
+    }
+
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+
+}
+
+    @for (int i = 0; i < selectList.Count(); i++)
+    {
+        string id = string.Format("{0}[{1}]", this.ViewData.ModelMetadata.PropertyName, i);
+    <div class="checkbox">
+        <label for="@id">
+            <input type="hidden" name="@(this.ViewData.ModelMetadata.PropertyName).Index" value="@i" />
+            <input id="@id" name="@id" type="checkbox" value="@selectList[i].Value" @(selectList[i].Selected ? "checked" : "")> @selectList[i].Text
+        </label>
+    </div>
+    }

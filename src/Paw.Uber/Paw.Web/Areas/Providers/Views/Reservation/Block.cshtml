@@ -1,0 +1,462 @@
+﻿
+@{
+    ViewBag.Title = "Reservation List";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+}
+
+<a href="/"
+   data-target="#resDialog"
+   data-toggle="modal"
+   data-ownerId="331b1bb1-8729-4625-bcad-b15d970e35df"
+   data-skuCategoryId="cc698546-9ebf-434c-82f6-a988000ae32b"
+   data-petId=""
+   data-page="1"
+   class="res-link">Add Grooming 1</a> |
+<a href="/"
+   data-target="#resDialog"
+   data-toggle="modal"
+   data-ownerId="81069ed4-b5eb-4345-94fd-1996392bfe4f"
+   data-skuCategoryId="cc698546-9ebf-434c-82f6-a988000ae32b"
+   data-petId="c9a79096-afa9-4b6e-a1df-fb2d920d289c"
+   data-page="2"
+   class="res-link">Add Grooming 2</a>
+
+<div class="modal fade" id="resDialog" tabindex="-1" role="dialog" aria-labelledby="resDialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div id="resDialogContent1" class="modal-content">
+            <!-- Content will be loaded here -->
+            <!-- header -->
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">{{this.formTitle}}</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div slot="page1" v-if="currentPage == 1">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="Name-container" class="form-group ">
+                                    <div>
+                                        <label class="control-label" for="">
+                                            <strong>Pet Name</strong>
+                                        </label>
+                                    </div>
+                                    <select v-model="petId" class="form-control">
+                                        <option v-for="pet in petList" v-bind:value="pet.Id">
+                                            {{pet.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page2" v-else-if="currentPage == 2">
+
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <div>
+                                            <label class="control-label" for="">
+
+                                                <strong>Service</strong>
+
+                                            </label>
+                                        </div>
+                                        <select v-model="skuId" class="form-control">
+                                            <option v-for="sku in primarySkuList" v-bind:value="sku.Id">
+                                                {{sku.Name}} (${{sku.Amount}})
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page3" v-else-if="currentPage == 3">
+
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <label v-for="relatedSku in relatedSkuList" class="col-6 ">
+                                    <input type="checkbox" v-model="relatedSkuIdList" v-bind:value="relatedSku.Id"> {{relatedSku.Name}} (${{relatedSku.Amount}})
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page4" v-else-if="currentPage == 4">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label" for="">
+
+                                        <strong>Choose Provider</strong>
+
+                                    </label>
+                                    <select v-model="employeeId" class="form-control">
+                                        <option v-for="employee in employeeList" v-bind:value="employee.Id">
+                                            {{employee.FullName}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <div>
+                                        <label class="control-label" for="">
+                                            <strong>Start Date</strong>
+                                        </label>
+                                    </div>
+                                    <input type="date" v-model="startDate" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label" for="">
+
+                                        <strong>Start Time</strong>
+
+                                    </label>
+                                    <select v-model="scheduleRuleId" class="form-control">
+                                        <option v-for="startTime in startTimeList" v-bind:value="startTime.Id">
+                                            {{startTime.Time | toJSDate | timeOnly }}
+                                        </option>
+                                    </select>
+                                    <br />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div slot="page5" v-else-if="currentPage == 5">
+
+                        <div><span class='font-weight-bold'>Service:</span> {{currentSku.Name}}  (${{currentSku.Amount}})</div>
+                        <div>
+                            <span class='font-weight-bold'>Extras:</span>
+                            <template v-for="(extra, index) in currentExtraList">
+                                <span>{{extra.Name}} (${{extra.Amount}})</span>
+                                <span v-if="index+1 < currentExtraList.length">, </span>
+                            </template>
+                        </div>
+                        <div><span class='font-weight-bold'>Provider:</span> {{currentEmployee.FullName}}</div>
+                        <div><span class='font-weight-bold'>Owner:</span> {{owner.FullName}}</div>
+                        <div><span class='font-weight-bold'>Pet:</span> {{currentPet.Name}}</div>
+                        <div><span class='font-weight-bold'>Date:</span> {{startDate}} </div>
+                        <div><span class='font-weight-bold'>Time:</span> {{currentScheduleRule.Time | toJSDate | timeOnly }} </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="modal-footer">
+
+                <template v-if="currentPage != 1">
+                    <button class="btn" v-on:click="movePrevious()">Back</button>
+                </template>
+                <template v-if="currentPage < 5">
+                    <button class="btn btn-primary" v-on:click="moveNext()">Next</button>
+                </template>
+                <template v-if="currentPage == 5">
+                    <button class="btn" v-on:click="addPet()">Add Pet</button>
+                </template>
+                <template v-if="currentPage == 5">
+                    <button class="btn btn-primary" v-on:click="moveNext()">Save</button>
+                </template>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="@Url.Content("~/Scripts/axios.min.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+    <script>
+
+        $(function () {
+            //v.$data.ownerId = '331b1bb1-8729-4625-bcad-b15d970e35df';
+            //v.init('331b1bb1-8729-4625-bcad-b15d970e35df', 'cc698546-9ebf-434c-82f6-a988000ae32b')
+
+            //$('.res-link').on("click", function () {
+            //    v.init($(this).data("ownerid"), $(this).data("skucategoryid"), $(this).data("petid"), $(this).data("page"));
+            //});
+
+        });
+        
+
+        var v = new Vue({
+            el: '#resDialog',
+            data: {
+                ownerId: '',
+                skuCategoryId: '',
+                skuId: '',
+                currentPage: 1,
+                petId: '',
+                employeeId: '',
+                startDate: '',
+                scheduleRuleId: '',
+                relatedSkuIdList: [
+
+                ],
+
+                petList: [
+
+                ],
+
+                primarySkuList: [
+
+                ],
+
+                relatedSkuList: [
+
+                ],
+
+                employeeList: [
+
+                ],
+
+                startTimeList: [
+
+                ],
+
+                owner: {},
+
+            },
+            mounted: function () {
+                this.getPetList(this.ownerId);
+                this.getPrimarySkuList(this.skuCategoryId);
+                this.getOwner(this.ownerId);
+            },
+            methods: {
+                moveNext: function() {
+                    return this.currentPage = this.currentPage + 1;
+                },
+                movePrevious: function() {
+                    return this.currentPage = this.currentPage - 1;
+                },
+                // Lookups
+                getPetList: function (ownerId) {
+                    if (ownerId) {
+                        axios.get('/reservations/lookup/getPetList?OwnerId=' + ownerId)
+                            .then(response => this.petList = response.data.result);
+                    }
+                },
+                getPrimarySkuList: function (skuCategoryId) {
+                    if (skuCategoryId) {
+                        axios.get('/reservations/lookup/getPrimarySkuList?skuCategoryId=' + skuCategoryId)
+                            .then(response => this.primarySkuList = response.data.result);
+                    }
+                },
+                getRelatedSkuList: function (skuId) {
+                    if (skuId) {
+                        axios.get('/reservations/lookup/getRelatedSkuList?skuId=' + skuId)
+                            .then(response => this.relatedSkuList = response.data.result);
+                    }
+                },
+                getEmployeeList: function (skuId) {
+                    if (skuId) {
+                        axios.get('/reservations/lookup/getEmployeeList')
+                            .then(response => this.employeeList = response.data.result);
+                    }
+                },
+                getStartTimeList: function (date, employeeId) {
+                    if (date && employeeId) {
+                        axios.get('/reservations/lookup/getStartTimeList?date=' + date + '&employeeIdFilterList=' + employeeId)
+                            .then(response => {
+                                this.startTimeList = response.data.result;
+                            });
+                    }
+                },
+                getOwner: function (ownerId) {
+                    if (ownerId) {
+                        axios.get('/reservations/lookup/getOwnerInfo?Id=' + ownerId)
+                            .then(response => this.owner = response.data.result);
+                    }
+                },
+                // Search
+                search: function (id, array) {
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i].Id.toUpperCase() === id.toUpperCase()) {
+                            return array[i];
+                        }
+                    }
+
+                    return null;
+                },
+                init: function (ownerId, skuCategoryId, petId, pg) {
+                    
+                    this.skuCategoryId = skuCategoryId;
+                    this.ownerId = ownerId;
+                    this.petId = petId;
+                    this.currentPage = pg;
+
+                    this.relatedSkuIdList = [];
+                    this.startTimeList = [];
+                    this.scheduleRuleId = '';
+                    this.startDate = '';
+                    this.employeeId = '';
+                }
+            },
+            filters: {
+                timeOnly: function (date) {
+                    return moment(date).format("h:mm a");
+                },
+                toJSDate: function (value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    return new Date(parseFloat(results[1]));
+                }
+            },
+            computed:
+            {
+                subTotal: function () {
+
+                    var acc = 0;
+                    for (var i = 0; i < this.reservation.SkuLineList.length; i++) {
+
+                        var item = this.reservation.SkuLineList[i];
+
+                        acc = acc + (item.Amount || 0);
+
+                        for (j = 0; j < item.SkuLineList.length; j++) {
+                            acc = acc + (item.SkuLineList[j].Amount || 0);
+                        }
+                    }
+
+                    return acc;
+                },
+                formTitle: function () {
+                    if (this.currentPage === 1) {
+                        return "Step 1. Choose Pet";
+                    }
+                    else if (this.currentPage === 2) {
+                        return "Step 2. Choose Service";
+                    }
+                    else if (this.currentPage === 3) {
+                        return "Step 3. Choose Extras";
+                    }
+                    else if (this.currentPage === 4) {
+                        return "Step 4. Choose Provider and Date";
+                    }
+                    else if (this.currentPage === 5) {
+                        return "Step 5. Review";
+                    }
+                    else if (this.currentPage === 6) {
+                        return "Step 6. Choose Pet";
+                    }
+                },
+                currentPet: function () {
+                    if (this.petId) {
+                        return this.search(this.petId, this.petList)
+                    } else {
+                        return null;
+                    }
+                },
+                currentSku: function () {
+                    if (this.skuId) {
+                        return this.search(this.skuId, this.primarySkuList);
+                    } else {
+                        return null;
+                    }
+                },
+                currentScheduleRule: function () {
+                    if (this.scheduleRuleId) {
+                        return this.search(this.scheduleRuleId, this.startTimeList);
+                    } else {
+                        return null;
+                    }
+                },
+                currentEmployee: function () {
+                    if (this.employeeId) {
+                        return this.search(this.employeeId, this.employeeList);
+                    } else {
+                        return null;
+                    }
+                },
+                currentExtraList: function () {
+                    return this.relatedSkuList.filter(item => { return this.relatedSkuIdList.indexOf(item.Id) > -1 });
+                },
+            },
+            watch: {
+                skuId: function (val) {
+
+                    this.getRelatedSkuList(val);
+                    this.getEmployeeList(val);
+
+                },
+                startDate: function (val) {
+                    this.getStartTimeList(val, this.employeeId);
+                },
+                ownerId: function (val) {
+                    if (val) {
+                        this.getOwner(val);
+                        this.getPetList(val);
+                    }
+                },
+                skuCategoryId: function (val) {
+                    this.getPrimarySkuList(val);
+                }
+            }
+
+
+        });
+
+        function guid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function round(value, precision) {
+            var multiplier = Math.pow(10, precision || 0);
+            return Math.round(value * multiplier) / multiplier;
+        }
+
+        function isEmpty(value) {
+            if (!!value && value instanceof Array) {
+                return value.length < 1
+            }
+
+            if (!!value && typeof value === 'object') {
+                for (var key in value) {
+                    if (hasOwnProperty.call(value, key)) {
+                        return false
+                    }
+                }
+            }
+
+            return !value // Fallback for strings, etc.
+        }
+
+    </script>
+
+
+}

@@ -1,0 +1,13 @@
+﻿@model  List<Paw.Services.Messages.Web.PetReservations.PetReservation>
+@{
+    Layout = null;
+}
+<div id="petReservationList">
+    @for (int i = 0; i < this.Model.Count; i++)
+    {
+        @Html.EditorFor(m => m[i]);
+    }
+</div>
+
+    
+

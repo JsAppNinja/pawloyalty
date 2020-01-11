@@ -1,0 +1,5 @@
+
+1. Default groom pricing - calculate from dog size, then breed - add as attribute or plugin
+2. Timesszone - display and editors
+3. 
+

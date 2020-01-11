@@ -1,0 +1,59 @@
+﻿@model Guid?
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+    if (readOnly)
+    {
+        this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control");
+    }
+    else
+    {
+        this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control select2");
+
+    }
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    IEnumerable<SelectListItem> selectList = this.ViewData[this.ViewData.ModelMetadata.PropertyName + "_SelectList"] as IEnumerable<SelectListItem>;
+
+
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (item.Value == this.Model.ToString())
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+            }
+        }
+    }
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+
+}
+
+@if (readOnly)
+{
+    @Html.TextBox("Display_" + this.ViewData.ModelMetadata.PropertyName, itemText, this.ViewData.ModelMetadata.AdditionalValues)
+    @Html.Hidden(string.Empty, itemValue)
+}
+else
+{
+    @Html.DropDownListFor(x => x, selectList, emptyText, this.ViewData.ModelMetadata.AdditionalValues)
+}
+
+

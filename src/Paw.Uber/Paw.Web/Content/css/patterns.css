@@ -1,0 +1,505 @@
+/* Pty.pe for Paw Loyalty - Patterns */
+
+/* Accordians */
+
+.card-header {
+	padding: 0;
+}
+.accordian-header, .accordian-header:hover, .accordian-header:focus {
+	font-size: 2rem;
+	line-height: 3rem;
+	font-weight: 400;
+	width: 100%;
+	color: #fff;
+	background: var(--secondary);
+	text-align: left;
+}
+.accordian-header.sticky {
+	font-size: 1rem;
+	line-height: 1.5;
+    
+}
+.accordian-header.collapsed, .accordian-header.collapsed:hover, .accordian-header.collapsed:focus {
+	color: #000;
+}
+.accordian-header.collapsed {
+	background: #fff;
+}
+.accordian-header.collapsed:hover, .accordian-header.collapsed:focus {
+	background: var(--grey);
+}
+.accordian-header:before {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f0dd";
+	float: left;
+	margin: 0 1% 0 0;
+	margin-top: -5px;
+}
+.collapsed:before {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f0da";
+	float: left;
+	margin: 0 2% 0 0;
+	color: var(--secondary);
+}
+/* Alerts */
+
+.alert span {
+	margin-left: 2%;
+	color: black;
+	font-size: 1rem;
+	line-height: 1rem;
+}
+.alert-info {
+	color: var(--secondary);
+	background-color: var(--secondary-light2);
+	border-color: var(--secondary-light2);
+}
+.alert-success {
+	color: var(--green);
+	background-color: var(--green-light);
+	border-color: var(--green-light);
+}
+.alert-danger {
+	color: var(--red);
+	background-color: var(--red-light);
+	border-color: var(--red-light);
+}
+.alert-warning {
+	color: var(--primary);
+	background-color: var(--primary-light2);
+	border-color: var(--primary-light2);
+}
+/* Cards */
+
+.inner-cards .card-header {
+	font-size: 1rem;
+	color: #fff;
+	background: var(--secondary);
+	text-align: left;
+	padding: .5rem 1rem;
+}
+.inner-cards .card-header:before {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f0dd";
+	float: left;
+	margin: 0 1% 0 0;
+	color: #fff;
+}
+.schedule-cards .card-header {
+	font-size: 1rem;
+	color: #fff;
+	background: var(--secondary);
+	text-align: left;
+	padding: .5rem 1rem;
+	line-height: 3em;
+	font-weight: 500;
+}
+.p-35 {
+	padding: 1.25rem;
+}
+.schedule-img-top {
+	max-width: 50px;
+	float: left;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.schedule-dividers {
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+}
+.schedule-header {
+	font-size: 1rem;
+	color: #fff;
+	background: var(--secondary);
+	text-align: left;
+	padding: .5rem 1rem;
+	line-height: 1em;
+}
+.schedule-header.grey {
+	background: var(--grey2);
+}
+.schedule-header:before {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f0de";
+	float: left;
+	margin: 0 3% 0 0;
+	color: #fff;
+	margin-top: 5px;
+}
+.white-circle {
+	background: white;
+	border-radius: 50%;
+	padding: 1px;
+}
+.fs125 {
+	font-size: 1.25em;
+}
+.mr-45 {
+	margin-right: 2em!important;
+}
+.mr-05 {
+	margin-right: 0.25em!important;
+}
+/* Popovers */
+
+.hide {
+	display: none!important;
+}
+.edit-pop {
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+/* Calendar */
+
+.calendar {
+	width: 100%;
+	margin: 0 auto;
+}
+.calendar table {
+	width: 100%;
+	text-align: center;
+}
+.month {
+	line-height: 2rem;
+}
+.muted {
+	color: var(--grey3);
+}
+.w100 {
+	width: 100%;
+}
+/*!
+ * ClockPicker v0.0.7 for Bootstrap (http://weareoutman.github.io/clockpicker/)
+ * Copyright 2014 Wang Shenwei.
+ * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
+ */
+
+.clockpicker .input-group-addon {
+	cursor: pointer;
+}
+.clockpicker-moving {
+	cursor: move;
+}
+.clockpicker-align-left.popover>.arrow {
+	left: 25px;
+}
+.clockpicker-align-top.popover>.arrow {
+	top: 17px;
+}
+.clockpicker-align-right.popover>.arrow {
+	left: auto;
+	right: 25px;
+}
+.clockpicker-align-bottom.popover>.arrow {
+	top: auto;
+	bottom: 6px;
+}
+.clockpicker-plate {
+	background-color: var(--secondary);
+	border: 1px solid var(--secondary);
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	overflow: visible;
+	position: relative;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.clockpicker-canvas, .clockpicker-dial {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: -1px;
+	top: -1px;
+}
+.clockpicker-tick {
+	border-radius: 50%;
+	color: #fff;
+	line-height: 26px;
+	text-align: center;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	cursor: pointer;
+}
+.clockpicker-tick.active, .clockpicker-tick:hover {
+	background-color: #fff;
+	color: var(--secondary);
+}
+.clockpicker-button {
+	background-image: none;
+	background-color: #fff;
+	border-width: 1px 0 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin: 0;
+	padding: 10px 0;
+}
+.clockpicker-button:hover {
+	background-image: none;
+	background-color: var(--secondary-light);
+}
+.clockpicker-button:focus {
+	outline: none!important;
+}
+.clockpicker-dial {
+	-webkit-transition: -webkit-transform 350ms, opacity 350ms;
+	-moz-transition: -moz-transform 350ms, opacity 350ms;
+	-ms-transition: -ms-transform 350ms, opacity 350ms;
+	-o-transition: -o-transform 350ms, opacity 350ms;
+	transition: transform 350ms, opacity 350ms;
+}
+.clockpicker-dial-out {
+	opacity: 0;
+}
+.clockpicker-hours.clockpicker-dial-out {
+	-webkit-transform: scale(1.2, 1.2);
+	-moz-transform: scale(1.2, 1.2);
+	-ms-transform: scale(1.2, 1.2);
+	-o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
+}
+.clockpicker-minutes.clockpicker-dial-out {
+	-webkit-transform: scale(.8, .8);
+	-moz-transform: scale(.8, .8);
+	-ms-transform: scale(.8, .8);
+	-o-transform: scale(.8, .8);
+	transform: scale(.8, .8);
+}
+.clockpicker-canvas {
+	-webkit-transition: opacity 175ms;
+	-moz-transition: opacity 175ms;
+	-ms-transition: opacity 175ms;
+	-o-transition: opacity 175ms;
+	transition: opacity 175ms;
+}
+.clockpicker-canvas-out {
+	opacity: 0.25;
+}
+.clockpicker-canvas-bearing, .clockpicker-canvas-fg {
+	stroke: none;
+	fill: #fff;
+}
+.clockpicker-canvas-bg {
+	stroke: #fff;
+	fill: var(--secondary-light);
+}
+.clockpicker-canvas line {
+	stroke: #fff;
+	stroke-width: 1;
+	stroke-linecap: round;
+	/*shape-rendering: crispEdges;*/
+}
+.clockpicker-button.am-button {
+	margin: 1px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+}
+.clockpicker-button.pm-button {
+	margin: 1px 1px 1px 136px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+}
+/* Multi level dropdowns */
+
+.dropdown-submenu {
+	position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	-webkit-border-radius: 0 6px 6px 6px;
+	-moz-border-radius: 0 6px 6px;
+	border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+	display: block;
+}
+.dropdown-submenu>a:after {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	display: block;
+	content: "\f054";
+	float: right;
+	width: 0;
+	height: 0;
+	margin-top: 2px;
+	margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+	border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+	float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+	margin-left: 10px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
+}
+.dropdown-item a {
+	color: #000;
+	text-decoration: none;
+}
+.dropdown-item a:hover {
+	color: var(--primary-dark);
+}
+.dropdown-toggle-split {
+	margin-left: 2px!important;
+}
+@media (min-width: 576px) {
+	.card-deck.booking .card {
+		margin-right: 2px;
+		margin-left: 2px;
+		margin-bottom: 2px;
+	}
+}
+.card-deck.booking .card-body {
+	padding: 0.3rem;
+}
+.card.days {
+	border: none!important;
+	text-align: center;
+	font-weight: 700;
+	font-size: 0.75rem;
+	background-color: var(--grey);
+	border-bottom: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.calendar-tag {
+	background-color: var(--green);
+	color: #fff;
+	padding: 5%;
+	border-radius: 0.25em;
+}
+.card-deck.booking, .card-deck.booking h5 {
+	font-size: 0.75rem;
+}
+
+/*Nav bar*/
+
+.navbar-toggler.collapsed:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "";
+    float: left;
+    margin: 0 2% 0 0;
+    color: var(--secondary);
+}
+
+.navbar-dark .navbar-toggler-icon svg {
+    fill: var(--secondary);}
+
+.info-dropdown {background:transparent; color:#fff;border: none;
+    outline:none;}
+
+.info {color:#fff;}
+
+.navbar-nav {flex-direction:row;}
+
+.navbar-nav .dropdown-menu {}
+
+.pet-nav.navbar-collapse {background:var(--grey2); font-weight:700;margin-left:-16px; margin-right:-16px; padding:0 1%;}
+
+.navbar {padding: 0rem 1rem;}
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link {color:#fff;}
+
+.navbar-nav .dropdown-menu {position:absolute;}
+
+.navbar-dark .navbar-toggler {border:none;}
+
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(15,198,230, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+/* Room booking */
+
+.rb_month {
+	width: 775px;
+	height: 27px;
+	top: 0px;
+	text-align: center;
+}
+.rb_day {
+	height: 27px;
+	border-top: 1px solid var(--grey1);
+}
+.rb_slot {
+	height: 60px;
+}
+.rb_slot:hover {
+	border: 2px solid var(--primary);
+	border-radius: 0.25em;
+}
+.rb_slot, .rb_day {
+	position: relative;
+	float: left;
+	width: 25px;
+	top: 0px;
+	text-align: center;
+	border-left: 1px solid var(--grey1);
+}
+.end {
+	border-right: 1px solid var(--grey1);
+}
+.bottom {
+	border-bottom: 1px solid var(--grey1);
+}
+.weekend {
+	background-color: var(--primary-light2);
+}
+.ready {
+	border-left: 3px solid var(--green);
+}
+.cleaning {
+	border-left: 3px solid var(--yellow);
+}
+.dirty {
+	border-left: 3px solid var(--red);
+}
+.rb table tr {
+	height: 60px;
+}
+.rb_img {
+	height: 50px;
+}
+.rb_slot_booked {
+	width: 175px;
+	height: 60px;
+	float: left;
+	position: absolute;
+	margin-left: 50px;
+	border: 1px solid black;
+	border-radius: 0.25em;
+}
+
+

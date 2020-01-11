@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Guid>
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    attributes.Add("class", "form-control selectpicker");
+    attributes.Add("data-actions-box", "true");
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    IEnumerable<SelectListItem> selectList = this.ViewData[this.ViewData.ModelMetadata.PropertyName + "_SelectList"] as IEnumerable<SelectListItem>;
+
+    // Value
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (item.Value == this.Model.ToString())
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+
+            }
+        }
+    }
+
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+
+}
+
+<text>
+    @Html.DropDownListFor(x => x, selectList, emptyText, attributes)
+</text>

@@ -1,0 +1,123 @@
+/* Pty.pe for Paw Loyalty - Colour */
+
+:root {
+  --primary: #e6700f;
+  --primary-light: #f99d32;
+  --primary-light2: #fde1c1;
+  --primary-dark: #c25b06;
+  --secondary: #008299;
+  --secondary-light: #0fc6e6;
+  --secondary-dark: #006375;
+  --green: #85ad5f;
+  --red: #b21e00;
+  --green-light: #dae6cf;
+  --red-light: #e7bbb2;
+  --secondary-light2:#b2d9e0;
+  --grey:#f0f0f0;
+--grey1:#dee2e6;
+  --grey2:#666666;
+  --grey3:#BFC1C3;
+  
+    
+}
+
+/* Backgrounds */
+
+.background-primary {
+    background-color: var(--primary);
+}
+
+.background-primary-light {
+    background-color: var(--primary-light);
+}
+
+.background-primary-light2 {
+    background-color: var(--primary-light2);
+}
+
+
+.background-primary-dark {
+    background-color: var(--primary-dark);
+}
+
+.background-secondary {
+    background-color: var(--secondary);
+}
+
+.background-secondary-light {
+    background-color: var(--secondary-light);
+}
+
+.background-secondary-light2 {
+    background-color: var(--secondary-light2);
+}
+
+.background-secondary-dark {
+    background-color: var(--secondary-dark);
+}
+
+.background-green {
+    background-color: var(--green);
+   
+}
+
+.background-red {
+    background-color: var(--red);
+    
+}
+
+.background-green-light {
+    background-color: var(--green-light);
+   
+}
+
+.background-red-light {
+    background-color: var(--red-light);
+    
+}
+
+.background-grey {
+    background-color: var(--grey);
+    
+}
+
+.background-grey2 {
+    background-color: var(--grey2);
+    
+}
+
+/* Text and icon colours */
+
+.text-primary {
+    color: var(--primary)!important;
+}
+
+.text-primary-light {
+    color: var(--primary-light);
+}
+
+
+.text-primary-dark {
+    color: var(--primary-dark);
+}
+
+.text-secondary {
+    color: var(--secondary)!important;
+}
+
+.text-grey {
+    color: var(--grey3);
+}
+
+.text-red {
+    color: var(--red);
+}
+
+
+/* Borders */
+
+.border-blue {
+    border:1px solid var(--secondary);
+}
+
+

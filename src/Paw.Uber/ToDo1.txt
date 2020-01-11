@@ -1,0 +1,127 @@
+
+
+This Weekend
+1. booking back end: create backend for booking
+- grooming
+- boarding
+- daycare
+2. data import: vaccines
+3. nva dns {T}
+4. invoice layout, tips, payments, outstanding invoices
+5. 
+
+
+1. breakout pet cache
+2. 
+
+
+
+1. create container control
+2. view in container control
+3. create readonly container header
+4. Create scrollable add-on list
+- selectable
+5. create pop up configurator
+
+
+2. 
+1. create change feed
+2. create reset
+
+
+
+------
+
+1. sku version
+2. sku version trigger refresh
+3. composite foreign key
+
+create a read only user for production
+
+
+--------------------------
+
+1. create search box [Done]
+2. create group dropdown [Done]
+3. create provider drop down [Done]
+4. create owner search (empty) [Done]
+5. create path plan [Done]
+6. create provider group path [Done]
+7. create provider path [Done]
+8. add owners, providers, providerGroups data migration [Done]
+9. add pet data migration [Done]
+10. add search 
+- nested span
+- links
+- performance
+11. Layout
+12. 
+13. 
+
+1. Add property snippet [Done]
+2. 
+
+deferred
+-------------------------------------------------------
+1. combine employee with user ???
+2. 
+
+
+Authentication
+-------------------------------------------------------
+1. Add UseLegacyPassword (0=legacy,1=new) and LegacyPassword -> default false and empty columns [Done]
+2. Create user import script 
+- 
+
+1. Test password migration
+wagredwood/1025Hansen
+pawsample/P@sswoof
+dogtopiatraining/password
+garrettadlock@gmail.com/password
+
+2. 
+
+Requirements
+--------------------------------------------------------
+1. lockout provider users if provider is not active
+2. 
+
+
+Later
+--------------------------------------------------------
+1. Validate Legacy Passwords
+2. Import Legacy Users
+3. ASP.Net Session
+4. ditch legacy Id's
+5. profile photo upload
+6. search keyboard operation, default link/select
+7. create unique key for Owner.Email (create script in OwnerLaod test to clean up emails with null index)
+
+Questions
+-------------------------------------------------------------
+1. Use PetProviderDetails or PetProviders?
+
+Cache
+-------------------------------------------------------------
+1. Use redis for session state
+2. use local cache for pet list
+3. when adding or delete - refresh local cache
+4. 30 second remote cache expiration
+5. 
+
+Providers Links
+------------------------------------------------------------
+
+
+/Providers/[ProviderKey]/Profile/[ProfileKey]
+
+/Providers/[ProviderKey]/Profile/[ProfileKey]/Medical
+
+/Providers/[ProviderKey]/Provider/[ProviderKey]
+
+
+
+/Providers/1543DD05-83D2-484D-9D59-16278995D4F1/Provider
+
+/Providers/284a43dd-f676-41e4-a713-ebc848cf85db/Profile/377bd6d5-5126-4404-8143-832326576675
+

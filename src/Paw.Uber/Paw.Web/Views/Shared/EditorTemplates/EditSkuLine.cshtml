@@ -1,0 +1,37 @@
+﻿@model Paw.Services.Messages.Web.SkuLines.EditSkuLine
+@using Paw.Services.Messages.Web.SkuLines
+@{
+    Layout = "InputContainer.cshtml";
+
+    string display = this.Model?.Id.ToString();
+
+    // Get the querystring
+    string querystring = string.Empty;
+    ISkuCategoryId skuCategoryIdItem = this.ViewData.ModelMetadata.Container as ISkuCategoryId;
+    if (skuCategoryIdItem != null)
+    {
+        Guid skuCategoryId = skuCategoryIdItem.SkuCategoryId;
+        querystring = $"skuCategoryId={skuCategoryId}";
+    }
+    else
+    {
+        SkuLine skuLine = this.ViewData.ModelMetadata.Container as SkuLine;
+        if (skuLine != null)
+        {
+            querystring = $"parentSkuId={skuLine.SkuId}";
+        }
+    }    
+}
+
+
+@if (this.Model == null)
+{
+    <div>
+        <a href="/Providers/simplereservation/_EditSkuLine?@(querystring)" data-target="#commonDialog" data-toggle="modal" class="nav-link"><i class="fas fa-plus"></i> Add Service</a>
+    </div>
+}
+else
+{
+    <div>SkuLine</div>
+    <div>@display</div>
+}

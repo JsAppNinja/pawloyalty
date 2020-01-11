@@ -1,0 +1,33 @@
+﻿@model List<Pet>
+@{
+    Layout = null;
+    string id = "Petid";
+
+    bool singleItem = false;
+    if (this.Model != null && this.Model.Count == 1)
+    {
+        singleItem = true;
+    }
+}
+
+    <label class="control-label" for="PetId">
+
+        <strong>Pet </strong>
+
+    </label>
+
+    <div>
+        @if (this.Model == null || this.Model.Count == 0)
+        {
+            <span style="text-transform: uppercase !important; color: darkgray;">No records found</span>
+        }
+
+    @foreach (var item in this.Model)
+    {
+        <div class="radio radio-list-item">
+            <label>
+                <input type="radio" name="@id" id="@id" value="@item.Id " @if (singleItem) { <text>checked</text> }> @item.Name @if (item.Breed != null && !string.IsNullOrEmpty(item.Breed.Name)){ <text>( @(item.Breed) )</text> }
+            </label>
+        </div>
+    }
+    </div>

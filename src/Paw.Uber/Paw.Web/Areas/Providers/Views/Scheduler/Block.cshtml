@@ -1,0 +1,284 @@
+﻿@model List<Paw.Services.Messages.Web.Schedules.SchedulerInfo>
+@{
+    // Step 1.Get Provider
+    PawContext pawContext = Html.GetPawContext();
+    Provider provider = pawContext.Provider;
+    if (provider == null) { return; }
+
+    // Step 2. Get SkuCategory
+    SkuCategory skuCategory = provider.GetSkuCategory(Html.GetRouteValueAsGuid("SkuCategoryId"));
+    if (skuCategory == null) { return; }
+
+    // Step 3. Get Date
+    DateTime? date = Html.GetQuerystringInfo().GetValueAsDate("Start");
+    if (date == null)
+    {
+        date = DateTime.Now;
+    }
+    DateTime startTime = new DateTime(date.Value.Year, date.Value.Month, date.Value.Day, 0, 0, 0);
+
+    // Step 4. Get Config
+    //string timezone = "America/Los_Angeles";
+    string timezone = "Etc/UTC";
+    int minorTickCount = 4;
+
+    // Step 6. Business Hours
+    DateTime workdayStart = new DateTime(2000, 6, 1, 7, 0, 0);
+    DateTime workdayEnd = new DateTime(2000, 6, 1, 19, 0, 0);
+    if (this.Request.QueryString["FullDay"] != null)
+    {
+        workdayStart = new DateTime(2000, 6, 1, 0, 0, 0);
+        workdayEnd = new DateTime(2000, 6, 2, 0, 0, 0);
+    }
+
+    // Step 7. Determine view type
+    string view = "week";
+    string viewQueryString = this.Request.QueryString["View"];
+    if (!string.IsNullOrEmpty(viewQueryString))
+    {
+        view = viewQueryString;
+    }
+
+}
+
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            @(skuCategory.Name)
+            <small>schedule, blocks</small>
+        </h1>
+    </div>
+</div>
+
+    @(Html.Kendo().Scheduler<Paw.Services.Messages.Web.Schedules.SchedulerInfo>()
+                                            .Name("scheduler")
+                                            .Date((DateTime)date)
+                                            .StartTime(startTime)
+
+                                            .MinorTickCount(minorTickCount)
+
+                                            .ShowWorkHours(true)
+                                            .WorkDayStart(workdayStart)
+                                            .WorkDayEnd(workdayEnd)
+
+                                            //.Timezone(timezone)
+
+                                            .Views(views =>
+                                            {
+                                                views.DayView(dayView => dayView.AllDaySlot(false).Selected("day".Equals(view, StringComparison.CurrentCultureIgnoreCase)).WorkDayCommand(true));
+                                                views.WeekView(weekView => weekView.AllDaySlot(false).Selected("week".Equals(view, StringComparison.CurrentCultureIgnoreCase))); // Default View
+                                                views.AgendaView(agendaView => agendaView.Editable(false).Selected("agenda".Equals(view, StringComparison.CurrentCultureIgnoreCase)));
+
+
+                                            })
+
+                                            // Data
+                                            .Editable(editable =>
+                                            {
+                                                editable.Destroy(true);
+
+                                            })
+
+                                            .Events(events =>
+                                            {
+                                                events.Add("scheduler_add");
+                                                events.Edit("scheduler_edit");
+                                                events.Move("scheduler_move");
+                                                events.Change("scheduler_change");
+                                                events.Navigate("scheduler_navigate");
+                                            })
+
+                                            .EventTemplateId("event1")
+
+
+                            .DataSource(dataSource => dataSource
+                                .Custom()
+                                .ServerFiltering(false)
+                                .Batch(false)
+                                .Schema(schema => schema
+
+                                    .Model(m =>
+                                    {
+
+                                        m.Id(f => f.Id);
+                                        m.Field("title", typeof(string)).From("Title");
+                                        m.Field("start", typeof(DateTime)).From("Start");
+                                        m.Field("end", typeof(DateTime)).From("End");
+                                        m.Field("description", typeof(string)).From("Description");
+                                        m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                                        m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                                        m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                                        m.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                                        m.Field("startTimezone", typeof(string)).From("StartTimezone");
+                                        m.Field("endTimezone", typeof(string)).From("EndTimezone");
+                                        m.Field("color", typeof(string)).From("Color");
+
+                                        m.Field("durationInMinutes", typeof(string)).From("DurationInMinutes");
+                                        m.Field("employeeId", typeof(string)).From("EmployeeId");
+                                        m.Field("employeeName", typeof(string)).From("EmployeeName");
+                                        m.Field("initials", typeof(string)).From("Initials");
+                                        m.Field("providerId", typeof(string)).From("ProviderId");
+
+                                        m.Field("petName", typeof(string)).From("PetName");
+                                        m.Field("serviceName", typeof(string)).From("ServiceName");
+
+                                    })
+                                )
+
+                            )
+
+                            .Deferred()
+    )
+
+    <style>
+        .event-template img {
+            float: left;
+            margin: 0 8px;
+        }
+
+        .event-template {
+            height: 100%;
+            background-color: #E8F4F8;
+            padding: 3px;
+            color: #2e3031;
+        }
+
+            .event-template p {
+                margin: 5px 0 0;
+            }
+
+            .event-template h3 {
+                padding: 0 8px 5px;
+                font-size: 12px;
+            }
+
+
+        body, h1, h2, h3 {
+            margin: 0px;
+        }
+    </style>
+
+
+    @section scripts  {
+
+        @AppHelpers.ModalDialog("addSchedulerEvent")
+
+        @AppHelpers.ModalDialog("editSchedulerEvent")
+
+        <script>
+
+    function filterData(e) {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+            var filter = { start: kendo.format('{0:s}', scheduler.view().startDate()), end: kendo.format('{0:s}', scheduler.view().endDate()) }
+
+        return filter;
+            }
+
+    function parameterMap(options, operation) {
+        if (operation !== "read" && options.models) {
+            return { models: kendo.stringify(options.models) };
+        }
+    }
+
+    function scheduler_change(e) {
+        console.log("change");
+        console.log(e);
+        e.preventDefault();
+    }
+
+    function scheduler_save(e) {
+        console.log("save");
+    }
+
+    function scheduler_remove(e) {
+        console.log("remove");
+    }
+
+    function scheduler_cancel(e) {
+        console.log("cancel");
+    }
+
+    function scheduler_edit(e) {
+        console.log("edit");
+        e.preventDefault();
+        console.log(e);
+        console.log(e.event.Id);
+
+        var editSchedulerUri = "/providers/Scheduler/_UpdateSchedulerEventModal/" + e.event.Id + "?SkuCategoryid=@(skuCategory.Id)";
+        console.log(editSchedulerUri);
+        // window.location = editSchedulerUri;
+        $('#editSchedulerEvent').modal('show').find('.modal-content').load(editSchedulerUri);
+    }
+
+    function scheduler_add(e) {
+
+        console.log("add");
+        e.preventDefault();
+        var addSchedulerUri = "/providers/Scheduler/_AddSchedulerEventModal?SkuCategoryid=@(skuCategory.Id)&eventStart=" + kendo.format('{0:s}', e.event.start);
+        console.log(addSchedulerUri);
+        $('#addSchedulerEvent').modal('show').find('.modal-content').load(addSchedulerUri);
+
+    }
+
+    function scheduler_moveStart(e) {
+        console.log("moveStart");
+    }
+
+    function scheduler_move(e) {
+        console.log("move");
+    }
+
+    function scheduler_moveEnd(e) {
+        console.log("moveEnd");
+    }
+
+    function scheduler_resizeStart(e) {
+        console.log("resizeStart");
+    }
+
+    function scheduler_resize(e) {
+        console.log("resize");
+    }
+
+    function scheduler_resizeEnd(e) {
+        console.log("resizeEnd");
+        }
+        </script>
+        <script>
+        function scheduler_navigate(e) {
+            console.log(e);
+            var scheduleUri = "/Providers/Scheduler/@(skuCategory.Id)/Appointment";
+            if (e.action === "changeView") {
+                scheduleUri = scheduleUri + "@(Html.GetQuerystringInfo().Remove("View").GetQuerystring())&View=" + e.view + "&Start=" + kendo.toString(e.date, 'yyyy-MM-dd');
+            }
+            else if (e.action === "changeDate") {
+                scheduleUri = scheduleUri + "@(Html.GetQuerystringInfo().Remove("Start").GetQuerystring())&Start=" + kendo.toString(e.date, 'yyyy-MM-dd');
+            }
+            else if (e.action === "next")
+            {
+                scheduleUri = scheduleUri + "@(Html.GetQuerystringInfo().Remove("Start").GetQuerystring())&Start=" + kendo.toString(e.date, 'yyyy-MM-dd');
+            }
+            else if (e.action === "today")
+            {
+                scheduleUri = scheduleUri + "@(Html.GetQuerystringInfo().Remove("View").GetQuerystring())&View=" + e.view;
+            }
+
+            console.log(scheduleUri);
+            window.location = scheduleUri;
+            e.preventDefault();
+            return false;
+        }
+
+        </script>
+
+        <script id="event1" type="text/x-kendo-template">
+            <div class="event-template">
+                <p>
+                    <span class="badge label-provider-1" data-toggle="tooltip" data-placement="top" title="#= employeeName # - #= serviceName # (#= durationInMinutes # min)">#= initials #</span>
+                    <span style="white-space: nowrap" data-toggle="tooltip" data-placement="top" title="#= petName #"><strong>#= petName #</strong></span><br />
+                    <span style="white-space: nowrap" data-toggle="tooltip" data-placement="top" title="#= serviceName #">#= serviceName #</span>
+                </p>
+            </div>
+        </script>
+
+    }

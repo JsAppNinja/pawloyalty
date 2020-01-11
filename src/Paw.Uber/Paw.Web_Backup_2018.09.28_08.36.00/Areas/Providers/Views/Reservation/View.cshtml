@@ -1,0 +1,12 @@
+﻿@model Reservation
+@{
+    ViewBag.Title = "Reservation";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+}
+
+
+<div><a href="/Providers/Reservation/_UpdateReservation/@this.Model.Id">Update</a></div>
+
+<div>Owner: @this.Model.Pet.Owner.FullName </div>
+<div>Pet: @this.Model.Pet.Name </div>

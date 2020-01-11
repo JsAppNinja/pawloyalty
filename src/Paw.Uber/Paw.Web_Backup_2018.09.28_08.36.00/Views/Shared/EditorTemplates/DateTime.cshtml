@@ -1,0 +1,12 @@
+﻿@model DateTime?
+@{
+    Layout = "InputContainer.cshtml";
+}
+
+@(Html.Kendo().DateTimePicker()
+            .Name(this.ViewData.ModelMetadata.PropertyName)
+            .Value(this.Model)
+            .Interval(15)
+            .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker", @class="form-control" })
+            .DateInput()
+)

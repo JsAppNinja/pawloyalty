@@ -1,0 +1,80 @@
+﻿@model Guid?
+@using Paw.Services.Util
+@using Paw.Services.Messages.Web.Searches
+@using Paw.Services.Messages.Web.Owners
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+}
+
+@{
+
+    // Only show if provider group is available
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    if (providerGroupId == null)
+    {
+        return;
+    }
+
+    // initial value
+    string valueAsString = null;
+    string textAsString = null;
+    if (this.ViewData.Model != null && this.ViewData.Model.Value != null)
+    {
+        valueAsString = this.ViewData.Model.Value.ToString();
+        textAsString = new GetOwnerName() { ProviderGroupId = providerGroupId.Value, OwnerId = this.ViewData.Model.Value }.ExecuteString();
+
+    }
+
+}
+
+
+@(Html.Kendo().ComboBox()
+            .Name(this.ViewData.ModelMetadata.PropertyName)
+
+            .Text(textAsString)
+            .Value(valueAsString)
+
+            .Events(e => e.Select("paw.search.onSelect"))
+
+            .Placeholder("Select owner")
+            .DataValueField("OwnerId")
+            .DataTextField("Fullname")
+            .AutoWidth(true)
+            .Template("<strong>#: data.Pet #</strong> (#: data.Breed #) #: data.Fullname #")
+            .MinLength(3)
+            .HtmlAttributes(new { @class = "form-control", style = "width: 100%; height: 32px;" })
+            .Filter(FilterType.StartsWith)
+            .AutoBind(false)
+            .DataSource(source =>
+                {
+                    source.Custom()
+            .ServerFiltering(true)
+            .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+            .Transport(transport =>
+            {
+                transport.Read(config => config.Url(string.Format("/ProviderGroups/{0}/Search/PetOwner", providerGroupId)));
+
+            })
+
+            .Schema(schema =>
+            {
+                schema
+                    .Data("Data")
+                    .Model(model =>
+                    {
+                        model.Id("Id");
+                        model.Field("Pet", typeof(string));
+                        model.Field("OwnerId", typeof(Guid));
+                        model.Field("Fullname", typeof(string));
+                        model.Field("FirstName", typeof(string));
+                        model.Field("LastName", typeof(string));
+                        model.Field("Breed", typeof(string));
+                    });
+            });
+                })
+    //.Deferred()
+)
+

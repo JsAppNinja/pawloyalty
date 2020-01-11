@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="Paw.Services.Test.SchedulerTests.GetSchedulerEventTest" /><Add Test="Paw.Services.Test.SkuTests.GetSkuListTest" /><Add Test="Paw.Services.Test.Bootstrap.BootstrapSchedule.ScheduleSetup" /><Add Test="Paw.Services.Test.Bootstrap.BootstrapSkus.SkusSetup" /></Playlist>

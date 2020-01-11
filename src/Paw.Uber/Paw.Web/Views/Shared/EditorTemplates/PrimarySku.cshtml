@@ -1,0 +1,96 @@
+﻿@using Paw.Services.Attributes.ClientData
+@model Guid?
+@using Paw.Services.Util
+@{
+    //Layout = "InputContainer.cshtml
+    Layout = null;
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    attributes.Add("class", "form-control");
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    // Step 1. Get View Data
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    Guid? providerId = (Guid?)this.ViewData["__providerId"];
+    List<Sku> primarySkuList = new Paw.Services.Messages.Web.Skus.GetPrimarySkuList() { ProviderId = providerId.Value, SkuCategoryId = null }.ExecuteList();
+
+    // Step 2. Get SkuCategoryList Sorted
+    List<SkuCategory> skuCategoryList = new List<SkuCategory>();
+    foreach (Sku sku in primarySkuList)
+    {
+        if (!skuCategoryList.Exists(x => sku.SkuCategoryId != null && x == sku.SkuCategory))
+        {
+            if (sku.IsPrimary)
+            {
+                skuCategoryList.Add(sku.SkuCategory);
+            }
+        }
+    }
+
+    skuCategoryList.Sort((x, y) => x.DisplayOrder.CompareTo(y.DisplayOrder));
+
+    // Step 3. SetDisplayValue and ItemValue
+    string displayValue = "Select service";
+
+
+}
+@if (readOnly)
+{
+    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" id="SelectCategoryMenuButton" type="button">@displayValue</button>
+    @Html.Hidden(string.Empty, this.Model)
+}
+else
+{
+
+    <div class="dropdown mb-3">
+        <div class="btn-group">
+            @Html.Hidden(string.Empty, this.Model)
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="@(Html.IdForModel())_button" type="button">@displayValue</button>
+            <ul aria-labelledby="dropdownMenu" class="dropdown-menu multi-level" role="menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+
+                @foreach (SkuCategory skuCategory in skuCategoryList)
+                {
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item" href="#" tabindex="-1">@skuCategory.Name </a>
+                        <ul class="dropdown-menu">
+                            @foreach (Sku sku in primarySkuList)
+                            {
+                                if (sku.SkuCategoryId == skuCategory.Id && sku.IsPrimary)
+                                {
+                            <li class="dropdown-item">
+                                <a href="#"
+                                   tabindex="-1"
+                                   class="sku-menu-button"
+                                   data-item="@(Html.IdForModel())"
+                                   data-value="@sku.Id"
+                                   data-text="@sku.Name"
+                                   data-ajax="true"
+                                   data-ajax-confim="are you sure?"
+                                   data-ajax-begin="" 
+                                   data-ajax-complete="" 
+                                   data-ajax-loading="" 
+                                   data-ajax-url="/Reservations/Schedule/_Select@(sku.SkuCategory.ScheduleModel)"
+                                   data-ajax-method="GET" 
+                                   data-ajax-mode="replace" 
+                                   data-ajax-update="#ScheduleContainer"
+                                   data-schedule-model="@(sku.SkuCategory != null ? "" : sku.SkuCategory.ScheduleModel)">@sku.Name</a>
+
+                            </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

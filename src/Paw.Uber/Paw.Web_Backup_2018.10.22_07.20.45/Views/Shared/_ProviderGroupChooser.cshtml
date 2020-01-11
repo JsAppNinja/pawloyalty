@@ -1,0 +1,34 @@
+﻿@using Paw.Services.Messages.Web.Providers;
+
+@{
+    Layout = null;
+    Provider provider = this.ViewData["__Provider"] as Provider;
+
+    List<ProviderGroup> providerGroupList = new GetUserProviderGroupList().ExecuteList();
+
+    List<SelectListItem> providerGroupSelectList = providerGroupList.ConvertAll(x => new SelectListItem() { Value = GetDefaultProviderId(x), Text = x.Name, Selected = (provider?.ProviderGroupId == x.Id) });
+    providerGroupSelectList.Insert(0, new SelectListItem() { Text = "", Value = "/" });
+}
+
+@functions {
+
+    string GetDefaultProviderId(ProviderGroup providerGroup)
+    {
+        Provider provider = providerGroup.ProviderCollection.FirstOrDefault();
+
+        if (provider == null)
+        {
+            return "#";
+        }
+        
+        return string.Format("/Providers/Provider/Overview", provider.Id);
+    }
+
+}
+
+<div class="row" style="padding-top: 6px; padding-left:10px;">
+    <div class="col-md-12">
+        @Html.DropDownList("__ProviderGroupId", providerGroupSelectList, new {@class= "form-control", onchange = "javascript:location.href = this.value;" })
+    </div>
+</div>
+

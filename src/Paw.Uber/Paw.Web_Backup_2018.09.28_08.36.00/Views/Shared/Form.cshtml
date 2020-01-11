@@ -1,0 +1,90 @@
+﻿
+
+@{
+    // Step 1. Get Layout
+    string currentLayout = this.ViewBag.CurrentLayout as string;
+    if (!string.IsNullOrEmpty(currentLayout))
+    {
+        this.Layout = currentLayout;
+    }
+
+    // Step 2. Form Title
+    string formTitle = this.ViewData["FormTitle"] as string;
+
+    if (string.IsNullOrEmpty(formTitle))
+    {
+        formTitle = this.ViewData.ModelMetadata.DisplayName;
+    }
+
+    // Step 3. Submit
+    string action = this.GetAction();
+    string submitLabel = string.IsNullOrWhiteSpace(this.ViewData["SubmitLabel"] as string) ? "Save" : (string)this.ViewData["SubmitLabel"];
+
+    // Step 4. Cancel
+    string cancelUrl = string.IsNullOrWhiteSpace(this.ViewData["CancelUrl"] as string) ? "" : (string)this.ViewData["CancelUrl"];
+    string cancelText = string.IsNullOrWhiteSpace(this.ViewData["CancelText"] as string) ? "Cancel" : (string)this.ViewData["CancelText"];
+
+    // Step 5. Add ProviderId
+    string providerAttribute = string.Empty;
+    Provider provider = this.ViewData["__Provider"] as Provider;
+    if (provider != null)
+    {
+        providerAttribute = string.Format("data-providerId='{0}'", provider.Id);
+    }
+
+    // Step 6. Add ProviderGroupId
+    string providerGroupAttribute = string.Empty;
+    ProviderGroup providerGroup = this.ViewData["__ProviderGroup"] as ProviderGroup;
+    if (providerGroup != null)
+    {
+        providerGroupAttribute = string.Format("data-providerGroupId='{0}'", providerGroup.Id);
+    }
+
+    ViewBag.TitleTag = this.ViewData.ModelMetadata.DisplayName;
+}
+@functions{
+    public string GetAction()
+    {
+        if (!string.IsNullOrWhiteSpace(this.ViewData["FormAction"] as string))
+            return this.ViewData["FormAction"] as string;
+
+        string controller = this.ViewContext.Controller.ControllerContext.RouteData.Values["controller"] as string;
+
+        return string.Empty;
+    }
+
+}
+
+<form action="@action" class="form-vertical" method="post" role="form" novalidate="novalidate" @providerAttribute @providerGroupAttribute>
+
+    @if (!string.IsNullOrEmpty(formTitle))
+    {
+        <h2>@formTitle</h2>
+    }
+
+    @Html.Partial("FormLayout")
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group bump">
+                <input type="submit" value="@submitLabel" class="btn btn-primary" />
+
+                @if (!string.IsNullOrWhiteSpace(cancelUrl))
+                {
+                    <text>&nbsp;&nbsp; <a href="@cancelUrl">@cancelText</a></text>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+@section scripts {
+
+
+
+
+}

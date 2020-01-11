@@ -1,0 +1,9 @@
+﻿1. Move Tests to functions
+- should support using API Groups ***
+
+2. Run migrations for Wag, NVA and Dogtopia
+
+
+
+Deferred 
+1.  Gender using enum or int as Id?

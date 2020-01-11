@@ -1,0 +1,30 @@
+﻿@model Paw.Services.Messages.Web.PetReservations.PetReservation
+@{
+    Layout = null;
+    Pet pet = new Paw.Services.Messages.Web.Pets.GetPet(){ Id = this.Model.PetId, ProviderGroupId = (Guid)this.ViewData["__ProviderGroupId"]}.ExecuteItem();
+
+    bool show = (bool?)this.ViewData["__Show"] == true;
+
+
+}
+
+@if (pet != null)
+{
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <a href="#" data-toggle="collapse" data-target="#collapse-@(pet.Id)" aria-expanded="true" aria-controls="collapseOne">@pet.NameBreedAge </a>
+            </h5>
+        </div>
+
+        <div id="collapse-@(pet.Id)" class="collapse @(show ? "show" : "")" aria-labelledby="headingOne" data-parent="#petReservationList">
+            <div class="card-body">
+
+                <h2>Grooming Appointment</h2>
+
+                @Html.Partial("FormLayout")
+
+            </div>
+        </div>
+    </div>
+}

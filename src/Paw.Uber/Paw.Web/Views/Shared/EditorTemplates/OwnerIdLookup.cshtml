@@ -1,0 +1,96 @@
+﻿@model Guid?
+@using Paw.Services.Util
+@using Paw.Services.Messages.Web.Owners
+@{
+    Layout = "InputContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+}
+
+@{
+
+    // Only show if provider group is available
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    if (providerGroupId == null || providerId == null)
+    {
+        return;
+    }
+
+    // initial value
+    string valueAsString = null;
+    string textAsString = null;
+    if (this.ViewData.Model != null && this.ViewData.Model.Value != null)
+    {
+        valueAsString = this.ViewData.Model.Value.ToString();
+        textAsString = new GetOwnerName() { ProviderGroupId = providerGroupId.Value, OwnerId = this.ViewData.Model.Value }.ExecuteString();
+
+    }
+
+}
+<script>
+
+        function @(this.ViewData.ModelMetadata.PropertyName)_onSelect(e) {
+
+            // Step 1. Set the hidden OwnerId value
+            var dataItem = this.dataItem(e.item.index());
+            $('#@(this.ViewData.ModelMetadata.PropertyName)').val(dataItem.OwnerId);
+
+            // Step 2. If PetId-Container exists then update
+            if ($('#PetId-container')) {
+
+                var data = {};
+
+                data["action"] = "GET";
+                data["container"] = "#PetId-container";
+                data["url"] = "/Providers/UIControl/PetRadioButtonList?ProviderGroupId=@(providerGroupId)&ownerId=" + dataItem.OwnerId;
+                
+                paw.updateContainer(data);
+            }
+        }
+
+</script>
+
+@(Html.Kendo().AutoComplete()
+    .Name(this.ViewData.ModelMetadata.PropertyName + "_Search")
+    .AutoWidth(true)
+    .DataTextField("Fullname")
+    .Template(string.Format("<strong>#: data.Pet #</strong> (#: Breed #) #: data.Fullname #"))
+    .MinLength(3)
+    .HtmlAttributes(new { @class = "form-control input-lg", placeholder = "Search...", style = "width: 100%;" })
+    .Events(events =>
+        {
+            events.Select(this.ViewData.ModelMetadata.PropertyName + "_onSelect");
+        })
+    .DataSource(source =>
+    {
+        source.Custom()
+            .ServerFiltering(true)
+            .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+            .Transport(transport =>
+            {
+                transport.Read(config => config.Url(string.Format("/ProviderGroups/{0}/Search/PetOwner", providerGroupId)));
+            })
+            .Schema(schema =>
+            {
+                schema
+                .Data("Data")
+                .Model(model =>
+                {
+                    model.Id("Id");
+                    model.Field("Pet", typeof(string));
+                    model.Field("OwnerId", typeof(Guid));
+                    model.Field("Fullname", typeof(string));
+                    model.Field("Breed", typeof(string));
+                    model.Field("PetAndOwner", typeof(string));
+                    model.Field("ProviderId", typeof(Guid));
+                });
+            });
+    })
+)
+
+@(Html.Hidden(string.Empty))
+
+
+

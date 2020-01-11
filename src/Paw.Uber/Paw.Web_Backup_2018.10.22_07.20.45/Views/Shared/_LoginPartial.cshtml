@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+    @if (Request.IsAuthenticated)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="username username-hide-on-mobile"> @User.Identity.GetUserName() </span>
+                <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/Manage/Index"><i class="icon-user"></i> My Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "", action = "/Account/Logoff" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <text>Log Off</text>
+                    }
+                </a>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a href="/Account/Login" class="dropdown-item">
+                <span class="username username-hide-on-mobile">Login</span>
+            </a>
+        </li>
+    }

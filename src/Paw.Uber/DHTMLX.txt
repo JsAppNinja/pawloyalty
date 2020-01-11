@@ -1,0 +1,25 @@
+
+http://scheduler-net.com/docs/
+
+
+
+http://localhost:49328/Blocks/CC698546-9EBF-434C-82F6-A988000AE32B/Schedule/Index
+
+http://scheduler-net.com/docs/getting-started.html
+
+https://www.smashingmagazine.com/2017/07/designing-perfect-date-time-picker/
+
+https://github.com/airbnb/react-dates
+
+
+https://codecanyon.net/item/whendatepicker/22418308?s_rank=2 ***C:\Users\dwbanks\Source\Repos\Paw\src\Paw.Uber\Paw.Web\Areas\Providers\Views\Pet\
+
+https://codepen.io/ChamaraHarindra/pen/GNEyqo
+
+https://colorlib.com/wp/free-bootstrap-wizards/
+
+
+sticky left column
+
+https://codepen.io/paulobrien/pen/gWoVzN
+

@@ -1,0 +1,28 @@
+﻿@model Pet
+
+@{
+    Layout = null;
+
+}
+
+<div class="col-md-6 orange-box p-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card border-clear">
+                    <img alt="Image of @this.Model.Name" class="card-img-top" src="./@(this.Model.Id).jpg">
+                    <div class="card-body p-1">
+                        <p class="card-text small">
+                            @this.Model.Name 9yrs old.<br>
+                            @this.Model.Breed.Name
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3>@this.Model.Name</h3>
+                <p><i class="fas fa-bug"></i> <i class="fas fa-bug"></i> <i class="fas fa-bug"></i> <i class="fas fa-bug"></i></p>
+            </div>
+        </div>
+    </div>
+</div><!-- pet card -->

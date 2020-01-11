@@ -1,0 +1,17 @@
+﻿@{
+    // Responsability: form layout including rows and columns
+
+    this.Layout = null;
+    
+
+}
+
+
+
+@foreach (var property in ViewData.ModelMetadata.Properties.Where(x => x.ShowForEdit && !ViewData.TemplateInfo.Visited(x)))
+{
+    <text>
+    @Html.Editor(property.PropertyName, new { Parent = this.Model })
+    </text>
+
+}

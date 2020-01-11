@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+
+
+
+    <header class="sticky-top">
+        <nav class="navbar navbar-dark bg-dark">
+            @if (Request.IsAuthenticated)
+            {
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#MainNav" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            }
+                <a class="navbar-brand" href="#"><img src="/content/images/logo.png" width="200px"></a>
+                @if (Request.IsAuthenticated)
+                {
+                    <form class="form-inline my-2 my-md-0">
+                        @Html.Partial("_SearchBox")
+                    </form>
+                    <button type="button" class="btn btn-outline-primary">Quick check in</button>
+                    <button type="button" class="btn btn-primary">Dashboard</button>
+                    <button type="button" class="btn btn-outline-primary">New client</button>
+                }
+
+                @Html.Partial("_LoginPartial")
+
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="collapse pet-nav navbar-collapse" id="MainNav">
+                        <ul class="navbar-nav mr-auto list-inline">
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Facility news</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Employee calendar</a>
+                                    <a class="dropdown-item" href="#">Run transfer view</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Operational reports</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <a class="dropdown-item" href="#">Financial</a>
+                                    <a class="dropdown-item" href="#">Customer</a>
+                                    <a class="dropdown-item" href="#">Employee</a>
+                                    <a class="dropdown-item" href="#">Business KPI</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employees</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                                    <a class="dropdown-item" href="#">Schedule</a>
+                                    <a class="dropdown-item" href="/Settings/Employee">Manage Employees</a>
+                                    <a class="dropdown-item" href="#">Time clock</a>
+                                    <a class="dropdown-item" href="#">Notices</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketing</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="#">Drip campaigns</a>
+                                    <a class="dropdown-item" href="#">Automated emails</a>
+                                    <a class="dropdown-item" href="#">Newsletters</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <div class="settings">
+                                        <div class="row1">
+                                            <a class="dropdown-item" href="#">Policies</a>
+                                            <a class="dropdown-item" href="#">Reports</a>
+                                            <a class="dropdown-item" href="#">E-charting</a>
+                                            <a class="dropdown-item" href="#">Report card</a>
+                                        </div>
+                                        <div class="row2">
+                                            <a class="dropdown-item" href="#">Multiple day training</a>
+                                            <a class="dropdown-item" href="#">Packages</a>
+                                            <a class="dropdown-item" href="#">Activities</a>
+                                            <a class="dropdown-item" href="#">Rooms</a>
+                                            <a class="dropdown-item" href="#">Retail</a>
+                                        </div>
+                                        <div class="row3">
+                                            <a class="dropdown-item" href="#">Lists</a>
+                                            <a class="dropdown-item" href="#">Icons</a>
+                                            <a class="dropdown-item" href="#">Set up sheet</a>
+                                        </div>
+                                        <div class="row4">
+                                            <a class="dropdown-item" href="#">Mobile app</a>
+                                            <a class="dropdown-item" href="#">Email preferences</a>
+                                            <a class="dropdown-item" href="#">Import customer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                }
+            </nav>
+    </header>

@@ -1,0 +1,100 @@
+
+What get's Cached?
+---------------------------------------------------------------
+Two roots
+1. ProviderGroup - GetProviderGroup
+- Owner
+- Pet
+2. Provider - GetProviderByDomain
+- Employee
+
+What messages initiate cache?
+----------------------------------------------------------------
+Search on 'CacheHelper.CacheResult'
+1. GetProvider
+2. GetProviderByDomain
+3. GetProviderGroup
+
+
+What messages retreive from cache?
+---------------------------------------------------------------
+1. GetProvider
+2. GetProviderByDomain
+3. GetPet
+4. GetOwner
+
+What elese is cached?
+--------------------------------------------------------------
+GetPetLinkList is cached using PetSearchService
+
+
+Provider Refresh
+--------------------------------------------------------------
+1. Set ActiveProvider_{ProviderId} in ProviderActionFilterAttribute
+2. Every 5 mintues background task will refresh Providers
+3. 
+
+TODO
+--------------------------------------------------------------
+1. Read thru/write-thru generic service - start with Pets, Owners, PetSearchService
+2. Create a change feed - write local
+3. Add pub/sub to change feed to support distributed cache
+4. Create plan to keep PetSearchService cache hot
+
+Version 2 - 
+
+--------------------------------------------------------------
+
+Models
+
+1. Collection[]
+2. SingleItem[ProviderId|ProviderGroupId]
+3. 
+
+Features
+
+1. Seed cache on login and stays logged in
+2. Cache items related to provider login
+3. Messages work without cache
+4. Add|Update|Delete - signal
+
+Scenaio 1. SingleItem DirectUpdate 
+1. Replace item w/ Signal Item 
+
+Scenario 2. SinglItem Refresh 
+1. Prepace item from database 
+
+Scenario 3. ListItem DirectUpdate
+1. Replace ListItem w/ Signal Item
+
+Scenario 4. ListItem Refresh
+1. Replace ListItem from database
+2. Reload entire list
+3. Apply message
+
+Scenario 5. 
+1. Direct Update or Refresh item in collection
+
+
+
+Life Cycle (Item vs. List)
+------------------------------
+1. Null Cache
+2. Create Cache
+3. AddItem
+4. UpdateItem
+5. DeleteItem
+6. GetItem
+7. Sub-Item
+
+Components
+-----------------------------
+1. Notify [Done]
+2. Displatch Cache Actions - (on other thread)
+3. Process Cache Actions
+- Item Target
+- List Target
+- SubItem Target
+4. Seed Cache
+5. Read Cache
+

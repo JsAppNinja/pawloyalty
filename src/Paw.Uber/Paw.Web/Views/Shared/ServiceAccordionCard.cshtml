@@ -1,0 +1,29 @@
+﻿@model IId
+
+@{ 
+    Layout = null;
+    Pet pet = this.ViewData["PetId_Item"] as Pet;
+    Sku sku = this.ViewData["SkuId_Item"] as Sku;
+
+    string dataParent = this.ViewData["DataParent"] as string ?? "accoridion";
+
+}
+
+<div class="card">
+    <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#card-@(this.Model.Id)" aria-expanded="false" aria-controls="collapseOne">
+                @(pet.Name) - @(sku.Name) - Extras
+            </button>
+        </h5>
+    </div>
+
+    <div id="card-@(this.Model.Id)" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+
+            @Html.Partial("FormLayout")
+
+            <br />
+        </div>
+    </div>
+</div>

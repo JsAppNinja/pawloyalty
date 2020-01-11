@@ -1,0 +1,69 @@
+
+
+wagsuperadmin
+
+
+SkuCategory
+-----------
+Id
+ProviderId
+ProviderGroupExtenalId (future)
+name
+description
+isPrimary
+NavStyle
+DisplayOrder
+isDeleted
+
+Sku
+-----------
+Id
+name
+description
+price
+isPrimary
+serviceCategoryId
+parentId
+isDeleted
+DisplayOrder
+ExternalId
+IAudit
+
+RelatedSku
+-----------
+Id
+ProviderId
+SourceSkuId
+TargetSkuId
+RelationshipType (If you have source then target, [Bath](source) has addon sku of [Nail Trim](target) ) (AddOn|Recommend) AddOn = 0
+
+ResourceAppointment - Grooming
+AppointmentBlock - Grooming, Daycare (Use sku to track inventory)
+Boarding
+
+RelatedSkuGroup (Future)
+-----------
+
+
+EmployeeSku
+-----------
+Id
+ProviderId
+EmployeeId
+SkuId
+
+Or Scenarios
+1. Pick a primary service
+- List Service Categories in Nav where isPrimary 
+2. Pick Primary Sku in category
+- List Sku where isPrimary and ServcieCategoryId
+3. List AddOn Skus
+
+----
+
+Features
+1. Category = UI Style
+2. ProductBundle = relatedSku + type(Bundle)
+3. AddOnGroup = SkuGroup + SkuGroupSku
+4. DiscountBundle
+5. 

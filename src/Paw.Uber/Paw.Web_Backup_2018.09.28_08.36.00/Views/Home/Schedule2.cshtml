@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<address>
+    One Microsoft Way<br />
+    Redmond, WA 98052-6399<br />
+    <abbr title="Phone">P:</abbr>
+    425.555.0100
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+<style>
+    .schedule-container {
+        overflow: auto;
+        color: #444;
+        touch-action: none;
+        box-sizing: content-box;
+        display: block;
+        position: relative; /* used with event absolute */
+    }
+
+    .schedule-table {
+        table-layout: fixed; /* ignore content */
+        max-width: none;
+    }
+
+    .schedule-container, .schedule-table {
+        border-spacing: 0px;
+        width: 100%;
+        margin: 0;
+        border-collapse: separate;
+       
+    }
+
+    .schedule-table td {
+        box-sizing: content-box;
+        border-style: solid;
+        border-width: 0 0 1px 1px;
+        height: 2.75em;
+    }
+
+</style>
+
+<div class="schedule-container">
+    <table class="schedule-table">
+        <tbody>
+            <tr>
+                <td>asfda</td>
+                <td>asfd</td>
+                <td>asdf</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="appointment" data-uid="1" style="width:100px; height:100px; background-color: burlywood; left: 114px; top: 0px; position: absolute ;">
+        Tester1
+    </div>
+    <div class="appointment" data-uid="2" style="width:100px; height:100px; background-color: burlywood; left: 0; top: 100px; position: absolute;">
+        Tester2
+    </div>
+</div>

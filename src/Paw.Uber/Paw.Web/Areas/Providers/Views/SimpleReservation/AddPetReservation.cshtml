@@ -1,0 +1,60 @@
+﻿
+@{
+    //Layout = null;
+    string submitLabel = string.IsNullOrWhiteSpace(this.ViewData["SubmitLabel"] as string) ? "Save" : (string)this.ViewData["SubmitLabel"];
+
+    // Step 5. Add ProviderId
+    string providerAttribute = string.Empty;
+    Provider provider = this.ViewData["__Provider"] as Provider;
+    if (provider != null)
+    {
+        providerAttribute = string.Format("data-providerId='{0}'", provider.Id);
+    }
+
+    // Step 6. Add ProviderGroupId
+    string providerGroupAttribute = string.Empty;
+    ProviderGroup providerGroup = this.ViewData["__ProviderGroup"] as ProviderGroup;
+    if (providerGroup != null)
+    {
+        providerGroupAttribute = string.Format("data-providerGroupId='{0}'", providerGroup.Id);
+    }
+
+}
+
+<form action="" id="PetReservation" class="form-vertical" method="post" role="form" novalidate="novalidate" @providerAttribute @providerGroupAttribute>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Grooming Reservation
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+
+                    @Html.EditorForModel()
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group bump">
+
+                <input type="submit" value="@submitLabel" class="btn btn-primary" />
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+
+
+}
+

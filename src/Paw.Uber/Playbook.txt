@@ -1,0 +1,28 @@
+
+--------------------------------------
+Setup Data
+--------------------------------------
+1. Run BootstrapUser
+2. Run BootstrapProviders
+3. Run LoadProviderGroup
+4. Run LoadProvider
+5. Run LoadOwner
+6. Run LoadPet
+
+---------------------------------------
+Create a readonly user
+---------------------------------------
+1. Master: CREATE LOGIN readonlylogin WITH password='ZxbhShPEiMuc4'
+2. Database: CREATE USER readonlyuser2 FROM LOGIN readonlylogin;
+3. Database: EXEC sp_addrolemember 'db_datareader', 'readonlyuser2' 
+
+select * from sys.sysusers
+ALTER LOGIN readonlylogin WITH password = 'ZxbhShPEiMuc4'
+
+readonlylogin2/ZxbhShPEiMuc4
+
+-------------------------------------
+ProviderGroup Cache Refresh
+-------------------------------------
+
+/AppInstance/RefreshProviderGroup/284A43DD-F676-41E4-A713-EBC848CF85DB

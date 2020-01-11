@@ -1,0 +1,37 @@
+﻿@model List<Invoice>
+@{
+    ViewBag.Title = "Invoice List";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+}
+
+<p><a href="/Providers/@providerId/Invoices/Invoice/_AddInvoice">Add Invoice</a></p>
+@(Html.Kendo()
+            .Grid<Invoice>(this.Model)
+            .Name("MainGrid")
+            .HtmlAttributes(new { @class = "bump table" })
+                .Pageable()
+            .DataSource(d => d.Server().PageSize(50))
+            .Columns(columns =>
+            {
+                columns.Bound(u => u.Provider.Name).Title("Provider");
+
+                columns.Bound(u => u.Owner.FullName).Title("Owner");
+
+                columns.Bound(u => u.Date).Title("Date");
+
+                columns.Bound(u => u.Id).Title("Action").Width(120).Template(@<text>
+
+                    <a href="/Providers/Invoices/Invoice/View/@item.Id">view</a> |
+                    <a class="action"
+                       data-ajax="true"
+                       data-ajax-confirm="Are you sure?"
+                       data-ajax-method="POST"
+                       data-ajax-success="paw.onRefresh"
+                       data-ajax-url="/Providers/Invoices/Invoice/_DeleteInvoice/@item.Id">remove</a>
+
+                </text>);
+                    })
+                .Sortable()
+                .Deferred()
+)

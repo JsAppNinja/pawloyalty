@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="DataSetup" storage="c:\users\dwbanks\source\repos\paw\src\paw.uber\paw.services.test\datasetup.orderedtest" id="5447066a-e953-41e1-a091-4d5457f6c398" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="079a2217-83ca-352a-0882-099b6320ec01" name="BoostrapUser" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="a7a064f4-45e6-6c1f-a4b9-9f0a9aac08b1" name="BootstrapProviders" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="c77d3043-31c1-8486-d0b3-233ccc5060a1" name="LoadProviderGroup" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="24bbaf70-16f1-b747-79b6-b1174c61f4e7" name="LoadProvider" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="b0f4306f-4942-6259-45be-27cbfafef115" name="LoadOwner" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="b5607162-43c9-73a8-46ce-1c2cbdeeb0be" name="LoadPet" storage="bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

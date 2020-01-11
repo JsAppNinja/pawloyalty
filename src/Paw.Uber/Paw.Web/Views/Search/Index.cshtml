@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Hello</h1>
+
+
+@(Html.Kendo().AutoComplete()
+          .Name("search")
+          .AutoWidth(true)
+          .DataTextField("Pet")
+          .Template("<strong>#: data.Pet #</strong> #: data.Owner # (#: Breed #) <a href=\"//google.com\">View</a> <a href=\"//bing.com\">Edit</a>")
+          .MinLength(3)
+          .HtmlAttributes(new { style = "width:100%" })
+          .DataSource(source =>
+          {
+              source.Custom()
+                  .ServerFiltering(true)
+                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                  .Transport(transport =>
+                  {
+                      transport.Read("result", "search", new { ProviderGroupId = Request.QueryString["ProviderGroupId"] });
+                  })
+                  .Schema(schema =>
+                  {
+                      schema
+                      .Data("Data")
+                      .Model(model =>
+                      {
+                          model.Id("Id");
+                          model.Field("Pet", typeof(string));
+                          model.Field("Owner", typeof(string));
+                          model.Field("Breed", typeof(string));
+                      }); //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                      //      .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                  });
+
+              //source.Read(read =>
+              //{
+              //    read.Action("result", "search", new { ProviderGroupId = Request.QueryString["ProviderGroupId"] })
+              //        .Data("paw.onAdditionalData");
+              //})
+              //.ServerFiltering(true)
+              //.Custom();
+          })
+
+          .Deferred()
+)

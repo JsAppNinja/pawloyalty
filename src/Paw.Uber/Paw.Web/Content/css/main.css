@@ -1,0 +1,162 @@
+/* Pty.pe for Paw Loyalty */
+
+/* Presets for Style */
+
+@import url("./colour.css");
+@import url("./page.css");
+@import url("./typography.css");
+/* Presets for Components */
+
+@import url("./components.css");
+/* Presets for Patterns */
+
+@import url("./patterns.css");
+/* Custom styles */
+
+/* Select Pet */
+
+.orange-box {
+	background: #fff;
+	border: 1px solid var(--primary);
+	padding: .375rem .75rem;
+	border-radius: .25rem;
+}
+.table-clear td {
+	border-top: none;
+}
+.border-clear {
+	border: none;
+}
+.list-paw {
+	list-style-position: inside;
+	padding-left: 0;
+}
+/* Appointments */
+
+.fbr {
+	position: absolute;
+	bottom: 3px;
+	right: 3px;
+}
+.fr {
+	float: right;
+}
+.mw200 {
+	max-width: 200px;
+}
+.m0a {
+	margin: 0 auto;
+}
+.accordion .card.border-blue:last-of-type {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+.accordion .card.border-blue:first-of-type {
+	border-bottom: 1px solid var(--secondary);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+/* Retail items */
+
+.accordion .card.products:last-of-type {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+.accordion .card.products:first-of-type {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+.mt20 {
+	margin-top: 20px;
+}
+/* Dropdowns visible over accordians */
+
+.accordion .card {
+	overflow: visible;
+}
+/* Invoice */
+
+.sales span {
+	float: right;
+}
+.accordion .card.sales:last-of-type {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+.accordion .card.sales:first-of-type, .accordion .card.sales:not(:first-of-type):not(:last-of-type) {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+.list-group-flush.sales li {
+	padding: 0.5rem;
+}
+.inv-amt {
+	text-align: left;
+	font-size: 1.5rem;
+	font-weight: 700;
+	border-top: 1px solid var(--grey2)!important;
+}
+.inv-amt-price, .invoice-sub {
+	text-align: right;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+.fr {
+	float: right;
+}
+.table-icons {
+	min-width: 100px;
+}
+table.invoice td, table.invoice tr, table.invoice th {
+	padding: 0.5em;
+}
+/* Services and extras */
+
+.accordion .card.schedule-cards:last-of-type, .accordion .card:not(:first-of-type) .card-header.schedule:first-child, .accordion .card.booking {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+.accordion .card.schedule-cards:first-of-type, .accordion .card.schedule-cards:not(:first-of-type):not(:last-of-type) {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+.accordion .card-deck.booking .card:first-of-type, .accordion .card-deck.booking .card:not(:first-of-type):not(:last-of-type) {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+.accordion .card-deck.booking .card:not(:first-of-type):not(:last-of-type) {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+
+/* Booking sticky */
+
+
+.accordion .card.bookingsticky:last-of-type {
+	border-top-left-radius: 0.25em;
+	border-top-right-radius: 0.25em;
+}
+.accordion .card.bookingsticky:first-of-type {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-bottom-right-radius: 0.25em;
+	border-bottom-left-radius: 0.25em;
+}
+
+#accordionSticky {width:200px;}
+
+.stickmeup {
+    position:fixed;
+   z-index: 1030;
+    right:10px;
+}
+
+.settings {display:flex;}
+
+/*Invoice*/
+
+
+

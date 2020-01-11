@@ -1,0 +1,47 @@
+﻿In-Memory
+-------------------------------------
+
+Requirments
+1. P1+ tier
+
+
+Table Setup Example:
+CREATE TABLE [dbo].[Owner] (
+    [Id] [uniqueidentifier] NOT NULL,
+	...
+    CONSTRAINT [PK_dbo.Owner] PRIMARY KEY NONCLUSTERED ([Id]),
+	CONSTRAINT [IX_Owner_Email] UNIQUE ([Email])
+) WITH (MEMORY_OPTIMIZED = ON)
+
+
+Queries
+SELECT DatabasePropertyEx(DB_NAME(), 'IsXTPSupported');
+SELECT * FROM sys.tables WHERE is_memory_optimized=1
+SELECT * FROM sys.table_types WHERE is_memory_optimized=1
+SELECT * FROM sys.sql_modules WHERE uses_native_compilation=1
+
+
+Clustered Columnstore Index
+-------------------------------------
+
+Requirments
+1. P1+ tier
+
+*Note: Drop columnstore indexes before downgrading
+
+Location/Latency
+-------------------------------------
+South Central ~80ms latency expected
+
+http://www.azurespeed.com/
+
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-in-memory
+
+
+Configuration
+------------------------------------
+Resource Group: Paw2
+username: adminuser
+password: M1zyeRg7ZvLc4w2TV!
+database: pawdb01
+server: paw2

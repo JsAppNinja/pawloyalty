@@ -1,0 +1,57 @@
+@model List<Guid>
+@using System.Collections.Generic;
+@{
+
+    //
+    // DEPRICATED >>>!!!!!!!!!!
+    //
+
+
+
+    this.Layout = "InputContainer.cshtml";
+
+    bool includeAllOption = true;
+
+    // Step 1. Get SelectList
+    List<SelectListItem> selectList = Html.ExecuteValue() as List<SelectListItem> ?? new List<SelectListItem>();
+
+    if (includeAllOption)
+    {
+        selectList.Insert(0, new SelectListItem() { Text = "All Providers", Value = "", Selected = this.Model != null && this.Model.Count == 0  });
+    }
+
+    // Step 2. Set values
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (item.Value == this.Model.ToString())
+            {
+                item.Selected = true;
+            }
+        }
+    }
+
+}
+
+@functions{
+    public string GetButtonClass(bool selected)
+    {
+        if (selected)
+        {
+            return "btn-primary";
+        }
+        else
+        {
+            return "btn-default";
+        }
+    }
+
+    }
+
+&nbsp;
+    @foreach (var item in selectList)
+    {
+        <a href="#" class="btn @GetButtonClass(item.Selected) btn-circle" data-value="@item.Value">@item.Text</a>
+    }
+

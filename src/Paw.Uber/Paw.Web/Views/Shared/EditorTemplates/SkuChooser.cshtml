@@ -1,0 +1,94 @@
+﻿@model Guid?
+@{
+    /*NOTE: Requires JS to write back values to hidden in container*/
+
+    Layout = "NoLabelInputContainer.cshtml";
+
+    List<Sku> skuList = Html.ExecuteValue() as List<Sku>;
+
+    int columns = 2;
+    int rows = 10;
+    int recordCount = skuList.Count;
+
+    int colWidth = 12 / columns;
+    //int colWidth = 12;
+
+    string text = "Add Service";
+    Sku currentSku = skuList.Find(x => x.Id == this.Model);
+    if (this.Model != null && currentSku != null)
+    {
+        text = currentSku.Name;
+
+    }
+
+    string idprefix = this.ViewData.TemplateInfo.GetFullHtmlFieldId("");
+
+    if (idprefix != null && idprefix.Length > 0)
+    {
+        idprefix = idprefix.Substring(0, idprefix.Length - this.ViewData.ModelMetadata.PropertyName.Length);
+    }
+
+    string nameprefix = this.ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    if (nameprefix != null && nameprefix.Length > 0)
+    {
+        nameprefix = nameprefix.Substring(0, nameprefix.Length - this.ViewData.ModelMetadata.PropertyName.Length);
+    }
+
+}
+
+<div id="@(Html.IdForModel())-container">
+
+</div>
+<button type="button" id="@(Html.IdForModel())-edit" class="btn" data-toggle="modal" data-target="#@(Html.IdForModel())-sku-chooser">
+    @text
+</button>
+
+<div class="modal fade" id="@(Html.IdForModel())-sku-chooser" tabindex="-1" role="dialog" aria-labelledby="@this.ViewData.ModelMetadata.PropertyName" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choose Primary Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        @for (int i = 0; (i < columns) && (rows * i < recordCount); i++)
+                        {
+                            <div class="row">
+                                @for (int y = 0; y < rows && (rows * i + y < recordCount); y++)
+                                {
+                                    Sku sku = skuList[rows * i + y];
+
+                                    <div class="col-@(colWidth) sm-bump  btn-group btn-group-toggle">
+                                        <label class="btn btn-outline-secondary add-sku @(Html.IdForModel())-add-sku col-12 @(this.Model == sku.Id ? "active" : "")">
+                                            <input type="radio"
+                                                   name="@(Html.NameForModel())"
+                                                   id="@(Html.IdForModel())"
+                                                   class="sku-chooser"
+                                                   autocomplete="off"
+                                                   data-id="@sku.Id"
+                                                   data-targetid="@(Html.IdForModel())"
+                                                   data-idprefix="@idprefix"
+                                                   data-nameprefix="@nameprefix"
+                                                   data-text="@sku.NameAndAmount"
+                                                   value="@sku.Id"
+                                                   @(this.Model == sku.Id ? "checked" : "")> @sku.NameAndAmount
+                                            </label>
+</div>
+                                    }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

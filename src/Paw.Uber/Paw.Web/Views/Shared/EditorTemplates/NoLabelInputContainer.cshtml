@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+    ModelMetadata property = this.ViewData.ModelMetadata;
+}
+
+<div id="@(Html.IdForModel())-container" class="form-group @Html.ValidationClasses(property.PropertyName, " has-error")">
+   
+        @RenderBody()
+
+</div>

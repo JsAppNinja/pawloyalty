@@ -1,0 +1,14 @@
+
+Phase 1
+-------------------------
+
+
+Phase 2
+-------------------------
+1. Configuring Skus and Employees
+
+Phase N
+-------------------------
+1. Sku Hitory
+2. Seasonal Pricing
+3. 

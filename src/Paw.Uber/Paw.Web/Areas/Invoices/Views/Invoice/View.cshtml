@@ -1,0 +1,87 @@
+﻿@model Invoice
+@{
+    ViewBag.Title = "Invoice";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+}
+
+@helper InvoiceItemRow(InvoiceItem invoiceItem, int index = 0)
+    {
+        <tr>
+            <td>
+                @invoiceItem.Quantity
+            </td>
+            <td style="padding-left: @(8 + (index * 12))px">
+                @invoiceItem.Name
+
+                @if (invoiceItem.Pet != null)
+                {
+                    <text> (@invoiceItem.Pet.Name)</text>
+                }
+            </td>
+            <td  class="col-number">
+                @string.Format("{0:c}", invoiceItem.Amount)
+            </td>
+            <td  class="col-number">
+                @string.Format("{0:c}", invoiceItem.Total)
+            </td>
+            <td>
+                <a class="action"
+                   data-ajax="true"
+                   data-ajax-confirm="Are you sure?"
+                   data-ajax-method="GET"
+                   data-ajax-success="paw.onRefresh"
+                   data-ajax-url="/Providers/Invoices/Invoice/_DeleteInvoiceItem/@invoiceItem.Id">remove</a>
+
+            </td>
+        </tr>
+
+        <text>
+            @foreach (InvoiceItem child in invoiceItem.GetChildList())
+            {
+                <text>
+                    @InvoiceItemRow(child, ++index);
+                </text>
+            }
+        </text>
+}
+
+<h1>Invoice</h1>
+
+
+<div>
+    <a href="/Providers/Invoices/Invoice/_UpdateInvoice/@this.Model.Id">Update</a> |
+    <a href="/Providers/Invoices/Invoice/_AddInvoiceItem?InvoiceId=@this.Model.Id&OwnerId=@this.Model.OwnerId">Add Generic Item</a> |
+    <a href="/Providers/Invoices/Invoice/_AddServiceSkuInvoiceItem?InvoiceId=@this.Model.Id&OwnerId=@this.Model.OwnerId">Add Service Sku Item</a> |
+    <a href="/Providers/Invoices/Invoice">close</a>
+</div>
+
+<div>Owner: @this.Model.Owner.FullName</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" class="col-md-1">Qty #</th>
+            <th scope="col" class="col-md-3">Description</th>
+            <th scope="col" class="col-md-1 col-number">Unit</th>
+            <th scope="col" class="col-md-1 col-number">Amount</th>
+            <th scope="col" class="col-md-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (InvoiceItem invoiceItem in this.Model.GetParentInvoiceItemList())
+        {
+            <text>
+                @InvoiceItemRow(invoiceItem)
+            </text>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td  class="col-number">
+                @string.Format("{0:c}", this.Model.CalcualteTotal())
+            </td>
+        </tr>
+    </tfoot>
+</table>

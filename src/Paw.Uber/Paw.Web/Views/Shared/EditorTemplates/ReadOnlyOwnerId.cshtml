@@ -1,0 +1,36 @@
+﻿@model Guid?
+@using Paw.Services.Util
+@using Paw.Services.Messages.Web.Owners
+@{
+    Layout = "InputContainer.cshtml";
+    
+}
+
+@{
+
+    // Only show if provider group is available
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    if (providerGroupId == null)
+    {
+        return;
+    }
+
+    // initial value
+    string valueAsString = null;
+    string textAsString = null;
+    if (this.ViewData.Model != null && this.ViewData.Model.Value != null)
+    {
+        valueAsString = this.ViewData.Model.Value.ToString();
+        textAsString = new GetOwnerName() { ProviderGroupId = providerGroupId.Value, OwnerId = this.ViewData.Model.Value }.ExecuteString();
+
+    }
+    else
+    {
+        textAsString = "No Owner";
+    }
+
+}
+
+<div>@textAsString</div>
+
+@Html.HiddenFor(x => x)

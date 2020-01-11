@@ -1,0 +1,119 @@
+﻿ExternalId|SkuCategory.ExternalId|Name|Description|IsPrimary|Amount
+
+-- Grooming
+completeGroupXS						|grooming		|Complete Groom-XS					||1|55.00
+completeGroupS						|grooming		|Complete Groom-S					||1|65.00
+completeGroupM						|grooming		|Complete Groom-M					||1|75.00
+completeGroupL						|grooming		|Complete Groom-L					||1|85.00
+completeGroupXL						|grooming		|Complete Groom-XL					||1|125.00
+redo								|grooming		|Redo								||1|0.00
+compBath							|grooming		|Comp Bath							||1|0.00
+rinse								|grooming		|Rinse								||1|0.00
+saniTrim							|grooming		|Sani Trim							||1|10.00
+tuneUp								|grooming		|Tune Up							||1|15.00
+nailTrim							|grooming		|Nail Trim							||1|10.00
+extraSmallBathBrushNails			|grooming		|Extra Small Bath Brush & Nails		||1|35.00
+analGlands							|grooming		|Anal Glands						||1|10.00
+bathBrushNails						|grooming		|Bath Brush & Nails					||1|40.00
+
+furminatorUpgrade					|extras		|FURminator Upgrade					||0|30.00
+hairDyeDesign						|extras		|Hair Dye & Design					||0|25.00
+lemonSeasaltBath					|extras		|Lemon Seasalt Bath					||0|10.00
+naturalBathUpgrade					|extras		|Natural Bath Upgrade				||0|10.00
+pawPabRub							|extras		|Paw Pab Rub						||0|5.00
+pawdicure							|extras		|Pawdicure							||0|25.00
+petTattoo							|extras		|Pet Tattoo							||0|5.00
+teethBrushing						|extras		|Teeth Brusing						||0|12.00
+wagDetox							|extras		|Wag Detox							||0|22.00
+coconultOilSilkTreatment			|extras		|Coconult Oil Silk Treatment		||0|13.00
+deepConditioning					|extras		|Deep Conditioning					||0|15.00
+deMatting							|extras		|De-Matting							||0|0.00
+extraBrushing						|extras		|Extra Brushing						||0|5.00
+fleaBath							|extras		|Flea Bath							||0|15.00
+fleaTreatment						|extras		|Flea Treatment						||0|25.00
+furMask								|extras		|Fur Mask							||0|10.00
+																											   
+-- Daycare
+addDayPlaye							|dayCare		|All Day Play-E						||1|46.00
+dayStayUltraSuite					|dayCare		|Day Stay Ultra Suite				||1|45.00
+dayStayStayDeluxe					|dayCare		|Day Stay Deluxe					||1|80.00
+dayStayStandard						|dayCare		|Day Stay Standard					||1|46.00
+dayStayCattery						|dayCare		|Day Stay Cattery					||1|29.00
+dayStayCatUltraSuite				|dayCare		|Day Stay Cat Ultra Suite			||1|45.00
+																						
+-- Boarding											
+smallRoom							|boarding		|Small Room							||1|64.00
+catUltraSuite						|boarding		|Cat Ultra Suite					||1|78.00
+catteryRoom							|boarding		|Cattery Room						||1|56.00
+ultraSuite							|boarding		|Ultra Suite						||1|160.00
+medRoom								|boarding		|Med Room							||1|74.00
+largeRoom							|boarding		|Large Room							||1|86.00
+slumberRoom							|boarding		|Slumber @ Wag						||1|90.00
+deluxeSuite							|boarding		|Deluxe Suite						||1|120.00
+																						
+-- Training											
+atHomePrivateTraining				|training		|At Home Private Training			||1|125.00
+atWebPrivateTraining				|training		|At Wag Private Training			||1|125.00
+eddMakeUpLesson						|training		|EDD Make-Up Lesson					||1|35.00
+everyDayDogLevel1					|training		|Every Day Dog Level 1				||1|35.00
+everyDayDogLevel2					|training		|Every Day Dog Level 2				||1|35.00
+puppySocial							|training		|Puppy Social						||1|0.00
+traningConsultation					|training		|Training Consultation				||1|100.00
+																						
+trainingEvaluation					|training		|Training Evaluation				||0|0.00
+																						
+-- Extras											
+adpFeeding							|extras			|ADP Feeding						||0|5.00
+agility								|extras			|Agility							||0|55.00
+allDayPlay							|extras			|All Day Play						||0|23.00
+bedtimeStory						|extras			|Bedtime Story						||0|0.00
+boardAndTrain						|extras			|Board & Train						||0|119.00
+buddyTime							|extras			|Buddy Time							||0|18.00
+burrowBed							|extras			|Burrow Bed							||0|6.00
+camp								|extras			|Camp								||0|0.00
+cancellationFee						|extras			|Cancellation Fee					||0|0.00
+chickenVibraPet						|extras			|Chicken Vibra Pet					||0|10.00
+dayStroll							|extras			|Day Stroll							||0|10.00
+dayTrain							|extras			|Day Train							||0|75.00
+evenintStroll						|extras			|Evening Stroll						||0|10.00
+firstDayPhoto						|extras			|First Day Photo					||0|0.00
+FruitNYogurtBar						|extras			|Fruit N Yogurt Bar					||0|1.00
+FuzzPetClinic						|extras			|Fuzzy Pet Clinic					||0|0.00
+gingerbreadTreat					|extras			|Gingerbread Treat					||0|0.00
+holidayCancellationFee				|extras			|Holiday Cancellation Fee			||0|100.00
+iceCreamSundae						|extras			|Ice Cream Sundae					||0|3.00
+iqTreatBall							|extras			|IQ Treat Ball						||0|5.00
+k9Fit								|extras			|K9 Fit								||0|20.00
+kittyCuddle							|extras			|Kitty Cuddle						||0|15.00
+memoryFoamBed						|extras			|Memory Foam Bed					||0|8.00
+morningStroll						|extras			|Morning Stroll						||0|10.00
+netflix								|extras			|Netflix							||0|0.00
+pandora								|extras			|Pandora							||0|0.00
+peanutButterKong					|extras			|Peanut Butter Kong					||0|5.00
+premiumFood							|extras			|Premium Food						||0|5.00
+premiumRaisedBed					|extras			|Premium Raised Bed					||0|5.00
+propertyDamageFee					|extras			|Property Damage Fee				||0|75.00
+seasonOfGivingDonation				|extras			|Season of Giving Donation			||0|0.00
+sitStayPlay							|extras			|Sit Stay & Play					||0|55.00
+skype								|extras			|Skype								||0|0.00
+sniffNSeek							|extras			|Sniff N Seek						||0|55.00
+soothNSnoozeSnack					|extras			|Soothe n Snooze Snack				||0|3.00
+specialCareEnrichment				|extras			|Special Care Enrichment			||0|45.00
+specialDiet							|extras			|Special Diet						||0|5.00
+specializedCareAM					|extras			|Specialized Care AM				||0|16.67
+specializedCareMid					|extras			|Specialized Care Mid				||0|16.66
+specializedCarePM					|extras			|Specialized Care PM				||0|16.66
+splashTime							|extras			|Splash Time						||0|18.00
+steakVibraPet						|extras			|Steak Vibra Pet 					||0|10.00
+sunsetSocial						|extras			|Sunset Social						||0|20.00
+wagkikiPlayPass						|extras			|Wagkiki Play Pass					||0|20.00
+wagucchino							|extras			|Wagucchino							||0|3.00
+																						
+-- Fees												
+transportFee						|fees			|Transportation Fee					||0|50.00
+valetADPDropOff						|fees			|Valet ADP Drop Off					||0|5.00
+valetADPPickUp						|fees			|Valet ADP Pick Up 					||0|5.00
+valetBoardingDropOff				|fees			|Valet Boarding Drop Off			||0|5.00
+valetBoardingPickUp					|fees			|Valet Boarding Pick Up				||0|5.00
+vetCharges							|fees			|Vet Charges						||0|0.00
+

@@ -1,0 +1,99 @@
+﻿@{
+    // Responsability: form layout including rows and columns
+
+    this.Layout = null;
+
+    // Step 1. Get AddAntiForgeryToken flag
+    bool addAntiForgeryToken = this.ViewData["AddAntiForgeryToken"] != null && (bool)this.ViewData["AddAntiForgeryToken"] == true;
+
+    // Step 2. Define current row variables
+    bool rowStarted = false;
+    var startRowHtml = new HtmlString("<div class=\"row\">");
+    var endRowHtml = new HtmlString("</div>");
+
+}
+@functions{
+
+    public string GetColumnWidth(ModelMetadata property)
+    {
+        if (property.AdditionalValues.ContainsKey("Width"))
+        {
+            return property.AdditionalValues["Width"].ToString();
+        }
+        else
+        {
+            return "3";
+        }
+    }
+
+    public bool StartRow(ModelMetadata property)
+    {
+        if (property.AdditionalValues.ContainsKey("StartRow"))
+        {
+            return ((bool)property.AdditionalValues["StartRow"] == true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public string GetSectionTag(SectionAttribute sectionAttribute)
+    {
+        return string.Format("<{0} class=\"{2}\">{1}</{0}>", sectionAttribute.Tag, sectionAttribute.Text, sectionAttribute.CSS);
+    }
+
+}
+
+@if (addAntiForgeryToken)
+{
+    @Html.AntiForgeryToken();
+}
+
+@foreach (var property in ViewData.ModelMetadata.Properties.Where(x => x.ShowForEdit && !ViewData.TemplateInfo.Visited(x)))
+{
+
+    if (this.StartRow(property))
+    {
+        // End row if started
+        if (rowStarted)
+        {
+            @endRowHtml
+        }
+
+
+        // Add Section Title if necessary (section only renders for start of row items)
+        if (property.AdditionalValues.ContainsKey("SectionList"))
+        {
+            foreach (SectionAttribute sectionAttribute in property.AdditionalValues["SectionList"] as List<SectionAttribute>)
+            {
+                @Html.Raw(GetSectionTag(sectionAttribute))
+            }
+        }
+
+        // Start Row
+        @startRowHtml
+        rowStarted = true;
+    }
+
+    if (property.HideSurroundingHtml)
+    {
+        @Html.Editor(property.PropertyName)
+        continue;
+    }
+    else
+    {
+        <div class="col-md-@GetColumnWidth(property)">
+
+            @Html.Editor(property.PropertyName, new { Parent = this.Model })
+
+        </div>
+    }
+}
+
+@if (rowStarted)
+{
+    @endRowHtml
+}
+

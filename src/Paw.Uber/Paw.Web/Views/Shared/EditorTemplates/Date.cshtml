@@ -1,0 +1,8 @@
+@model DateTime?
+@{
+    Layout = "InputContainer.cshtml";
+}
+
+@(Html.Kendo().DatePickerFor(m => m)
+        .HtmlAttributes(new { @class= "form-control" })
+        .Deferred())

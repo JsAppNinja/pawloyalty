@@ -1,0 +1,40 @@
+﻿
+@model List<Employee>
+
+<div class="row">
+    <h1>Employees</h1>
+</div>
+<div class="row">
+    <a href="/settings/employee/add">Add</a>
+</div>
+@if (this.Model != null && this.Model.Count > 0)
+{
+
+@(Html.Kendo()
+        .Grid<Employee>(this.Model)
+        .Name("MainGrid")
+        .HtmlAttributes(new { @class = "bump table" })
+                .Pageable(c => c.Enabled(false))
+        .Columns(columns =>
+        {
+        columns.Bound(u => u.FullName);
+        columns.Bound(u => u.Email);
+        columns.Bound(u => u.Id).Title("Action").Template(@<text>
+
+                <a href="/Settings/Employee/@item.Id">Edit</a>
+
+            </text>);
+        })
+        .Sortable(c => c.AllowUnsort(false))
+        .Deferred())
+}
+else
+{
+                    
+    <div class="row big-bump">
+        <div class="alert alert-info col-12" role="alert">
+            <i class="fas fa-2x fa-info-circle"></i><span>No employees records found</span>
+        </div>
+    </div>
+
+}

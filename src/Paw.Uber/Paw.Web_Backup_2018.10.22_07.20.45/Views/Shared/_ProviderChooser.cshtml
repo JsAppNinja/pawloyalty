@@ -1,0 +1,33 @@
+﻿@using Paw.Services.Messages.Web.Providers;
+
+@{
+    Layout = null;
+    Provider provider = this.ViewData["__Provider"] as Provider;
+
+    List<Provider> providerList = new GetUserProviderList().ExecuteList();
+
+    List<SelectListItem> providerSelectList = providerList.ConvertAll(x => new SelectListItem() { Value = GetUrl(x), Text = x.Name, Selected = (provider?.Id == x.Id) });
+    providerSelectList.Insert(0, new SelectListItem() { Text = "", Value = "/" });
+}
+
+@functions {
+
+    string GetUrl(Provider provider)
+    {
+        if (provider == null)
+        {
+            return "#";
+        }
+
+        return string.Format("/Providers/Provider/Overview", provider.Id);
+    }
+
+}
+
+
+<div class="row" style="padding-top: 6px; padding-left:10px;">
+    <div class="col-md-12">
+        @Html.DropDownList("__ProviderId", providerSelectList, new { @class = "form-control", onchange= "javascript:location.href = this.value;" })
+    </div>
+</div>
+

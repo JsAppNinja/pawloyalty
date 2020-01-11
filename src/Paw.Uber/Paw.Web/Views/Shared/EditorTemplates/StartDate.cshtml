@@ -1,0 +1,18 @@
+@model DateTime?
+@{
+    Layout = "InputContainer.cshtml";
+
+
+    string idprefix = this.ViewData.TemplateInfo.GetFullHtmlFieldId("");
+
+    if (idprefix != null && idprefix.Length > 0)
+    {
+        idprefix = idprefix.Substring(0, idprefix.Length - this.ViewData.ModelMetadata.PropertyName.Length);
+    }
+
+
+}
+
+@(Html.Kendo().DatePickerFor(m => m)
+            .HtmlAttributes(new { @class = "form-control startDate", data_target= "#" + idprefix + "StartTime"  })
+            .Deferred())

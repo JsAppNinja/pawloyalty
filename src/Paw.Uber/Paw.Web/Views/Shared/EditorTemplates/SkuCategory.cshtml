@@ -1,0 +1,56 @@
+﻿@using Paw.Services.Attributes.ClientData
+@model Guid?
+@using Paw.Services.Util
+@{
+        //Layout = "InputContainer.cshtml
+        Layout = null;
+
+        bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+        // Attributes
+        Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+        attributes.Add("class", "form-control");
+
+        // Empyt Text
+        string emptyText = "-- Select --";
+        if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+        {
+            emptyText = this.ViewData.ModelMetadata.Watermark;
+        }
+
+        // Step 1. Get View Data
+        Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+        Guid? providerId = (Guid?)this.ViewData["__providerId"];
+
+        // Step 2. Get SkuCategoryList Sorted
+        List<SkuCategory> skuCategoryList = new Paw.Services.Messages.Web.Skus.GetSkuCatetoryList() { PrimaryOnly = true, ProviderId = providerId.Value, ShowDeleted = false }.ExecuteList();
+
+        // Step 3. SetDisplayValue and ItemValue
+        string displayValue = "Select service";
+
+    }
+    @if (readOnly)
+    {
+    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" id="SelectCategoryMenuButton" type="button">@displayValue</button>
+    @Html.Hidden(string.Empty, this.Model)
+}
+else
+{
+
+    <div class="dropdown mb-3">
+        <div class="btn-group">
+            @Html.Hidden(string.Empty, this.Model)
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="@(Html.IdForModel())_button" type="button">@displayValue</button>
+            <ul aria-labelledby="dropdownMenu" class="dropdown-menu multi-level" role="menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+
+                @foreach (SkuCategory skuCategory in skuCategoryList)
+                {
+                    <li class="dropdown-item">
+                        <a href="#" tabindex="-1" class="sku-menu-button" data-item="@(Html.IdForModel())" data-value="@skuCategory.Id" data-text="@skuCategory.Name">@skuCategory.Name</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+}

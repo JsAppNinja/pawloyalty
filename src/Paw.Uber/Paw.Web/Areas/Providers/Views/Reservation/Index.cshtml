@@ -1,0 +1,378 @@
+﻿
+@{
+    ViewBag.Title = "Reservation List";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+}
+
+<h2>Invoice</h2>
+
+
+<a href="/Providers/Owner/Add" data-target="#commonDialog" data-toggle="modal" class="nav-link"> Add Grooming</a>
+
+<div id="app">
+    <p>
+    </p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="" style="width:150px;"></th>
+                <th scope="col" class="col-6">Description</th>
+                <th scope="col" class="text-center">Qty</th>
+                <th scope="col" class="col-2 text-right">Unit</th>
+                <th scope="col" class="col-2 text-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <template v-for="skuLine in reservation.SkuLineList">
+
+                <tr>
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="">
+                        <strong>{{skuLine.Pet.Name}}</strong> - {{skuLine.Pet.Breed}} - {{skuLine.Pet.Weight | toWeight}} lbs
+                    </td>
+
+                    <td class="text-center"></td>
+                    <td class=" text-right"></td>
+                    <td class=" text-right"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="" style="padding-left: 30px;">{{ skuLine.Description}}</td>
+                    <td class="text-center">1</td>
+                    <td class=" text-right">{{ skuLine.Amount | toCurrency }}</td>
+                    <td class=" text-right">{{ skuLine.Amount | toCurrency }}</td>
+                </tr>
+                <template v-for="childLine in skuLine.SkuLineList">
+                    <tr>
+                        <td></td>
+                        <td class="" style="padding-left: 60px;">{{ childLine.Description}}</td>
+                        <td class="text-center">1</td>
+                        <td class=" text-right">{{ childLine.Amount | toCurrency }}</td>
+                        <td class=" text-right">{{ childLine.Amount | toCurrency }}</td>
+                    </tr>
+                </template>
+
+            </template>
+
+            <tr>
+                <td></td>
+                <td colspan="3" class="text-right">Subtotal</td>
+                <td class="text-right">{{subTotal | toCurrency}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" class="text-right">Tax</td>
+                <td class="text-right">0.00</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" class="text-right"><strong>Total</strong></td>
+                <td class="text-right">{{subTotal | toCurrency}}</td>
+            </tr>
+            <tr>
+                <td>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Add Payment</a>
+                        </div>
+                    </div>
+
+                </td>
+                <td colspan="3" class="text-right">Payments</td>
+                <td class="text-right">(0.00)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" class="text-right"><strong>Amount Due</strong></td>
+                <td class="text-right">{{subTotal | toCurrency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="bump">
+        <p>
+            <select name="addPet" @@change="addPet" class="col-md-4 form-control">
+                <option value="">Add Pet ...</option>
+                <option v-for="pet in reservation.PetList" :value="pet.Id">{{ pet.Name }}</option>
+            </select>
+        </p>
+
+        Owner: {{reservation.Owner.FirstName}} {{reservation.Owner.LastName}}
+
+        <div v-for="skuLine in reservation.SkuLineList" class="bump">
+            <div>Pet: {{skuLine.Pet.Name}} - {{skuLine.Pet.Breed}} - {{skuLine.Pet.Weight | toWeight}} lbs</div>
+            <div>Primary Sku: {{skuLine.Description}} ({{ skuLine.Amount | toCurrency }})</div>
+
+            <div>
+                <div v-for="childLine in skuLine.SkuLineList">
+                    <div>Sku: {{childLine.Description}} ({{ childLine.Amount | toCurrency }})</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts{
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        Vue.component("service-list", {
+            props: ['providerId', 'skuCategoryId'],
+            template: '#service-list',
+            data: function () {
+                return {
+                    Items: [
+                        {
+                            id: "1",
+                            text: "one"
+                        },
+                        {
+                            id: "2",
+                            text: "two"
+                        }
+                    ]
+                }
+            }
+        });
+
+        Vue.filter('toCurrency', function (value) {
+            if (typeof value !== "number") {
+                return value;
+            }
+            var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2
+            });
+            return formatter.format(value);
+        });
+
+        Vue.filter('toWeight', function (value) {
+            if (typeof value !== "number") {
+                return value;
+            }
+            var formatter = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 1
+            });
+            return formatter.format(value);
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                skuId: '2',
+                output: "Hello World!",
+                newItem: '',
+                items: [
+                    'car',
+                    'bat',
+                    'home'
+
+                ],
+
+                addPetId: '',
+
+                reservation: {
+                    Id: '{1B5D20A0-9961-4E19-A458-CD0283235708}',
+                    ProviderId: '{1543DD05-83D2-484D-9D59-16278995D4F1}',
+                    SkuCategoryId: '', // Context
+                    Owner: {
+                        Id: '',
+                        FirstName: 'Alexandria ',
+                        LastName: 'Kimball',
+                        Email: 'al_k@rocketmail.com',
+                        Phone: '713-505-0439'
+                    },
+                    PetList: [
+                        {
+                            Id: '{c9a79096-afa9-4b6e-a1df-fb2d920d289c}',
+                            Name: 'Baloo',
+                            Breed: 'Golden Retriever',
+                            Weight: 63.6,
+                            DOB: '2012-10-31'
+                        },
+                        {
+                            Id: '{c31780a7-0672-4ad4-b464-9c1d886dbf48}',
+                            Name: 'Topanga',
+                            Breed: 'Golden Retriever',
+                            Weight: 47,
+                            DOB: '2012-10-31'
+                        }
+                    ],
+                    SkuLineList: [
+                        {
+                            Id: '{ADC9628A-DB77-47EA-A023-51C5113BDBA1}',
+                            ProviderId: '{1543DD05-83D2-484D-9D59-16278995D4F1}',
+                            Pet: {
+                                Id: '{c9a79096-afa9-4b6e-a1df-fb2d920d289c}',
+                                Name: 'Baloo',
+                                Breed: 'Golden Retriever',
+                                Weight: 63.6
+                            },
+                            SkuId: '{3CC9A451-336B-4559-9B53-A988002834F4}',
+                            Description: 'Complete Groom-XL',
+                            Amount: 125.00,
+                            SkuLineList: [
+
+                            ]
+                        },
+                        {
+                            Id: '{E097C04F-51FF-434E-B1D8-3AEB7675CCE4}',
+                            ProviderId: '{1543DD05-83D2-484D-9D59-16278995D4F1}',
+                            Pet: {
+                                Id: '{c31780a7-0672-4ad4-b464-9c1d886dbf48}',
+                                Name: 'Topanga',
+                                Breed: 'Golden Retriever',
+                                Weight: 47
+                            },
+                            SkuId: '{3CC9A451-336B-4559-9B53-A988002834F4}',
+                            Description: 'Complete Groom-XL',
+                            Amount: 125.00,
+                            SkuLineList: [
+                                {
+                                    Id: '{FCF661D4-C01E-4EEF-B49C-C1F232A0F60F}',
+                                    SkuId: '{f5bdc63a-5d6a-4bc7-b840-a988002835ad}',
+                                    Description: 'FURminator Upgrade',
+                                    Amount: 30.00
+                                },
+                                {
+                                    Id: '{5150F7C1-A607-4C3E-BC3B-04BEDF50AB00}',
+                                    SkuId: '{8388c0f9-c1f0-4f87-9d05-a988002835f7}',
+                                    Description: 'Paw Pad Rub ',
+                                    Amount: 5.00
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            methods: {
+                addPet(event) {
+                    // Step 1. Get PetId
+                    var petId = event.target.value;
+
+                    if (!petId) {
+                        return;
+                    }
+
+                    // Step 2. Get Pet
+                    var pet = this.getPet(petId);
+
+                    // Step 3. Add SkuLine
+                    var newSkuLine = {
+                        Id: guid(),
+                        ProviderId: this.reservation.ProviderId,
+                        Pet: pet,
+                        SkuId: null,
+                        Description: null,
+                        Amount: null,
+                        SkuLineList: []
+                    };
+                    console.log(newSkuLine);
+
+                    // Step 4. Push
+                    this.reservation.SkuLineList.push(newSkuLine);
+
+                },
+                getPet(petId) {
+                    return this.reservation.PetList.find(x => x.Id === petId);
+                }
+            },
+            computed:
+            {
+                subTotal: function () {
+
+                    var acc = 0;
+                    for (var i = 0; i < this.reservation.SkuLineList.length; i++) {
+
+                        var item = this.reservation.SkuLineList[i];
+
+                        console.log(item.Amount || 0);
+
+                        acc = acc + (item.Amount || 0);
+
+
+                        console.log(item.SkuLineList.length);
+
+                        for (j = 0; j < item.SkuLineList.length; j++) {
+                            acc = acc + (item.SkuLineList[j].Amount || 0);
+                        }
+                    }
+
+                    return acc;
+                }
+            }
+
+        });
+
+        function guid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function round(value, precision) {
+            var multiplier = Math.pow(10, precision || 0);
+            return Math.round(value * multiplier) / multiplier;
+        }
+
+        function isEmpty(value) {
+            if (!!value && value instanceof Array) {
+                return value.length < 1
+            }
+
+            if (!!value && typeof value === 'object') {
+                for (var key in value) {
+                    if (hasOwnProperty.call(value, key)) {
+                        return false
+                    }
+                }
+            }
+
+            return !value // Fallback for strings, etc.
+        }
+
+    </script>
+
+
+}

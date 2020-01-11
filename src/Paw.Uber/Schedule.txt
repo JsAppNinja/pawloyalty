@@ -1,0 +1,34 @@
+
+Requirements
+1. Add point in time appointment with start and end date
+2. Assign a reservation
+3. Assign an employee
+4. Add rule that schedules blocks out into the future
+5. Assign room
+6. Create queue for schedule blocks without employee, room
+7. only maertialize blocks if cancelled or assigned to reservation
+8. if appoinement is cancelled delete the block
+9. run form in memory - read thru/write thru repository
+10. cancel all bocks on a given day
+11. effective date for rules
+12. 20 month schedule
+13. support sparse keys
+14. Query rules and blocks together to get weekly/monthly view of appoinments
+15. Blocks can be either AM-PM
+16. Supoprt House Assignment
+17. 
+
+
+AddScheduleBlockRule
+UpdateScheuleBlockRule
+DeleteScheduleBlockRule
+GetUnAssignedScheduleBlocks
+GetScheduleBloksByEmployee
+CancelScheduleBlock - unassign employee
+AssignScheduleBlock
+
+
+
+Language
+1. assign - add empoyee
+2. reserve - add reservation

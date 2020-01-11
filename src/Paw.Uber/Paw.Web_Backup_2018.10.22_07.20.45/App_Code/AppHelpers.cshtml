@@ -1,0 +1,221 @@
+﻿@using System.Web.Routing;
+@using System.Web.Mvc.Html;
+@using System.Web.Routing;
+@using System.Web.Mvc;
+@using Paw.Web.Helpers;
+
+
+@helper Address(string streetAddress, string city, string state, string postalCode, string phone, string email, string editUrl = "", string editModal = "")
+    {
+
+        <address>
+
+            @WriteLine(@streetAddress)
+
+            @{
+                string cityStateZip = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(city))
+                {
+                    cityStateZip = city;
+                }
+
+                if (!string.IsNullOrWhiteSpace(city) && (!string.IsNullOrWhiteSpace(state)))
+                {
+                    cityStateZip = cityStateZip + ", ";
+                }
+                else
+                {
+                    cityStateZip = cityStateZip + " ";
+                }
+
+                if (!string.IsNullOrWhiteSpace(state))
+                {
+                    cityStateZip = cityStateZip + state + " ";
+                }
+
+                if (!string.IsNullOrWhiteSpace(postalCode))
+                {
+                    cityStateZip = cityStateZip + postalCode;
+                }
+            }
+
+            @if (string.IsNullOrWhiteSpace(cityStateZip))
+            {
+
+            }
+            else
+            {
+                <text>@cityStateZip<br /></text>
+            }
+            @WritePhoneLine("Phone", "P:", phone)
+            @WriteEmail(email)
+            @if (!string.IsNullOrEmpty(editUrl))
+            {
+                string modalAttributes = "";
+                if (!string.IsNullOrEmpty(editModal))
+                {
+                    modalAttributes = string.Format("data-target={0} data-toggle=modal", editModal);
+                }
+                <a href="@editUrl" @modalAttributes>update</a>
+            }
+        </address>
+
+}
+
+@helper WriteLine(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+
+        }
+        else
+        {
+            @input<br />
+        }
+}
+
+@helper WriteValue(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            <text>-</text>
+        }
+        else
+        {
+            @input
+        }
+}
+
+@helper WriteValue(double? input)
+    {
+        if (!input.HasValue)
+        {
+            <text>-</text>
+        }
+        else
+        {
+            @input
+        }
+}
+
+@helper WriteEmail(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+
+        }
+        else
+        {
+            <a href="mailto:@input" target="_blank">@input</a><br />
+        }
+}
+
+@helper FormatPhone(string input)
+    {
+        if (!string.IsNullOrEmpty(input))
+        {
+            input = input.Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+
+        }
+
+        if (string.IsNullOrEmpty(input))
+        {
+
+        }
+        else if (input.Length == 10)
+        {
+            <text>@input.Substring(0, 3)-@input.Substring(3, 3)-@input.Substring(6, 4) </text>
+        }
+        else
+        {
+            <text>@input</text>
+        }
+}
+
+@helper WritePhoneLine(string title, string abbr, string phone)
+    {
+        if (string.IsNullOrEmpty(phone))
+        {
+
+        }
+        else
+        {
+            <abbr>@abbr</abbr> @FormatPhone(phone) <br />
+        }
+}
+
+@helper ModalLink(string text, string url, object htmlAttributes = null)
+    {
+
+        var routeValueDictionary = System.Web.Mvc.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+        var attr = routeValueDictionary.Keys.Zip(
+                routeValueDictionary.Values,
+                (k, v) => string.Format("{0}={1}", k, v));
+
+        <a href="@url" @(string.Join(" ", attr))>@text</a>
+
+}
+
+@helper ModalDialog(string id)
+    {
+
+        <div class="modal fade" id="@id" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                </div>
+            </div>
+        </div>
+}
+
+@helper QuerystringFilter(System.Web.Mvc.HtmlHelper html, string id, List<System.Web.Mvc.SelectListItem> selectList, string allOptionName = "")
+    {
+
+        var defaultOption = new System.Web.Mvc.SelectListItem() { Text = allOptionName, Value = "" };
+
+        if (!string.IsNullOrEmpty(allOptionName))
+        {
+            selectList.Insert(0, defaultOption);
+        }
+
+        foreach (System.Web.Mvc.SelectListItem selectListItem in selectList)
+        {
+            // Step 1. Create route dictionary w/ existing querystring parameters
+            RouteValueDictionary routeValueDictionary = new RouteValueDictionary().ExecuteAddExistingQuerystringValues(html);
+
+            // Step 2. Set selected item
+            if (routeValueDictionary.ContainsKey(id) && !string.IsNullOrEmpty(selectListItem.Value) && routeValueDictionary[id].ToString().Equals(selectListItem.Value.ToString(), StringComparison.CurrentCultureIgnoreCase))
+            {
+                selectListItem.Selected = true;
+            }
+            else if (!routeValueDictionary.ContainsKey(id) || string.IsNullOrWhiteSpace(routeValueDictionary[id] as string))
+            {
+                defaultOption.Selected = true;
+            }
+
+            // Step 3. Get css classes
+            string classString = "btn blue btn-circle " + (selectListItem.Selected ? "btn-info" : "btn-outline");
+            IDictionary<string, object> attributes = new Dictionary<string, object>();
+            attributes.Add("class", classString);
+
+            routeValueDictionary.ExecuteSet(id, selectListItem.Value);
+
+            // Step 4.
+            <text>
+                @html.RouteLink(selectListItem.Text, routeValues: routeValueDictionary, htmlAttributes: attributes)
+            </text>
+        }
+}
+
+@helper QuerystringFilter(System.Web.Mvc.HtmlHelper html, string id, string dataValueField, string dataTextField, IEnumerable<object> list, string allOptionName = "")
+    {
+
+        if (list == null)
+        {
+            return;
+        }
+
+        SelectList selectList = new SelectList(list, dataValueField, dataTextField);
+        @QuerystringFilter(html, id, new List<System.Web.Mvc.SelectListItem>(selectList.ToArray()), allOptionName);
+}

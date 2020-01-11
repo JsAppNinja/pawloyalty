@@ -1,0 +1,21 @@
+﻿@model DHTMLX.Scheduler.DHXScheduler
+@{
+    // Step 1.Get Provider
+    PawContext pawContext = Html.GetPawContext();
+    Provider provider = pawContext.Provider;
+    if (provider == null) { return; }
+
+    // Step 2. Get SkuCategory
+    SkuCategory skuCategory = provider.GetSkuCategory(Html.GetRouteValueAsGuid("SkuCategoryId"));
+    if (skuCategory == null) { return; }
+}
+
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            @(skuCategory.Name)
+            <small>calendar, resources</small>
+        </h1>
+    </div>
+</div>
+

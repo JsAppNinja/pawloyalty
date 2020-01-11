@@ -1,0 +1,138 @@
+﻿ExternalId|Type|SkuGroup.ExternalId|Sku.ExternalId
+
+-- completeGroomUpgrade head 
+completeGroomUpgrade_0_completeGroupXS		|0|completeGroomUpgrades|completeGroupXS		
+completeGroomUpgrade_0_completeGroupS		|0|completeGroomUpgrades|completeGroupS		
+completeGroomUpgrade_0_completeGroupM		|0|completeGroomUpgrades|completeGroupM		
+completeGroomUpgrade_0_completeGroupL		|0|completeGroomUpgrades|completeGroupL		
+completeGroomUpgrade_0_completeGroupXL		|0|completeGroomUpgrades|completeGroupXL	
+
+
+-- completeGroomUpgrades tail
+completeGroomUpgrade_1_furminatorUpgrade			|1|completeGroomUpgrades|furminatorUpgrade					
+completeGroomUpgrade_1_hairDyeDesign				|1|completeGroomUpgrades|hairDyeDesign						
+completeGroomUpgrade_1_lemonSeasaltBath				|1|completeGroomUpgrades|lemonSeasaltBath					
+completeGroomUpgrade_1_naturalBathUpgrade			|1|completeGroomUpgrades|naturalBathUpgrade					
+completeGroomUpgrade_1_pawPabRub					|1|completeGroomUpgrades|pawPabRub							
+completeGroomUpgrade_1_pawdicure					|1|completeGroomUpgrades|pawdicure							
+completeGroomUpgrade_1_petTattoo					|1|completeGroomUpgrades|petTattoo													
+completeGroomUpgrade_1_wagDetox						|1|completeGroomUpgrades|wagDetox							
+completeGroomUpgrade_1_coconultOilSilkTreatment		|1|completeGroomUpgrades|coconultOilSilkTreatment			
+completeGroomUpgrade_1_deepConditioning				|1|completeGroomUpgrades|deepConditioning					
+completeGroomUpgrade_1_deMatting					|1|completeGroomUpgrades|deMatting							
+completeGroomUpgrade_1_extraBrushing				|1|completeGroomUpgrades|extraBrushing						
+completeGroomUpgrade_1_fleaBath						|1|completeGroomUpgrades|fleaBath							
+completeGroomUpgrade_1_fleaTreatment				|1|completeGroomUpgrades|fleaTreatment						
+completeGroomUpgrade_1_furMask						|1|completeGroomUpgrades|furMask
+
+
+-- alaCarteUpgrades head				
+alaCarteUpgrades_0_redo						|0|alaCarteUpgrades|redo						
+alaCarteUpgrades_0_compBath					|0|alaCarteUpgrades|compBath					
+alaCarteUpgrades_0_rinse					|0|alaCarteUpgrades|rinse						
+alaCarteUpgrades_0_saniTrim					|0|alaCarteUpgrades|saniTrim					
+alaCarteUpgrades_0_tuneUp					|0|alaCarteUpgrades|tuneUp						
+alaCarteUpgrades_0_nailTrim					|0|alaCarteUpgrades|nailTrim					
+alaCarteUpgrades_0_extraSmallBathBrushNails	|0|alaCarteUpgrades|extraSmallBathBrushNails	
+alaCarteUpgrades_0_analGlands				|0|alaCarteUpgrades|analGlands					
+alaCarteUpgrades_0_bathBrushNails			|0|alaCarteUpgrades|bathBrushNails				
+alaCarteUpgrades_0_furminatorUpgrade		|0|alaCarteUpgrades|furminatorUpgrade			
+alaCarteUpgrades_0_hairDyeDesign			|0|alaCarteUpgrades|hairDyeDesign				
+alaCarteUpgrades_0_lemonSeasaltBath			|0|alaCarteUpgrades|lemonSeasaltBath			
+alaCarteUpgrades_0_naturalBathUpgrade		|0|alaCarteUpgrades|naturalBathUpgrade			
+alaCarteUpgrades_0_pawPabRub				|0|alaCarteUpgrades|pawPabRub					
+alaCarteUpgrades_0_pawdicure				|0|alaCarteUpgrades|pawdicure					
+alaCarteUpgrades_0_petTattoo				|0|alaCarteUpgrades|petTattoo					
+alaCarteUpgrades_0_wagDetox					|0|alaCarteUpgrades|wagDetox					
+alaCarteUpgrades_0_coconultOilSilkTreatment	|0|alaCarteUpgrades|coconultOilSilkTreatment	
+alaCarteUpgrades_0_deepConditioning			|0|alaCarteUpgrades|deepConditioning			
+alaCarteUpgrades_0_deMatting				|0|alaCarteUpgrades|deMatting					
+alaCarteUpgrades_0_extraBrushing			|0|alaCarteUpgrades|extraBrushing				
+alaCarteUpgrades_0_fleaBath					|0|alaCarteUpgrades|fleaBath					
+alaCarteUpgrades_0_fleaTreatment			|0|alaCarteUpgrades|fleaTreatment				
+alaCarteUpgrades_0_furMask					|0|alaCarteUpgrades|furMask
+
+
+-- alaCarteUpgrades tail
+alaCarteUpgrades_1_redo						|1|alaCarteUpgrades|redo						
+alaCarteUpgrades_1_compBath					|1|alaCarteUpgrades|compBath					
+alaCarteUpgrades_1_rinse					|1|alaCarteUpgrades|rinse						
+alaCarteUpgrades_1_saniTrim					|1|alaCarteUpgrades|saniTrim					
+alaCarteUpgrades_1_tuneUp					|1|alaCarteUpgrades|tuneUp						
+alaCarteUpgrades_1_nailTrim					|1|alaCarteUpgrades|nailTrim					
+alaCarteUpgrades_1_extraSmallBathBrushNails	|1|alaCarteUpgrades|extraSmallBathBrushNails	
+alaCarteUpgrades_1_analGlands				|1|alaCarteUpgrades|analGlands					
+alaCarteUpgrades_1_bathBrushNails			|1|alaCarteUpgrades|bathBrushNails				
+alaCarteUpgrades_1_furminatorUpgrade		|1|alaCarteUpgrades|furminatorUpgrade			
+alaCarteUpgrades_1_hairDyeDesign			|1|alaCarteUpgrades|hairDyeDesign				
+alaCarteUpgrades_1_lemonSeasaltBath			|1|alaCarteUpgrades|lemonSeasaltBath			
+alaCarteUpgrades_1_naturalBathUpgrade		|1|alaCarteUpgrades|naturalBathUpgrade			
+alaCarteUpgrades_1_pawPabRub				|1|alaCarteUpgrades|pawPabRub					
+alaCarteUpgrades_1_pawdicure				|1|alaCarteUpgrades|pawdicure					
+alaCarteUpgrades_1_petTattoo				|1|alaCarteUpgrades|petTattoo					
+alaCarteUpgrades_1_wagDetox					|1|alaCarteUpgrades|wagDetox					
+alaCarteUpgrades_1_coconultOilSilkTreatment	|1|alaCarteUpgrades|coconultOilSilkTreatment	
+alaCarteUpgrades_1_deepConditioning			|1|alaCarteUpgrades|deepConditioning			
+alaCarteUpgrades_1_deMatting				|1|alaCarteUpgrades|deMatting					
+alaCarteUpgrades_1_extraBrushing			|1|alaCarteUpgrades|extraBrushing				
+alaCarteUpgrades_1_fleaBath					|1|alaCarteUpgrades|fleaBath					
+alaCarteUpgrades_1_fleaTreatment			|1|alaCarteUpgrades|fleaTreatment				
+alaCarteUpgrades_1_furMask					|1|alaCarteUpgrades|furMask
+
+
+-- daycare grooming head
+daycareUpgrades_0_addDayPlaye				|0|daycareUpgrades|addDayPlaye						
+daycareUpgrades_0_dayStayUltraSuite			|0|daycareUpgrades|dayStayUltraSuite					
+daycareUpgrades_0_dayStayStayDeluxe			|0|daycareUpgrades|dayStayStayDeluxe					
+daycareUpgrades_0_dayStayStandard			|0|daycareUpgrades|dayStayStandard					
+daycareUpgrades_0_dayStayCattery			|0|daycareUpgrades|dayStayCattery						
+daycareUpgrades_0_dayStayCatUltraSuite		|0|daycareUpgrades|dayStayCatUltraSuite				
+
+
+-- daycare grooming tail
+daycareUpgrades_1_completeGroupXS				|1|daycareUpgrades|completeGroupXS				
+daycareUpgrades_1_completeGroupS				|1|daycareUpgrades|completeGroupS					
+daycareUpgrades_1_completeGroupM				|1|daycareUpgrades|completeGroupM					
+daycareUpgrades_1_completeGroupL				|1|daycareUpgrades|completeGroupL					
+daycareUpgrades_1_completeGroupXL				|1|daycareUpgrades|completeGroupXL				
+daycareUpgrades_1_redo							|1|daycareUpgrades|redo							
+daycareUpgrades_1_compBath						|1|daycareUpgrades|compBath						
+daycareUpgrades_1_rinse							|1|daycareUpgrades|rinse							
+daycareUpgrades_1_saniTrim						|1|daycareUpgrades|saniTrim						
+daycareUpgrades_1_tuneUp						|1|daycareUpgrades|tuneUp							
+daycareUpgrades_1_nailTrim						|1|daycareUpgrades|nailTrim						
+daycareUpgrades_1_extraSmallBathBrushNails		|1|daycareUpgrades|extraSmallBathBrushNails		
+daycareUpgrades_1_analGlands					|1|daycareUpgrades|analGlands						
+daycareUpgrades_1_bathBrushNails				|1|daycareUpgrades|bathBrushNails					
+
+
+-- boarding grooming head
+boardingGroomingUpgrades_0_smallRoom			|0|boardingGroomingUpgrades|smallRoom					
+boardingGroomingUpgrades_0_catUltraSuite		|0|boardingGroomingUpgrades|catUltraSuite				
+boardingGroomingUpgrades_0_catteryRoom			|0|boardingGroomingUpgrades|catteryRoom			
+boardingGroomingUpgrades_0_ultraSuite			|0|boardingGroomingUpgrades|ultraSuite					
+boardingGroomingUpgrades_0_medRoom				|0|boardingGroomingUpgrades|medRoom				
+boardingGroomingUpgrades_0_largeRoom			|0|boardingGroomingUpgrades|largeRoom					
+boardingGroomingUpgrades_0_slumberRoom			|0|boardingGroomingUpgrades|slumberRoom			
+boardingGroomingUpgrades_0_deluxeSuite			|0|boardingGroomingUpgrades|deluxeSuite			
+
+-- boarding grooming tail
+boardingGroomingUpgrades_1_completeGroupXS				|1|boardingGroomingUpgrades|completeGroupXS				
+boardingGroomingUpgrades_1_completeGroupS				|1|boardingGroomingUpgrades|completeGroupS					
+boardingGroomingUpgrades_1_completeGroupM				|1|boardingGroomingUpgrades|completeGroupM					
+boardingGroomingUpgrades_1_completeGroupL				|1|boardingGroomingUpgrades|completeGroupL					
+boardingGroomingUpgrades_1_completeGroupXL				|1|boardingGroomingUpgrades|completeGroupXL				
+boardingGroomingUpgrades_1_redo							|1|boardingGroomingUpgrades|redo							
+boardingGroomingUpgrades_1_compBath						|1|boardingGroomingUpgrades|compBath						
+boardingGroomingUpgrades_1_rinse						|1|boardingGroomingUpgrades|rinse							
+boardingGroomingUpgrades_1_saniTrim						|1|boardingGroomingUpgrades|saniTrim						
+boardingGroomingUpgrades_1_tuneUp						|1|boardingGroomingUpgrades|tuneUp							
+boardingGroomingUpgrades_1_nailTrim						|1|boardingGroomingUpgrades|nailTrim						
+boardingGroomingUpgrades_1_extraSmallBathBrushNails		|1|boardingGroomingUpgrades|extraSmallBathBrushNails		
+boardingGroomingUpgrades_1_analGlands					|1|boardingGroomingUpgrades|analGlands						
+boardingGroomingUpgrades_1_bathBrushNails				|1|boardingGroomingUpgrades|bathBrushNails					
+
+-- boarding training
+
+-- boarding activity 
+

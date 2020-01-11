@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Reservation";
+
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+}
+
+<h2>Invoice</h2>
+
+<a href="/Reservations/Block/Add" data-target="#commonDialog" data-toggle="modal" class="nav-link"> Add Grooming</a>

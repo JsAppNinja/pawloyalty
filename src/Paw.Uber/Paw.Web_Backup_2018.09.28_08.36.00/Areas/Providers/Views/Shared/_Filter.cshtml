@@ -1,0 +1,61 @@
+@model Paw.Web.Areas.Providers.Views.Shared.FilterModel
+@using System.Collections.Generic;
+@{
+    this.Layout = null;
+
+    // Step 1. Default option
+    bool includeAllDefaultOption = !string.IsNullOrEmpty(this.Model.SelectAllCaption);
+
+    // Step 2. Get current value
+    string currentValue = this.Request.QueryString[this.Model.Id];
+
+    // Step 3. Get SelectList
+    List<SelectListItem> selectList = this.Model.SelectListItemList;
+
+    // Step 4 .add Default Option
+    if (includeAllDefaultOption)
+    {
+        selectList.Insert(0, new SelectListItem() { Text = this.Model.SelectAllCaption, Value = "", Selected = string.IsNullOrEmpty(currentValue) });
+    }
+
+    // Step 5. Set values
+    if (!string.IsNullOrEmpty(currentValue))
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (currentValue.Equals(item.Value, StringComparison.CurrentCulture))
+            {
+                item.Selected = true;
+            }
+        }
+    }
+
+    }
+
+    @functions{
+    public string GetButtonClass(bool selected)
+    {
+        if (selected)
+        {
+            return "btn-info";
+        }
+        else
+        {
+            // return "btn-default";
+            return "btn-outline ";
+        }
+    }
+
+    }
+
+<form>
+
+    <div class="form-group">
+        &nbsp;
+        @foreach (var item in selectList)
+    {
+        <a href="?@(this.Model.Id)=@(item.Value)" class="btn blue btn-circle  @GetButtonClass(item.Selected)" data-value="@item.Value">@item.Text</a>
+        @Html.RouteLink(item.Text, new RouteValueDictionary().ExecuteAddExistingQuerystringValues(Html), new { @class="btn blue btn-circle GetButtonClass(item.Selected)" })
+}
+    </div>
+</form>

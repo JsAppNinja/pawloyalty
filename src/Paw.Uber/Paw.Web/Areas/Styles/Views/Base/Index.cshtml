@@ -1,0 +1,948 @@
+﻿
+@{
+
+}
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Discounts</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputQty">Qty</label> <input class="form-control mr-sm-2" id="inlineFormInputQty" type="text" value="2">
+                    </div>
+                    <div class="col-auto">
+                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Service</label> <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>
+                                Choose...
+                            </option>
+                            <option value="1">
+                                Luxury
+                            </option>
+                            <option value="2">
+                                Standard
+                            </option>
+                            <option value="3">
+                                Three
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        by
+                    </div>
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputDiscount">Discount</label> <input class="form-control mr-sm-2" id="inlineFormInputDiscount" type="text" value="10">
+                    </div>
+                    <div class="col-auto">
+                        <div class="btn-group">
+                            <button class="btn btn-outline-blue2" type="button">%</button> <button class="btn btn-outline-blue2" type="button">$</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--models-end-->
+<div class="container py-md-5">
+    <div class="accordion" id="accordionBooking">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0"><button aria-controls="collapseOne" aria-expanded="true" class="btn accordian-header select-pet collapsed" data-target="#collapseOne" data-toggle="collapse" type="button">Show pet info</button></h2>
+            </div>
+            <div aria-labelledby="headingOne" class="collapse" data-parent="#accordionBooking" id="collapseOne">
+                <div class="card-body background-grey">
+                    <div class="row">
+                        <!-- pet card -->
+                        <div class="col-md-6 orange-box p-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="card border-clear">
+                                            <img alt="Image of Horatio" class="card-img-top" src="./horatio.jpg">
+                                            <div class="card-body p-1">
+                                                <p class="card-text small">
+                                                    Mainecoon 9yrs old.<br>
+                                                    Puppy kitty ipsum dolor sit good dog tigger good boy.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3>Horatio</h3>
+                                        <p><i class="fas fa-bug"></i> <i class="fas fa-bug"></i> <i class="fas fa-bug"></i> <i class="fas fa-bug"></i></p>
+                                        <div class="row p-0">
+                                            <div class="col-md-4">
+                                                <h4 class="small bold">Vaccinations and tests:</h4>
+                                                <ul class="list-paw small">
+                                                    <li>Bordella</li>
+                                                    <li>Bordella</li>
+                                                    <li>Bordella</li>
+                                                    <li>Bordella</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fas fa-2x fa-exclamation-circle text-primary"></i>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h4 class="small bold">Preferences:</h4>
+                                                <ul class="list-paw small">
+                                                    <li>Dry food</li>
+                                                    <li>Green toys</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fas fa-2x fa-edit text-secondary"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row p-0">
+                                            <div class="col-md-10">
+                                                <h4 class="small bold">Special Instructions:</h4>
+                                                <p class="small">Puppy kitty ipsum dolor sit good dog tigger good boy furry teeth purr lazy cat run fast fish critters string. Ferret walk toy kibble kitten cockatiel feeder fetch.</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="edit-pop" data-container="body" data-html="true" data-placement="left" data-toggle="popover" type="button"><i class="fas fa-2x fa-edit text-secondary"></i></a>
+                                                <div class="hide" id="popover-content">
+                                                    <div class="card inner-cards">
+                                                        <div class="card-body background-grey">
+                                                            <div class="form-group">
+                                                                <label for="SpecialIntructionsFormControlTextarea">Special instructions</label>
+                                                                <textarea class="form-control" id="SpecialIntructionsFormControlTextarea" rows="3"></textarea>
+                                                            </div><a class="btn btn-outline-primary" href="#">Cancel</a> <a class="btn btn-primary" href="#">Save</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row p-0">
+                                            <div class="col-md-10">
+                                                <h4 class="small bold">Booking Notes:</h4>
+                                                <p class="small">Puppy kitty ipsum dolor sit good dog tigger good boy furry teeth purr lazy cat run fast fish critters string. Ferret walk toy kibble kitten cockatiel feeder fetch.</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fas fa-2x fa-edit text-secondary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card inner-cards border-clear">
+                                <div class="card-header">
+                                    Horatio's Appointments
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table table-sm table-clear small" role="presentation">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="bold">Last Appt:</td>
+                                                        <td>Mon, Dec 24, 2018 10:00 am</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Appt Type:</td>
+                                                        <td>Full day</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Activies:</td>
+                                                        <td>Neque porro quisquam est</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Extras:</td>
+                                                        <td>Neque porro quisquam est</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Room:</td>
+                                                        <td>Luxury 2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Invoice amt:</td>
+                                                        <td>$24.95</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table table-sm table-clear small" role="presentation">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="bold">Last Appt:</td>
+                                                        <td>Mon, Dec 24, 2018 10:00 am</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Appt Type:</td>
+                                                        <td>Full day</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Activies:</td>
+                                                        <td>Neque porro quisquam est</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Extras:</td>
+                                                        <td>Neque porro quisquam est</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Room:</td>
+                                                        <td>Luxury 2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">Invoice amt:</td>
+                                                        <td>$24.95</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- pet card -->
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0"><button aria-controls="collapseTwo" aria-expanded="false" class="btn accordian-header collapsed" data-target="#collapseTwo" data-toggle="collapse" type="button">Appointment type and date</button></h2>
+            </div>
+            <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionBooking" id="collapseTwo">
+                <div class="card-body background-grey">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="select-location">Select location</label> <select class="form-control" id="select-location">
+                                    <option>
+                                        Scotsdale
+                                    </option>
+                                    <option>
+                                        Glendale
+                                    </option>
+                                    <option>
+                                        Tempe
+                                    </option>
+                                    <option>
+                                        Queen Creek
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="SelectCategoryMenuButton">Select category</label>
+                            <div class="dropdown mb-3">
+                                <div class="btn-group">
+                                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="SelectCategoryMenuButton" type="button">Select category</button>
+                                    <ul aria-labelledby="dropdownMenu" class="dropdown-menu multi-level" role="menu">
+                                        <li class="dropdown-submenu">
+                                            <a class="dropdown-item" href="#" tabindex="-1">Hover me for more options</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-item">
+                                                    <a href="#" tabindex="-1">Second level</a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a href="#">Second level</a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a href="#">Second level</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-divider"></li>
+                                        <li class="dropdown-submenu">
+                                            <a class="dropdown-item" href="#" tabindex="-1">Hover me for more options</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-item">
+                                                    <a href="#" tabindex="-1">Second level</a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a href="#">Second level</a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a href="#">Second level</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><label for="DayCareButton">Day care recurrence</label><br>
+                            <div aria-label="Large button group" class="btn-group mb-3" id="DayCareButton" role="group">
+                                <button class="btn btn-outline-blue2" type="button">Single date</button> <button class="btn btn-outline-blue2" type="button">Multiple dates</button> <button class="btn btn-outline-blue2" type="button">Recurring</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h4>Last appointment</h4>
+                            <ul class="list-unstyled">
+                                <li>Sat Dec 15, 2018</li>
+                                <li>Room: Luxury 2</li>
+                                <li>Playgroup: Shy Dogs</li>
+                                <li>$25.00 pd via Visa</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Current package</h4>
+                            <p>4 days left from the Happy Days package</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="SelectDateRange">Select date range</label>
+                            <div class="input-group mb-3">
+                                <input aria-describedby="date" aria-label="date" class="form-control" id="SelectDateRange" placeholder="DD/MM/YY" type="text">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-blue" type="button"><i class="fas fa-calendar-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="card calendar border-blue mb-3">
+                                <div class="card-body">
+                                    <table class="table-calendar mb-2">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="7"><span class="btn-group"><a class="btn text-secondary"><i class="fas fa-2x fa-chevron-circle-left"></i></a> <a class="btn text-secondary month">February 2019</a> <a class="btn text-secondary"><i class="fas fa-2x fa-chevron-circle-right"></i></a></span></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Su</th>
+                                                <th>Mo</th>
+                                                <th>Tu</th>
+                                                <th>We</th>
+                                                <th>Th</th>
+                                                <th>Fr</th>
+                                                <th>Sa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="muted">28</td>
+                                                <td class="muted">29</td>
+                                                <td class="muted">30</td>
+                                                <td class="muted">31</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>5</td>
+                                                <td>6</td>
+                                                <td>7</td>
+                                                <td>8</td>
+                                                <td>9</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>12</td>
+                                                <td>13</td>
+                                                <td>14</td>
+                                                <td>15</td>
+                                                <td>16</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr>
+                                                <td>18</td>
+                                                <td class="btn-circle-blue">19</td>
+                                                <td>20</td>
+                                                <td>21</td>
+                                                <td>22</td>
+                                                <td>23</td>
+                                                <td>24</td>
+                                            </tr>
+                                            <tr>
+                                                <td>25</td>
+                                                <td>26</td>
+                                                <td>27</td>
+                                                <td>28</td>
+                                                <td class="muted">1</td>
+                                                <td class="muted">2</td>
+                                                <td class="muted">3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="select-playgroup">Select playgroup</label> <select class="form-control" id="select-playgroup">
+                                    <option>
+                                        Rough dogs (2 available)
+                                    </option>
+                                    <option>
+                                        Shy dogs (6 available)
+                                    </option>
+                                    <option>
+                                        Puppies (1 available)
+                                    </option>
+                                    <option>
+                                        Old dogs (3 available)
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <div class="card border-blue mb-3">
+                                        <div class="card-body m0a">
+                                            <label for="DropOff">Drop off</label>
+                                            <div class="input-group mb-3 mw200">
+                                                <input aria-label="Choose drop off time" class="form-control" id="DropOff" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="clockpicker-plate">
+                                                <div class="clockpicker-canvas">
+                                                    <svg class="clockpicker-svg" height="200" width="200">
+                                                        <g transform="translate(100,100)">
+                                                            <line x1="0" x2="0" y1="0" y2="-80"></line>
+                                                            <circle class="clockpicker-canvas-fg" cx="0" cy="-80" r="3.5"></circle>
+                                                            <circle class="clockpicker-canvas-bg" cx="0" cy="-80" r="13"></circle>
+                                                            <circle class="clockpicker-canvas-bearing" cx="0" cy="0" r="2"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                                <div class="clockpicker-dial clockpicker-hours" style="visibility: visible;">
+                                                    <div class="clockpicker-tick" style="left: 87px; top: 7px; font-size: 120%;">
+                                                        12
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 127px; top: 17.718px; font-size: 120%;">
+                                                        1
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 156.282px; top: 47px; font-size: 120%;">
+                                                        2
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 167px; top: 87px; font-size: 120%;">
+                                                        3
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 156.282px; top: 127px; font-size: 120%;">
+                                                        4
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 127px; top: 156.282px; font-size: 120%;">
+                                                        5
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 87px; top: 167px; font-size: 120%;">
+                                                        6
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 47px; top: 156.282px; font-size: 120%;">
+                                                        7
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 17.718px; top: 127px; font-size: 120%;">
+                                                        8
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 7px; top: 87px; font-size: 120%;">
+                                                        9
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 17.718px; top: 47px; font-size: 120%;">
+                                                        10
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 47px; top: 17.718px; font-size: 120%;">
+                                                        11
+                                                    </div>
+                                                </div>
+                                            </div><!--clock end-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card border-blue mb-3">
+                                        <div class="card-body m0a">
+                                            <label for="PickUp">Pick up</label>
+                                            <div class="input-group mb-3 mw200">
+                                                <input aria-label="Choose pick up time" class="form-control" id="PickUp" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="clockpicker-plate">
+                                                <div class="clockpicker-canvas">
+                                                    <svg class="clockpicker-svg" height="200" width="200">
+                                                        <g transform="translate(100,100)">
+                                                            <line x1="0" x2="0" y1="0" y2="-80"></line>
+                                                            <circle class="clockpicker-canvas-fg" cx="0" cy="-80" r="3.5"></circle>
+                                                            <circle class="clockpicker-canvas-bg" cx="0" cy="-80" r="13"></circle>
+                                                            <circle class="clockpicker-canvas-bearing" cx="0" cy="0" r="2"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                                <div class="clockpicker-dial clockpicker-hours" style="visibility: visible;">
+                                                    <div class="clockpicker-tick" style="left: 87px; top: 7px; font-size: 120%;">
+                                                        12
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 127px; top: 17.718px; font-size: 120%;">
+                                                        1
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 156.282px; top: 47px; font-size: 120%;">
+                                                        2
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 167px; top: 87px; font-size: 120%;">
+                                                        3
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 156.282px; top: 127px; font-size: 120%;">
+                                                        4
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 127px; top: 156.282px; font-size: 120%;">
+                                                        5
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 87px; top: 167px; font-size: 120%;">
+                                                        6
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 47px; top: 156.282px; font-size: 120%;">
+                                                        7
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 17.718px; top: 127px; font-size: 120%;">
+                                                        8
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 7px; top: 87px; font-size: 120%;">
+                                                        9
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 17.718px; top: 47px; font-size: 120%;">
+                                                        10
+                                                    </div>
+                                                    <div class="clockpicker-tick" style="left: 47px; top: 17.718px; font-size: 120%;">
+                                                        11
+                                                    </div>
+                                                </div>
+                                            </div><!--clock end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn btn-primary fr" href="#">Select room(s)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0"><button aria-controls="collapseThree" aria-expanded="false" class="btn accordian-header collapsed" data-target="#collapseThree" data-toggle="collapse" type="button">Services and extras</button></h2>
+            </div>
+            <div aria-labelledby="headingThree" class="collapse" data-parent="#accordionBooking" id="collapseThree">
+                <div class="card-body background-grey">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h2 class="mb-0"><button aria-controls="collapseFour" aria-expanded="false" class="btn accordian-header collapsed" data-target="#collapseFour" data-toggle="collapse" type="button">Retail items</button></h2>
+            </div>
+            <div aria-labelledby="headingFour" class="collapse" data-parent="#accordionBooking" id="collapseFour">
+                <div class="card-body background-grey">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="search-catalog">Search catalog</label>
+                            <div class="input-group mb-3">
+                                <div class="autocomplete-wrapper">
+                                    <select class="custom-select" id="search-catalog" name="search-catalog">
+                                        <option value="Pink">Pink Kong</option>
+                                        <option value="Red">Red Kong</option>
+                                        <option value="Chew">Chew Toy</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="select-category">or select category</label>
+                            <div class="dropdown mb-3">
+                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="select-category" type="button">Select category</button>
+                                <div aria-labelledby="select-category" class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-lg btn-outline-primary mb-3 mt20" type="button">View all products</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-lg btn-outline-primary mb-3 mt20" type="button">Scan barcode</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card products mb-3">
+                                        <img alt="Product Name" class="card-img-top" src="./pink-toy.jpg">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product Name</h5>
+                                            <p class="card-text">$24.99</p><a class="btn btn-outline-primary w100" href="#">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card products mb-3">
+                                        <img alt="Product Name" class="card-img-top" src="./pink-toy.jpg">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product Name</h5>
+                                            <p class="card-text">$24.99</p><a class="btn btn-outline-primary w100" href="#">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card products mb-3">
+                                        <img alt="Product Name" class="card-img-top" src="./pink-toy.jpg">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product Name</h5>
+                                            <p class="card-text">$24.99</p><a class="btn btn-outline-primary w100" href="#">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card products mb-3">
+                                        <img alt="Product Name" class="card-img-top" src="./pink-toy.jpg">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product Name</h5>
+                                            <p class="card-text">$24.99</p><a class="btn btn-outline-primary w100" href="#">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="card inner-cards">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sales suggestions</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h2 class="mb-0"><button aria-controls="collapseFive" aria-expanded="false" class="btn accordian-header collapsed" data-target="#collapseFive" data-toggle="collapse" type="button">Invoice and payment</button></h2>
+            </div>
+            <div aria-labelledby="headingFive" class="collapse" data-parent="#accordionBooking" id="collapseFive">
+                <div class="card-body background-grey">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="card inner-cards mb-3 sales">
+                                <div class="card-body">
+
+                                    <table class="table table-borderless invoice" role="presentation">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Unit price</th>
+                                                <th scope="col">Sub total</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td colspan="7"><h3>Boarding</h3></td></tr>
+                                            <tr>
+                                                <td>Boarding per night</td>
+                                                <td></td>
+                                                <td>4</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="UnitPriceFormControlInput">Unit price</label> <input class="form-control" id="UnitPriceFormControlInput" type="text" value="$65.00">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="SubTotalFormControlInput">Unit price</label> <input class="form-control" id="SubTotalFormControlInput" type="text" value="$260.00">
+                                                    </div>
+                                                </td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-cut text-secondary"></i><i class="fas fa-2x fa-money-bill-alt text-secondary"></i></td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-edit text-secondary mr-3"></i><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Late check out</td>
+                                                <td><button class="btn btn-outline-blue btn-sm" type="button">Waive</button></td>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="UnitPriceFormControlInput1">Unit price</label> <input class="form-control" id="UnitPriceFormControlInput1" type="text" value="$5.00">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="SubTotalFormControlInput1">Unit price</label> <input class="form-control" id="SubTotalFormControlInput1" type="text" value="$260.00">
+                                                    </div>
+                                                </td>
+                                                <td class="table-icons"><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-2x fa-cut text-secondary"></i><i class="fas fa-2x fa-money-bill-alt text-secondary"></i></a></td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-edit text-secondary mr-3"></i><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                            <tr><td colspan="7"><h3>Services and Extras</h3></td></tr>
+                                            <tr>
+                                                <td>Full Groom</td>
+                                                <td></td>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="UnitPriceFormControlInput2">Unit price</label> <input class="form-control" id="UnitPriceFormControlInput2" type="text" value="$35.00">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="SubTotalFormControlInput2">Unit price</label> <input class="form-control" id="SubTotalFormControlInput2" type="text" value="$35.00">
+                                                    </div>
+                                                </td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-cut text-secondary"></i><i class="fas fa-2x fa-money-bill-alt text-secondary"></i></td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-edit text-secondary mr-3"></i><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Departure Day Treat</td>
+                                                <td><button class="btn btn-outline-blue btn-sm" type="button">Waive</button></td>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="UnitPriceFormControlInput3">Unit price</label> <input class="form-control" id="UnitPriceFormControlInput3" type="text" value="$8.00">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="SubTotalFormControlInput3">Unit price</label> <input class="form-control" id="SubTotalFormControlInput3" type="text" value="$8.00">
+                                                    </div>
+                                                </td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-cut text-secondary"></i><i class="fas fa-2x fa-money-bill-alt text-secondary"></i></td>
+                                                <td class="table-icons"><i class="fas fa-2x fa-edit text-secondary mr-3"></i><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                            <tr class="invoice-sub"><td colspan="4">Sub total</td><td>$311.00</td><td></td><td></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card inner-cards mb-3 sales">
+                                <div class="card-body">
+                                    <table class="table table-borderless invoice" role="presentation">
+                                        <tbody>
+                                            <tr><td colspan="4"><h3>Pet and client discounts</h3></td><td><i class="fas fa-2x fa-plus-circle text-primary"></i></td></tr>
+                                            <tr>
+                                                <td>Auto Discount - 50% off full groom with 3+ boarding days</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="DiscountFormControlInput1">Discount</label> <input class="form-control" id="DiscountFormControlInput1" type="text" value="$20.00">
+                                                    </div>
+                                                </td>
+                                                <td><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Military member</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-outline-blue2" type="button">%</button> <button class="btn btn-outline-blue2" type="button">$</button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="DiscountFormControlInput2">Discount</label> <input class="form-control" id="DiscountFormControlInput2" type="text" value="10">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="DiscountFormControlInput3">Discount</label> <input class="form-control" id="DiscountFormControlInput3" type="text" value="$20.00">
+                                                    </div>
+                                                </td>
+                                                <td><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto"><h4>Enter coupon code</h4></div>
+                                        <div class="col-auto">
+                                            <label class="sr-only" for="CouponFormControlInput">Enter coupon code</label> <input class="form-control" id="CouponFormControlInput" type="text" value="10">
+                                        </div><div class="col-auto"><button type="button" class="btn btn-primary">Add</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card inner-cards mb-3 sales">
+                                        <div class="card-body">
+
+                                            <table class="table table-borderless invoice" role="presentation">
+                                                <tbody>
+                                                    <tr><td colspan="2"><h3>Add tips</h3> </td><td><i class="fas fa-2x fa-plus-circle text-primary"></i></td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            Tip jar
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="TipFormControlInput">Tips</label> <input class="form-control" id="TipFormControlInput" type="text" value="$8.00">
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="mr-sm-2 sr-only" for="inlineFormEmployeeSelect">Employee</label> <select class="custom-select mr-sm-2" id="inlineFormEmployeeSelect">
+                                                                <option selected>
+                                                                    Choose...
+                                                                </option>
+                                                                <option value="1">
+                                                                    Barb
+                                                                </option>
+                                                                <option value="2">
+                                                                    Jane
+                                                                </option>
+                                                                <option value="3">
+                                                                    Petre
+                                                                </option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="TipFormControlInput">Tips</label> <input class="form-control" id="TipFormControlInput" type="text" value="$8.00">
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card inner-cards mb-3 sales">
+                                        <div class="card-body">
+
+                                            <table class="table table-borderless invoice" role="presentation">
+                                                <tbody>
+                                                    <tr><td colspan="2"><h3>Add outstanding invoices</h3> </td><td><i class="fas fa-2x fa-plus-circle text-primary"></i></td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            Inv #123456 Dec 8, 2018
+                                                        </td>
+                                                        <td>$410.96</td>
+                                                        <td><i class="fas fa-2x fa-times-circle text-red"></i></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="card inner-cards mb-3 sales">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sales suggestions</h5>
+                                    <p class="card-text"></p>
+                                    <ul class="list-group list-group-flush sales">
+                                        <li class="list-group-item">10 day care days package<span>$350.00</span></li>
+                                        <li class="list-group-item">20 day care days package<span>$670.00</span></li>
+                                        <li class="list-group-item">Morbi leo risus <span>$350.00</span></li>
+                                        <li class="list-group-item">Porta ac consectetur ac <span>$350.00</span></li>
+                                        <li class="list-group-item">Vestibulum at eros <span>$350.00</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="notesFormControlSelect1">Notes type</label> <select class="form-control" id="notesFormControlSelect1">
+                                    <option>
+                                        Booking notes
+                                    </option>
+                                    <option>
+                                        Customer notes
+                                    </option>
+                                    <option>
+                                        Grooming notes
+                                    </option>
+                                    <option>
+                                        Training notes
+                                    </option>
+                                    <option>
+                                        Special instructions
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="notesFormControlTextarea1">Example textarea</label>
+                                <textarea class="form-control" id="notesFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <table class="table table-borderless mb-3" role="presentation">
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Sub total</th>
+                                        <td>$253.19</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sales tax</th>
+                                        <td>$25.32</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total before tips</th>
+                                        <td>$278.51</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tips</th>
+                                        <td>$10.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inv-amt border-grey-top" colspan="2">Invoice Amt</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inv-amt-price" colspan="2">$288.51</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Payments Made or Packages Used</th>
+                                        <td class="text-red">-$75.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="inv-amt">Balance</th>
+                                        <td class=" inv-amt inv-amt-price">$213.51</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3>Payments received</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Payment method</h3>
+                            <select class="custom-select custom-select-lg mb-3 fr">
+                                <option selected>
+                                    Cash
+                                </option>
+                                <option value="1">
+                                    Credit card
+                                </option>
+                                <option value="2">
+                                    Two
+                                </option>
+                                <option value="3">
+                                    Three
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-lg btn-primary fr" type="button">Complete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--accordian-->
+</div><!-- /container -->

@@ -1,0 +1,26 @@
+
+
+Time
+1. (SchedulerEvent) Time holds - pet/pet list, resource, employee (all the data)
+2. Scheduler Event has 2 behaviors - (1) appointment, (2) block
+3. Scheduler Event 
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. store sku information on invoiceItem
+2. 
+
+1. create a reservation in the database
+2. edit the reseration
+3. expire reservation
+4. 

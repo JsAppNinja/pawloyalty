@@ -1,0 +1,53 @@
+﻿
+@if (this.Model != null)
+{
+    <form class="form-inline">
+        <div class="form-group" style="">
+            @{
+                Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+                Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+            }
+
+            @if (providerGroupId != null)
+            {
+                @(Html.Kendo().AutoComplete()
+                            .Name("search")
+                            .AutoWidth(true)
+                            .DataTextField("Pet")
+                            .Template(string.Format("<strong><a href=\"/Providers/Pet/Profile/#: data.Id #\">#: data.PetName #</a></strong> (#: Breed #) <a href=\"/Providers/Owner/Profile/#: data.OwnerId #\" >#: data.FullName #</a>  ", providerId))
+                            .MinLength(3)
+                            .HtmlAttributes(new { @class = "input-lg mr-sm-2 form-control", placeholder = "Search...", style = "width: 300px;" })
+                            .DataSource(source =>
+                            {
+                                source.Custom()
+                                    .ServerFiltering(true)
+                                    .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                                    .Transport(transport =>
+                                    {
+                                        transport.Read(config => config.Url(string.Format("/ProviderGroups/{0}/Search/PetOwner", providerGroupId)));
+
+                                    })
+                                    .Schema(schema =>
+                                    {
+                                        schema
+                                        .Data("Data")
+                                        .Model(model =>
+                                        {
+                                            model.Id("Id");
+                                            model.Field("PetName", typeof(string));
+                                            model.Field("OwnerId", typeof(Guid));
+                                            model.Field("FullName", typeof(string));
+                                            model.Field("Breed", typeof(string));
+                                            model.Field("PetAndOwner", typeof(string));
+                                        });
+                                    });
+                            })
+                            .Deferred()
+                )
+            }
+        </div>
+
+    </form>
+   
+
+}

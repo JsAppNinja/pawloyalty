@@ -1,0 +1,75 @@
+﻿@model Owner
+@{
+    ViewBag.Title = string.Format("{0}", this.Model.FullName);
+}
+
+<!-- Profile -->
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Owner Profile
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12 col-sm-12">
+                        <span class="caption-subject bold uppercase font-dark">@this.Model.FullName</span> <small><a href="/Providers/Owner/Update/@this.Model.Id" data-target="#commonDialog" data-toggle="modal">update</a></small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12 col-sm-12">
+                        @AppHelpers.Address(this.Model.StreetAddress, this.Model.City, this.Model.State, this.Model.PostalCode, this.Model.PhoneNumber, this.Model.Email)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Pets <small><a href="/Providers/Pet/Add?OwnerId=@this.Model.Id" data-target="#commonDialog" data-toggle="modal">add</a></small>
+            </div>
+            <div class="card-body">
+                @if (this.Model.PetCollection.Count > 0)
+                {
+                    foreach (var pet in this.Model.PetCollection)
+                    {
+                        <div><a href="/Providers/Pet/Profile/@(pet.Id)">@(pet.Name)</a></div>
+                    }
+                }
+                else
+                {
+                    <small>No Pets</small>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Reservations
+            </div>
+            <div class="card-body">
+                @if (this.Model.PetCollection.Count > 0)
+                {
+                    foreach (var schedulerEvent in this.Model.SchedulerEventCollection)
+                    {
+                        <div><a href="#">@(schedulerEvent.SkuCategory.Name) @(schedulerEvent.Start) </a></div>
+                    }
+                }
+                else
+                {
+                    <small>No Reservations</small>
+                }
+            </div>
+        </div>
+    </div>
+</div>

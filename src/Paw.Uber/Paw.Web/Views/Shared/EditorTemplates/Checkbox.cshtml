@@ -1,0 +1,4 @@
+﻿@model SelectListItem
+
+@Html.CheckBoxFor(m => m.Selected, new { @class= "form-check-input" })
+@Html.LabelFor(m => m, this.Model.Text, new { @class = "form-check-label" })

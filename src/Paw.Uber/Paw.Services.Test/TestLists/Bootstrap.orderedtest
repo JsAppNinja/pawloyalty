@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="bootstrap" storage="c:\users\dwbanks\source\repos\paw\src\paw.uber\paw.services.test\testlists\bootstrap.orderedtest" id="fc4e9182-2d70-4637-9625-6c43a55f9aca" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="32fdb94f-a6b6-14c8-6023-979f2e029d37" name="UserSetup" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="180ecbab-e37e-69ae-07d9-9605035f39fd" name="ProvidersSetup" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="2a19b7c4-8b8a-d130-7bdb-0a0d0c79bbfe" name="SkusSetup" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="c77d3043-31c1-8486-d0b3-233ccc5060a1" name="LoadProviderGroup" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="24bbaf70-16f1-b747-79b6-b1174c61f4e7" name="LoadProvider" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="b0f4306f-4942-6259-45be-27cbfafef115" name="LoadOwner" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="b5607162-43c9-73a8-46ce-1c2cbdeeb0be" name="LoadPet" storage="..\bin\debug\paw.services.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paw.Services", "Paw.Services\Paw.Services.csproj", "{CD25786A-C767-413D-9A93-2F3350B57935}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paw.Web", "Paw.Web\Paw.Web.csproj", "{F9E6A893-F3FF-481B-BA3C-FB28CA37BB5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paw.Web.Test", "Paw.Web.Test\Paw.Web.Test.csproj", "{AFEAA08D-0B80-4C50-A562-21F0CE73A119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paw.Services.Test", "Paw.Services.Test\Paw.Services.Test.csproj", "{93EB9DDD-1A1C-4E0A-8C19-1142B414A110}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E63B0E08-CC3D-49C2-9F97-7F0F6BF7B752}"
+	ProjectSection(SolutionItems) = preProject
+		ApplicationInsights.txt = ApplicationInsights.txt
+		AzureManagementAPI.txt = AzureManagementAPI.txt
+		Cache.txt = Cache.txt
+		DataIssues.txt = DataIssues.txt
+		DebugHelper.txt = DebugHelper.txt
+		DesignNotes.txt = DesignNotes.txt
+		DHTMLX.txt = DHTMLX.txt
+		FeaturePlan.txt = FeaturePlan.txt
+		Playbook.txt = Playbook.txt
+		ReadMe_Telerik.txt = ReadMe_Telerik.txt
+		Reservation.txt = Reservation.txt
+		Schedule.txt = Schedule.txt
+		SchemaNotes.txt = SchemaNotes.txt
+		SetupTemplate.txt = SetupTemplate.txt
+		Sku.txt = Sku.txt
+		TaskList.txt = TaskList.txt
+		TestingConfig.txt = TestingConfig.txt
+		ToDo1.txt = ToDo1.txt
+		UI.txt = UI.txt
+		WebScripts.txt = WebScripts.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paw.WebJob", "Paw.WebJob\Paw.WebJob.csproj", "{6310DD45-1E02-4041-B35C-14CFF33AAC98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD25786A-C767-413D-9A93-2F3350B57935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD25786A-C767-413D-9A93-2F3350B57935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD25786A-C767-413D-9A93-2F3350B57935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD25786A-C767-413D-9A93-2F3350B57935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E6A893-F3FF-481B-BA3C-FB28CA37BB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E6A893-F3FF-481B-BA3C-FB28CA37BB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E6A893-F3FF-481B-BA3C-FB28CA37BB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E6A893-F3FF-481B-BA3C-FB28CA37BB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFEAA08D-0B80-4C50-A562-21F0CE73A119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFEAA08D-0B80-4C50-A562-21F0CE73A119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFEAA08D-0B80-4C50-A562-21F0CE73A119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFEAA08D-0B80-4C50-A562-21F0CE73A119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93EB9DDD-1A1C-4E0A-8C19-1142B414A110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93EB9DDD-1A1C-4E0A-8C19-1142B414A110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93EB9DDD-1A1C-4E0A-8C19-1142B414A110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93EB9DDD-1A1C-4E0A-8C19-1142B414A110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6310DD45-1E02-4041-B35C-14CFF33AAC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6310DD45-1E02-4041-B35C-14CFF33AAC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6310DD45-1E02-4041-B35C-14CFF33AAC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6310DD45-1E02-4041-B35C-14CFF33AAC98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+		SolutionGuid = {C9B03353-CBB3-4092-980C-655461787D60}
+	EndGlobalSection
+EndGlobal

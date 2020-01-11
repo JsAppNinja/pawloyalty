@@ -1,0 +1,57 @@
+﻿@using Paw.Web.Models;
+@{
+    ViewBag.Title = "Schedule";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<style>
+    .k-scheduler-layout:not(.k-scheduler-agendaview) {
+        table-layout: fixed;
+    }
+
+        .k-scheduler-layout:not(.k-scheduler-agendaview) > tbody > tr > td:first-child {
+            width: 80px;
+        }
+
+        .k-scheduler-layout:not(.k-scheduler-agendaview) .k-scheduler-content .k-scheduler-table,
+        .k-scheduler-layout:not(.k-scheduler-agendaview) .k-scheduler-header .k-scheduler-table {
+            width: 2000px
+        }
+</style>
+
+
+@(Html.Kendo().Scheduler<Appt>()
+    .Name("scheduler")
+    .Date(new DateTime(2013, 6, 13))
+    .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
+    .Views(views =>
+    {
+        views.DayView();
+        views.WorkWeekView(workWeekView => workWeekView.Selected(true));
+        views.WeekView();
+        views.MonthView();
+        views.AgendaView();
+        views.TimelineView();
+    })
+    .Timezone("Etc/UTC")
+    
+    .DataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.MeetingID);
+            m.Field(f => f.Title).DefaultValue("No title");
+            m.Field(f => f.Title).DefaultValue("No title");
+            m.RecurrenceId(f => f.RecurrenceID);
+        })
+        .Read("Meetings_Read", "Home")
+        .Create("Meetings_Create", "Home")
+        .Destroy("Meetings_Destroy", "Home")
+        .Update("Meetings_Update", "Home")
+    //.Filter(filters =>
+    //{
+    //    filters.Add(model => model.OwnerID).IsEqualTo(1).Or().IsEqualTo(2);
+    //})
+    )
+    .Deferred(true)
+)

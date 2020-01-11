@@ -1,0 +1,12 @@
+﻿@using Paw.Services.Messages.Web.Reservations
+@model List<ReservationService>
+@{
+
+}
+
+@for (int i = 0; i < this.Model.Count; i++)
+{
+
+    @Html.EditorFor(x => this.Model[i])
+}
+

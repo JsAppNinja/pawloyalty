@@ -1,0 +1,55 @@
+﻿
+@if (this.Model != null)
+{
+    <div class="page-actions m-grid-col-md-5">
+        <div style="border-bottom: 5px solid #ccc">
+            @{
+                Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+                Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+            }
+
+            @if (providerGroupId != null)
+            {
+                @(Html.Kendo().AutoComplete()
+                    .Name("search")
+                    .AutoWidth(true)
+                    .DataTextField("Pet")
+                    .Template(string.Format("<strong><a href=\"/Providers/Pet/Profile/#: data.Id #\">#: data.Pet #</a></strong> (#: Breed #) <a href=\"/Providers/Owner/Profile/#: data.OwnerId #\" >#: data.Fullname #</a>  ", providerId))
+                    .MinLength(3)
+                    .HtmlAttributes(new { @class = "form-control input-lg", placeholder = "Search...", style = "width: 100%;" })
+                    .DataSource(source =>
+                    {
+                        source.Custom()
+                            .ServerFiltering(true)
+                            .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                            .Transport(transport =>
+                            {
+                                transport.Read(config => config.Url(string.Format("/ProviderGroups/{0}/Search/PetOwner", providerGroupId)));
+                            })
+                            .Schema(schema =>
+                            {
+                                schema
+                                .Data("Data")
+                                .Model(model =>
+                                {
+                                    model.Id("Id");
+                                    model.Field("Pet", typeof(string));
+                                    model.Field("OwnerId", typeof(Guid));
+                                    model.Field("Owner", typeof(string));
+                                    model.Field("Breed", typeof(string));
+                                    model.Field("PetAndOwner", typeof(string));
+                                    model.Field("ProviderId", typeof(Guid));
+                                });
+                            });
+                    })
+                    .Deferred()
+                )
+            }
+
+
+        </div>
+    </div>
+    <div class="page-actions m-grid-col-md-1" style="padding-top:10px; font-size: 16px;">
+        <a href="/Providers/Owner/Add"><i class="fa fa-plus"></i> Add Owner</a>
+    </div>
+}

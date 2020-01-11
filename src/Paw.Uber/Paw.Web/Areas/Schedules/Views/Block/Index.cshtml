@@ -1,0 +1,80 @@
+﻿@using Paw.Web.Helpers
+@{
+    //Layout = null;
+}
+
+<style>
+    .hour-alt {
+        visibility: hidden;
+    }
+
+    .hour-display-alt {
+        border-top: none !important;
+    }
+
+    .hour-display {
+        width: 95px;
+        font-weight: bolder;
+        border-bottom: none !important;
+        padding: 0 6px 0 0px;
+    }
+
+    .column-display {
+        width: 250px;
+        border-bottom: 1px dotted #d2d2d2 !important;
+    }
+
+    .column-display-alt {
+        width: 250px;
+        border-top: 1px dotted #d2d2d2 !important;
+    }
+
+    .column-header {
+        font-weight: bolder;
+    }
+
+    .column-date {
+        font-weight: bolder;
+    }
+
+
+    .k-event {
+        cursor: default;
+        min-height: 1.3em;
+    }
+
+    .k-event, .k-more-events {
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+        text-align: left;
+        overflow: hidden;
+        box-sizing: content-box;
+        display: block
+    }
+
+    .k-event-template {
+        padding: .3em 1.4em .3em .6em;
+    }
+
+</style>
+
+<div class="bump">
+    @Html.DateView("schedule1", DateTime.Now.Date, 7, 19, new List<ColumnInfo>() {
+    new ColumnInfo() { Id = "1", Title = "Matt Smith" },
+    new ColumnInfo() { Id = "2", Title = "Samantha Jones" },
+    new ColumnInfo() { Id = "3", Title = "Darrielle Curry" },
+    //new ColumnInfo() { Id = "4", Title = "Callie  Morgan" },
+    new ColumnInfo() { Id = "5", Title = "Travis  Abernathy" }
+    })
+
+    <div data-uid="09f603ec-657c-4927-a922-b7b871bdbca7" style="background-color: rgb(245, 138, 138); border-color: rgb(245, 138, 138); top: 116px; height: 459px; width: 268.7px; left: 608px;" class="k-event">
+    <span class="k-event-actions"></span>
+    <div title="(9:00 AM - 5:00 PM): Evaluations">
+        <div class="k-event-template k-event-time">9:00 AM - 5:00 PM</div>
+        <div class="k-event-template">Evaluations</div></div>
+
+    
+    </div>
+
+</div>

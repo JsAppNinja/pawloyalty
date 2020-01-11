@@ -1,0 +1,150 @@
+﻿@model Pet
+@{
+    ViewBag.Title = string.Format("{0}", this.Model.Name);
+
+    List<Reservation> reservationList = this.ViewData["ReservationList"] as List<Reservation>;
+}
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Pet Profile
+            </div>
+            <div class="card-body">
+                <!-- Profile -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light bordered">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="~/Content/Images/default-avatar-100.jpg" class="img-thumbnail" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            @this.Model.Name @this.Model.Owner.LastName <small><a href="/Providers/Pet/Update/@this.Model.Id" data-target="#commonDialog" data-toggle="modal">update</a></small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <span class="">Breed: </span> @AppHelpers.WriteValue(this.Model?.Breed?.Name)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <span calss="">Weight: </span> @AppHelpers.WriteValue(this.Model.Weight)
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Owner
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            Owner: <a href="/Providers/Owner/Profile/@(this.Model.Owner.Id)">@(this.Model.Owner.FullName)</a>
+                        </div>
+                        <div>
+                            Email: @AppHelpers.WriteEmail(this.Model.Owner.Email)
+                        </div>
+                        <div>
+                            Phone: @AppHelpers.FormatPhone(this.Model.Owner.PhoneNumber)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Siblings
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        @if (this.Model.Owner.PetCollection.Count < 2)
+                        {
+                            <text>None</text>
+                        }
+                        else
+                        {
+                            foreach (Pet pet in this.Model.Owner.PetCollection)
+                            {
+                                if (pet.Id == this.Model.Id) { continue; }
+                                <div>
+                                    <a href="/Providers/Pet/Profile/@(pet.Id)">@(pet.Name)</a>
+                                </div>
+
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bump">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Reservations <small>
+
+
+    <a href="/Reservations/Schedule/Add?OwnerId=@this.Model.OwnerId&PetId=@this.Model.Id" class="res-link">add reservation</a>
+
+
+</small>
+        </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        @if (reservationList == null || reservationList.Count == 0)
+                        {
+                            <text>None</text>
+                        }
+                        else
+                        {
+                            foreach (Reservation reservation in reservationList)
+                            {
+                                SkuLine skuLine = reservation.SkuLineCollection.First(x => x.ParentId == null);
+                        <div><strong>@skuLine.StartTime.DisplayDate()</strong> (@skuLine.ScheduleRule.Employee.FullName) @skuLine.Name </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    @Html.Partial("ReservationDialog")
+
+}

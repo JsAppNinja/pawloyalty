@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@if (Request.IsAuthenticated)
+{
+
+
+    <div class="info">
+        <span class="bold">@User.Identity.GetUserName()</span><br>
+
+        <b>Admin</b>
+
+    </div>
+
+
+    <div class="info-dropdown dropdown">
+        <button class="info-dropdown dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-2x fa-user-circle mr-2"></i><i class="fas fa-2x fa-sort-down"></i>
+            <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"><i class="icon-user"></i> My Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "", action = "/Account/Logoff" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <text>Log Off</text>
+                }
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="info">
+        <a href="/Account/Login" class="dropdown-item">
+            <span class="btn btn-primary">Login</span>
+        </a>
+        </div>
+        }

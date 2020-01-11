@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "InputContainer.cshtml";
+}
+
+@{
+    RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+    this.ViewData.ModelMetadata.AdditionalValues.Add("class", "form-control bfh-phone");
+
+    if (!string.IsNullOrEmpty(this.Model) && this.Model.ToString().Length > 1 && this.Model.ToString().Length < 10)
+    {
+        this.ViewData.ModelMetadata.AdditionalValues.Add("data-format", "ddd-ddd-dddd");
+        this.ViewData.ModelMetadata.AdditionalValues.Add("placeholder", "xxx-xxx-xxxx");
+    }
+    else
+    {
+        this.ViewData.ModelMetadata.AdditionalValues.Add("data-format", "ddd-ddd-dddd");
+        this.ViewData.ModelMetadata.AdditionalValues.Add("placeholder", "xxx-xxx-xxxx");
+    }
+}
+@Html.TextBox(string.Empty, ViewContext.ViewData.TemplateInfo.FormattedModelValue, this.ViewData.ModelMetadata.AdditionalValues)

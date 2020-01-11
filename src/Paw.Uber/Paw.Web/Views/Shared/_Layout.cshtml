@@ -1,0 +1,276 @@
+﻿@using StackExchange.Profiling
+@{
+    Provider provider = this.ViewData["__Provider"] as Provider;
+    Guid? providerGroupId = (Guid?)this.ViewData["__ProviderGroupId"];
+    Guid? providerId = (Guid?)this.ViewData["__ProviderId"];
+
+    bool blank = ViewBag.Blank == true;
+
+    if (ViewBag.BodyClasses == null)
+    {
+        ViewBag.BodyClasses = "page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo";
+    }
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>@ViewBag.Title - Paw Loyalty</title>
+
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css" type="text/css" />
+
+    <link href="/content/css/fontawesome.css" rel="stylesheet">
+    <link href="/content/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/content/styles/site.css" />
+
+    @RenderSection("styles", required: false)
+
+    <script type='text/javascript'>
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } }
+            var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f; for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js', u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax']; i.length;)r('track' + i.pop()); return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: '6ffac2cf-95e9-4deb-8418-e00eef45feb0'
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body class="@ViewBag.BodyClasses">
+
+    @MiniProfiler.RenderIncludes()
+
+    @if (blank)
+    {
+        @RenderBody()
+    }
+    else
+    {
+
+        @Html.Partial("_HeaderPartial", provider)
+
+        <!-- BEGIN CONTAINER -->
+        <main class="container py-md-5">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEAD-->
+                    <div class="page-head">
+                        <!-- BEGIN PAGE TITLE -->
+                        @if (ViewBag.PageTitle != null)
+                        {
+                            <div class="page-title">
+                                <h1>
+                                    @ViewBag.PageTitle
+                                    @if (ViewBag.PageSubTitle != null)
+                                    {
+                                        <small>@ViewBag.PageSubTitle</small>
+                                    }
+                                </h1>
+                            </div>
+                        }
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                            <!-- BEGIN THEME PANEL -->
+                            <!-- REMOVED -->
+                            <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                    </div>
+                    <!-- END PAGE HEAD-->
+                    <!-- BEGIN PAGE BREADCRUMB -->
+                    <!-- REMOVED -->
+                    <!-- END PAGE BREADCRUMB -->
+                    <!-- BEGIN PAGE BASE CONTENT -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <!-- END PAGE BASE CONTENT -->
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+            <!-- Modal -->
+            <div class="modal fade" id="commonDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div id="commonDialogContent" class="modal-content">
+                        <!-- Content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="commonDialog1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div id="commonDialogContent1" class="modal-content">
+                        <!-- Content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+
+
+        </main>
+        <!-- END CONTAINER -->
+    }
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/kendo.aspnetmvc.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2018.1.117/js/kendo.timezones.min.js"></script>
+
+    @Html.Kendo().DeferredScripts()
+    <script src="@Url.Content("~/Scripts/paw.js")"></script>
+    <script>
+        $(function () {
+            $('input.k-input').addClass('form-control');
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(function () {
+
+            // Sku Chooser button click
+            //$("body").on("click", ".add-sku", function (event) {
+
+            //    // prevent default
+            //    //event.preventDefault();
+
+            //    // get button
+            //    var button = $(event.target);
+            //    console.log(button);
+
+            //    // clear active
+            //    $('.' + button.data('targetid') + '-add-sku').removeClass('active');
+
+            //    // Set hidden
+            //    var input = $('#' + button.data('targetid'));
+            //    input.val(button.data('id'));
+
+            //    // Rename button
+            //    $('#' + button.data('targetid') + "-edit").text(button.text());
+
+            //    // load extras
+            //    loadExtras(button.data('id'), button.data('idprefix'));
+
+            //    // add active
+            //    button.addClass('active');
+            //});
+
+            $('.sku-menu-button').click(function (e) {
+                //Step 1. Get button
+                var button = $(event.target);
+
+                // Step 2. Set value and text
+                $('#' + button.data('item')).val(button.data('value'));
+                $('#' + button.data('item') + '_button').text(button.data('text'));
+            });
+
+            $('.sku-chooser').click(function (e) {
+                //
+                var button = $(event.target);
+
+                // clear active
+                $('.' + button.data('targetid') + '-add-sku').removeClass('active');
+                button.parent().addClass('active');
+
+                // Rename button
+                $('#' + button.data('targetid') + "-edit").text(button.data('text'));
+
+                //
+                loadExtras(button.data('id'), button.data('idprefix'), button.data('nameprefix'));
+
+                $('.modal').modal('hide');
+            });
+
+            // Sku List Chooser button click
+            $("body").on("click", ".multi-sku-button", function (event) {
+
+                // Step 1. Get input class
+                var inputclass = $(event.target).data('inputclass');
+
+                var inputs = $('input:checked[type=checkbox].' + inputclass + "-multi-sku-button");
+                $(event.target).parent().toggleClass('active');
+
+                // description
+                var description = inputs.map(function () {
+                    return '<li>' + $(this).data("description") + '</li>';
+                }).get().join('');
+
+                // Rename button
+                console.log(inputclass);
+                $('#' + inputclass + "-edit").text('Update Extras');
+                $('#' + inputclass + "-description").html(description);
+
+            });
+
+
+            function loadExtras(skuId, idprefix, nameprefix) {
+                $.ajax({
+                    url: "/providers/simplereservation/_SkuButtonList?skuId=" + skuId + "&idForModel=" + idprefix + "Extras&nameForModel=" + nameprefix + "Extras", success: function (result) {
+                        $("#" + idprefix + "Extras-buttonList").html(result);
+                    }
+                });
+
+                // clear current
+                $("#" + idprefix + "Extras-description").html("");
+
+                // enable button
+                $("#" + idprefix + "Extras-edit").removeClass("disabled");
+            }
+
+            $("a.add-pet").click(function (e) {
+                console.log($(e.currentTarget).data('id'));
+
+                //var url = '?SkuCategoryId=' + $(e.currentTarget).data('skucategoryid') + '&AddPetId=' + $(e.currentTarget).data('id');
+
+                $('<input>').attr({
+                    type: 'hidden',
+                    id: 'AddPetId',
+                    name: 'AddPetId',
+                    value: $(e.currentTarget).data('id')
+                }).appendTo('#PetReservation');
+
+                $('#PetReservation').submit();
+
+            });
+
+            $(".startDate").change(function (e) {
+
+                var input = $(e.target)
+                console.log(input.data('target'));
+
+            });
+
+        });
+    </script>
+</body>
+</html>

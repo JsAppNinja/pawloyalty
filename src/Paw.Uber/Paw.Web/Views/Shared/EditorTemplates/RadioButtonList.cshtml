@@ -1,0 +1,68 @@
+﻿@model Guid?
+@using Paw.Services.Util
+@{
+    Layout = "RadioButtonContainer.cshtml";
+
+    bool readOnly = RestrictedAttribute.AddReadOnly(this.User, this.ViewData);
+
+    // Attributes
+    Dictionary<string, object> attributes = ViewMetadataHelper.GetAttributes(this);
+    //attributes.Add("class", "form-control");
+
+    // Empyt Text
+    string emptyText = "-- Select --";
+    if (!string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        emptyText = this.ViewData.ModelMetadata.Watermark;
+    }
+
+    List<SelectListItem> selectList = Html.ExecuteValue() as List<SelectListItem> ?? new List<SelectListItem>();
+
+    // Value
+    string itemText = string.Empty;
+    string itemValue = string.Empty;
+    bool isOnlyOne = selectList.Count() == 0; // Does this belon here?
+
+    if (this.Model != null)
+    {
+        foreach (SelectListItem item in selectList)
+        {
+            if (this.Model == new Guid(item.Value))
+            {
+                item.Selected = true;
+                itemText = item.Text; // Set the value
+                itemValue = item.Value;
+
+            }
+
+            if (isOnlyOne)
+            {
+                item.Selected = true;
+            }
+        }
+    }
+
+
+    if (string.IsNullOrWhiteSpace(itemText) && !string.IsNullOrWhiteSpace(this.ViewData.ModelMetadata.Watermark))
+    {
+        itemText = emptyText;
+    }
+
+}
+
+<div>
+    @if (selectList.Count() == 0)
+    {
+        <span style="text-transform: uppercase !important; color: darkgray;" class="small">No records found</span>
+    }
+
+    @for (int i = 0; i < selectList.Count(); i++)
+    {
+        string id = this.ViewData.ModelMetadata.PropertyName;
+        <div class="radio radio-list-item">
+            <label>
+                <input type="radio" name="@this.ViewData.ModelMetadata.PropertyName" id="@this.ViewData.ModelMetadata.PropertyName" value="@selectList[i].Value" @attributes.GetAttributes() @(selectList[i].Selected ? "checked" : "")> @selectList[i].Text
+            </label>
+        </div>
+    }
+</div>

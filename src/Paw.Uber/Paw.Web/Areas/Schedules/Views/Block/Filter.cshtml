@@ -1,0 +1,88 @@
+﻿@using Paw.Web.Helpers
+@{
+    //Layout = null;
+}
+
+<style>
+
+    .fc-grid {
+        display: grid;
+        grid-gap: 0px;
+    }
+
+    .fc-cell {
+        display: inline-block;
+        border-top: 1px solid #d2d2d2;
+        border-left: 1px solid #d2d2d2;
+        padding: 5px;
+    }
+
+    .fc-cell-alt {
+        display: inline-block;
+        border-top: 1px dotted #d2d2d2;
+        border-left: 1px solid #d2d2d2;
+        padding: 5px;
+    }
+
+    .fc-last-column {
+        border-right: 1px solid #d2d2d2;
+    }
+
+    .fc-last-row {
+        border-bottom: 1px solid #d2d2d2;
+    }
+
+    .fc-event {
+        background-color:  deepskyblue;
+        color: white;
+        margin: 5px;
+        padding: 5px;
+    }
+
+</style>
+
+
+<div class="bump fc-grid" style="display: grid; grid-template-columns: 100px 400px 400px; ">
+    <div class="fc-cell" style="grid-row: 1; grid-column: 1;">1a</div>
+    <div class="fc-cell" style="grid-row: 1; grid-column: 2;">1b</div>
+    <div class="fc-cell fc-last-column" style="grid-row: 1; grid-column: 3;">1c</div>
+
+    <div class="fc-cell-alt" style="grid-row: 2; grid-column: 1;">2a</div>
+    <div class="fc-cell-alt" style="grid-row: 2; grid-column: 2;">2b</div>
+    <div class="fc-cell-alt fc-last-column" style="grid-row: 2; grid-column: 3;">2c</div>
+
+    <div class="fc-cell" style="grid-row: 3; grid-column: 1;">3a</div>
+    <div class="fc-cell" style="grid-row: 3; grid-column: 2;">3b</div>
+    <div ondrop="drop(event)" ondragover="allowDrop(event)" class="fc-cell fc-last-column" style="grid-row: 3; grid-column: 3;">3c</div>
+
+    <div class="fc-cell-alt" style="grid-row: 4; grid-column: 1;">4a</div>
+    <div class="fc-cell-alt" style="grid-row: 4; grid-column: 2;">4b</div>
+    <div ondrop="drop(event)" ondragover="allowDrop(event)" class="fc-cell-alt fc-last-column" style="grid-row: 4; grid-column: 3;">4c</div>
+
+    <div class="fc-cell" style="grid-row: 5; grid-column: 1;">5a</div>
+    <div class="fc-cell" style="grid-row: 5; grid-column: 2;">5b</div>
+    <div class="fc-cell fc-last-column" style="grid-row: 5; grid-column: 3;">5c</div>
+
+    <div class="fc-cell-alt fc-last-row" style="grid-row: 6; grid-column: 1;">6a</div>
+    <div class="fc-cell-alt fc-last-row" style="grid-row: 6; grid-column: 2;">6b</div>
+    <div class="fc-cell-alt fc-last-column fc-last-row " style="grid-row: 6; grid-column: 3;">6c</div>
+
+    <div class="fc-event" draggable="true" ondragstart="drag(event)" style="grid-row: row 1 / span 3; grid-column: 2; ">cover</div>
+</div>
+
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    console.log(ev);
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>

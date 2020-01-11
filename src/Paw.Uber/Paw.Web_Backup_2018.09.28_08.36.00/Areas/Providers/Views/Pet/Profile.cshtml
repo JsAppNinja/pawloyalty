@@ -1,0 +1,104 @@
+﻿@model Pet
+@{
+    ViewBag.Title = string.Format("{0}", this.Model.Name);
+}
+
+<!-- Profile -->
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            Pet Profile
+            <small>details, reservations, history</small>
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-xs-12 col-sm-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject bold uppercase font-dark">@this.Model.Name @this.Model.Owner.LastName </span> <small><a href="/Providers/Pet/Update/@this.Model.Id">update</a></small>
+                    <span class="caption-help"></span>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-4 col-xs-4 col-sm-4">
+                    <div class="row">
+                            <div class="col-lg-12">
+                            <img src="~/Content/Images/default-avatar-100.jpg" class="img-thumbnail" />
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @this.Model.Name @this.Model.Owner.LastName
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="">Breed: </span> @AppHelpers.WriteValue(this.Model?.Breed?.Name)
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span calss="">Weight: </span> @AppHelpers.WriteValue(this.Model.Weight)
+                            </div>
+
+                        </div>
+                    <div class="row bump">
+                        <div class="col-lg-12">
+                            <strong>SIBLINGS </strong>
+                            <hr />
+
+
+                            @if (this.Model.Owner.PetCollection.Count < 2)
+        {
+                    <text>None</text>
+}
+else
+{
+foreach (Pet pet in this.Model.Owner.PetCollection)
+{
+    if (pet.Id == this.Model.Id) { continue; }
+                    <div>
+                        <a href="/Providers/Pet/Profile/@(pet.Id)">@(pet.Name)</a>
+                    </div>
+
+}
+
+}
+</div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-xs-4 col-sm-4">
+
+                </div>
+                <div class="col-lg-4 col-xs-4 col-sm-4">
+                    <div class="row">
+                        <strong>Owner: </strong> <a href="/Providers/Owner/Profile/@(this.Model.Owner.Id)">@(this.Model.Owner.FullName)</a>
+                    </div>
+                    <div class="row">
+                        <strong>Email: </strong> @AppHelpers.WriteEmail(this.Model.Owner.Email)
+                    </div>
+                    <div class="row">
+                        <strong>Phone: </strong> @AppHelpers.FormatPhone(this.Model.Owner.PhoneNumber)
+                    </div>
+                    <div class="row">
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>

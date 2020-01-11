@@ -1,0 +1,80 @@
+﻿
+@{
+    // Step 1. Get Layout
+    string currentLayout = this.ViewBag.CurrentLayout as string;
+    if (!string.IsNullOrEmpty(currentLayout))
+    {
+        this.Layout = currentLayout;
+    }
+
+}
+
+@Html.Partial("Form")
+
+@section scripts {
+
+    <script>
+        $(function () {
+            //$("input[name='SkuCategoryId']").on('change', function (e){
+            //    var selected_value = $("input[name='SkuCategoryId']:checked").val();
+            //    var data = { "url": "/", "container": "#SkuCategoryId-Container", "providerId": $("form").data("providerid"), "skucategoryid": selected_value };
+
+            //    // Step 1. Get data 
+            //    var data = $(e.target).data();
+
+            //    // Step 2. Add selected value
+            //    data["value"] = selected_value;
+
+            //    // Step 3. Eval expressions
+            //    for (var key in data) {
+            //        if (!paw.util.isEmpty(data[key]) && data[key].startsWith("$"))
+            //        {
+            //            data[key] = $(data[key].substring(1)).val();
+            //        } 
+            //    }
+
+            //    console.log(data);
+            //});
+
+            // onChangeContainerUpdate
+            $(".onChangeContainerUpdate").on('change', function (e) {
+
+                // Step 1. Get data 
+                var dataObject = $(e.target).data();
+                
+                // Step 2. Eval expressions
+                for (var key in dataObject) {
+                    if (!paw.util.isEmpty(dataObject[key]) && dataObject[key].startsWith("$")) {
+                        dataObject[key] = $(dataObject[key].substring(1)).val();
+                    }
+                }
+
+                console.log(dataObject);
+
+                var url = "/providers/UIControl/" + dataObject["action"];
+                console.log(url);
+
+                // Step 3. Call ajax
+                $.ajax({
+                    url: url,
+                    data: dataObject,
+                    type: "POST",
+                    dataType: "html",
+                    success: function (result) {
+                        $(dataObject["container"]).html(result);
+                    },
+                    error: function (xhr, status) {
+                         
+                    },
+                    complete: function (xhr, status) {
+                        
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+
+}

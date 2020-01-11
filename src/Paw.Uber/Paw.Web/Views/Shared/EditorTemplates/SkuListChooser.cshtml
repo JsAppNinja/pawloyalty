@@ -1,0 +1,103 @@
+﻿@model List<Guid>
+@{
+    /*NOTE: Requires JS to write back values to hidden in container*/
+
+    Layout = "NoLabelInputContainer.cshtml";
+
+    // Step 1. Get Container
+    Paw.Services.Messages.Web.PetReservations.PetReservation petReservation = this.ViewData.ModelMetadata.Container as Paw.Services.Messages.Web.PetReservations.PetReservation;
+
+    if (petReservation == null)
+    {
+        return;
+    }
+
+    // Step 2. Get SkuList based upon PrimarySku
+    List<Paw.Services.Common.Sku> skuList = new List<Paw.Services.Common.Sku>();
+
+    if (petReservation.SkuId != null)
+    {
+        skuList = new Paw.Services.Messages.Web.Skus.GetRelatedSkuList() { ProviderId = (Guid)this.ViewData["__ProviderId"], SkuId = petReservation.SkuId.Value, Type = 1 }.ExecuteList();
+    }
+    
+
+    int columns = 2;
+    int rows = 10;
+    int recordCount = skuList.Count;
+
+    int colWidth = 12 / columns;
+    //int colWidth = 12;
+
+    string text = "Add Service";
+
+    string prefixId = this.ViewData.TemplateInfo.GetFullHtmlFieldId("Extras");
+}
+
+
+<button type="button" id="@(Html.IdForModel())-edit" class="btn  @(skuList.Count > 0 ? "" : "disabled")" data-toggle="modal" data-target="#@(Html.IdForModel())-sku-chooser">
+    Add Extras
+</button>
+<ul id="@(Html.IdForModel())-description" class="sm-bump">
+
+    @foreach (Guid item in this.Model)
+    {
+        var picked = skuList.Find(x => x.Id == item);
+        if (picked == null)
+        {
+            continue;
+        }
+
+        <li>@picked.NameAndAmount</li>
+    }
+
+</ul>
+
+<div class="modal fade" id="@(Html.IdForModel())-sku-chooser" tabindex="-1" role="dialog" aria-labelledby="@this.ViewData.ModelMetadata.PropertyName" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div id="commonDialogContent1" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choose Extra Services</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="@(Html.IdForModel())-buttonList" class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        @for (int i = 0; (i < columns) && (rows * i < recordCount); i++)
+                        {
+                            <div class="row">
+                                @for (int y = 0; y < rows && (rows * i + y < recordCount); y++)
+                                {
+                                    int index = rows * i + y;
+                                    Sku sku = skuList[index];
+
+                                    <div class="col-@(colWidth) sm-bump">
+                                        <div class="btn-group-toggle" >
+                                            <label for="@(Html.IdForModel())-@(index)" class="btn btn-outline-secondary @(this.Model.Any(x => x == sku.Id) ? "active" : "")">
+                                                <input name="@(Html.NameForModel())"
+                                                       id="@(Html.IdForModel())-@(index)"
+                                                       value="@sku.Id"
+                                                        data-inputclass="@(Html.IdForModel())"
+                                                        data-description="@sku.NameAndAmount"
+                                                       class="multi-sku-button @(Html.IdForModel())-multi-sku-button"
+                                                       type="checkbox"
+                                                       autocomplete="off" @(this.Model.Any(x => x == sku.Id) ? "checked" : "")> @sku.NameAndAmount
+                                                </label>
+                                            </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary sku-chooser-button" data-inputclass="@(Html.IdForModel())" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

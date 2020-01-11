@@ -1,0 +1,10 @@
+
+Step 1. Add Skus
+
+Step 2. Add SubSkus
+
+Step 3. Add-Ons/Extras
+
+Step 4. Add Dimensions
+
+

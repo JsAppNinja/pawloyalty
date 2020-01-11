@@ -1,0 +1,5 @@
+
+Paw.Web.csproj
+
+<IISUrl>http://localhost:49328/</IISUrl>
+<IISUrl>http://pawrwc.pawloyalty.com:49328/</IISUrl>
